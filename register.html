@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SME Admin Registration · NAMA SME Cards</title>
+<meta name="description" content="Register your SME and admin user to start onboarding.">
+<meta name="theme-color" content="#003366">
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="css/vendor/bootstrap.min.css">
+<link rel="stylesheet" href="css/nama.css">
+</head>
+<body data-page="register">
+<script src="js/icons.js"></script>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="auth">
+  <aside class="auth-panel" aria-label="NAMA Financing">
+    <div class="deco" aria-hidden="true"></div>
+    <a class="brand" href="index.html"><img src="images/logo-nama-white.svg" alt="NAMA Financing" width="168" height="119"></a>
+    <div class="pitch">
+      <h2>Embark on a simplified digital financial journey.</h2>
+      <p>Register your company in minutes. Your corporate and employee details are verified securely with official registries.</p>
+      <ul class="facts"><li><svg class="ic" aria-hidden="true"><use href="#i-shield-check"/></svg><span>Bank-grade security — your data is verified with official registries</span></li><li><svg class="ic" aria-hidden="true"><use href="#i-layers"/></svg><span>Cards, Tawarruq, Murabaha and Ijarah financing in one portal</span></li><li><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg><span>Track your application status in real time</span></li></ul>
+    </div>
+    <div class="panel-foot">
+      <span>© <span data-year>2026</span> NAMA United Financing Company</span>
+      <span class="d-inline-flex align-items-center gap-2">Powered by <img src="images/logo-azentio-white.svg" alt="Azentio" width="58" height="16"></span>
+    </div>
+  </aside>
+  <main class="auth-main" id="main">
+    <div class="auth-top">
+      <button type="button" class="lang" aria-label="Switch language to Arabic"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-globe"/></svg><span lang="ar">العربية</span></button>
+    </div>
+    <div class="auth-body">
+      <div class="auth-form wide fade-in">
+        <div class="auth-steps" aria-label="Registration progress">
+          <span class="s active"><span class="n">1</span>Corporate &amp; Admin Details</span><span class="bar"></span>
+          <span class="s"><span class="n">2</span>Create Credentials</span>
+        </div>
+        <h1>SME Admin Registration</h1>
+        <p class="lead-sub">Please provide your corporate and employee details to begin the SME onboarding process. Fields marked with (*) are required.</p>
+
+        <form id="registerForm" data-guard novalidate>
+          <div class="section-block">
+            <p class="t-section">Corporate details</p>
+            <div class="row g-3">
+              <div class="col-md-6"><label class="form-label" for="corpIdType">Corporate ID type<span class="req">*</span></label><select class="form-select" id="corpIdType" name="corpIdType" required ><option value="unn" selected>Unified National Number</option><option value="cr">Commercial Registration (CR) Number</option></select></div>
+              <div class="col-md-6"><label class="form-label" for="corpIdNo">Corporate ID number<span class="req">*</span><button type="button" class="help-tip" data-help data-bs-title="What is the Unified National Number?" data-bs-content="&lt;p&gt;A 10-digit number starting with &lt;b&gt;7&lt;/b&gt; that the Ministry of Commerce assigns to every registered business in Saudi Arabia. It stays the same even if your CR is renewed.&lt;/p&gt;&lt;p class=&#x27;help-where&#x27;&gt;&lt;b&gt;Where to find it:&lt;/b&gt; at the top of your Commercial Registration (CR) certificate, or in your company profile on the Ministry of Commerce portal.&lt;/p&gt;" aria-label="Help: Unified National Number"><svg class="ic" aria-hidden="true"><use href="#i-info"/></svg></button></label><div class="field"><input type="text" class="form-control" id="corpIdNo" name="corpIdNo" placeholder="700XXXXXXX" required aria-describedby="corpIdNoHint" inputmode="numeric" maxlength="10" autocomplete="off"><span class="field-state state-error"><svg class="ic" aria-hidden="true"><use href="#i-circle-alert"/></svg></span><span class="field-state state-success"><svg class="ic" aria-hidden="true"><use href="#i-circle-check"/></svg></span></div><div class="invalid-feedback">Enter a valid 10-digit Unified National Number starting with 7</div><div class="form-text" id="corpIdNoHint">10-digit Unified National Number (starts with 7)</div></div>
+              <div class="col-12"><label class="form-label" for="corpName">Corporate name<span class="req">*</span></label><div class="field"><input type="text" class="form-control" id="corpName" name="corpName" placeholder="As registered in the Commercial Registration" required autocomplete="organization"><span class="field-state state-error"><svg class="ic" aria-hidden="true"><use href="#i-circle-alert"/></svg></span><span class="field-state state-success"><svg class="ic" aria-hidden="true"><use href="#i-circle-check"/></svg></span></div><div class="invalid-feedback">Enter the corporate name</div></div>
+            </div>
+          </div>
+
+          <div class="section-block">
+            <p class="t-section">Admin user details</p>
+            <div class="row g-3">
+              <div class="col-md-6"><label class="form-label" for="empName">Employee full name<span class="req">*</span></label><div class="field"><input type="text" class="form-control" id="empName" name="empName" placeholder="As shown on your national ID" required autocomplete="name"><span class="field-state state-error"><svg class="ic" aria-hidden="true"><use href="#i-circle-alert"/></svg></span><span class="field-state state-success"><svg class="ic" aria-hidden="true"><use href="#i-circle-check"/></svg></span></div><div class="invalid-feedback">Enter the employee's full name</div></div>
+              <div class="col-md-6"><label class="form-label" for="empIdNo">Employee ID number<span class="req">*</span><button type="button" class="help-tip" data-help data-bs-title="Which ID number?" data-bs-content="&lt;p&gt;Enter your &lt;b&gt;National ID&lt;/b&gt; (Saudi citizens, starts with &lt;b&gt;1&lt;/b&gt;) or your &lt;b&gt;Iqama&lt;/b&gt; number (residents, starts with &lt;b&gt;2&lt;/b&gt;). We detect the ID type from the first digit.&lt;/p&gt;&lt;p class=&#x27;help-where&#x27;&gt;Your mobile number must be registered to this ID, and you must be registered with GOSI as an employee of the company.&lt;/p&gt;" aria-label="Help: employee ID number"><svg class="ic" aria-hidden="true"><use href="#i-info"/></svg></button></label><div class="field"><input type="text" class="form-control" id="empIdNo" name="empIdNo" placeholder="1XXXXXXXXX or 2XXXXXXXXX" required aria-describedby="empIdNoHint" inputmode="numeric" maxlength="10" autocomplete="off"><span class="field-state state-error"><svg class="ic" aria-hidden="true"><use href="#i-circle-alert"/></svg></span><span class="field-state state-success"><svg class="ic" aria-hidden="true"><use href="#i-circle-check"/></svg></span></div><div class="invalid-feedback">Enter a 10-digit National ID (starts with 1) or Iqama (starts with 2)</div><div class="form-text" id="empIdNoHint">National ID (starts with 1) or Iqama (starts with 2) — the ID type is detected automatically</div></div>
+              <div class="col-md-6"><label class="form-label" for="empDobG">Date of birth (Gregorian)<span class="req">*</span></label><div class="field"><svg class="ic ic-lead" aria-hidden="true"><use href="#i-calendar"/></svg><input type="text" class="form-control num date-in" id="empDobG" name="empDobG" placeholder="DD/MM/YYYY" inputmode="numeric" maxlength="10" autocomplete="off" required aria-describedby="empDobGHint"><span class="field-state state-error"><svg class="ic" aria-hidden="true"><use href="#i-circle-alert"/></svg></span><span class="field-state state-success"><svg class="ic" aria-hidden="true"><use href="#i-circle-check"/></svg></span></div><div class="invalid-feedback">Enter a valid date of birth (DD/MM/YYYY)</div><div class="form-text" id="empDobGHint">DD/MM/YYYY · fills in the Hijri date automatically</div></div><div class="col-md-6"><label class="form-label" for="empDobH">Date of birth (Hijri)<span class="req">*</span></label><div class="field"><svg class="ic ic-lead" aria-hidden="true"><use href="#i-calendar"/></svg><input type="text" class="form-control num date-in" id="empDobH" name="empDobH" placeholder="DD/MM/YYYY" inputmode="numeric" maxlength="10" autocomplete="off" required aria-describedby="empDobHHint"><span class="field-state state-error"><svg class="ic" aria-hidden="true"><use href="#i-circle-alert"/></svg></span><span class="field-state state-success"><svg class="ic" aria-hidden="true"><use href="#i-circle-check"/></svg></span></div><div class="invalid-feedback">Enter a valid date of birth (DD/MM/YYYY)</div><div class="form-text" id="empDobHHint">DD/MM/YYYY · fills in the Gregorian date automatically</div></div>
+              <div class="col-md-6">
+                <label class="form-label" for="mobile">Mobile number<span class="req">*</span></label>
+                <div class="field field-prefix divided">
+                  <span class="prefix">+966</span>
+                  <input type="tel" class="form-control" id="mobile" name="mobile" placeholder="5XXXXXXXX" inputmode="numeric" maxlength="9" autocomplete="tel-national" required aria-describedby="mobileHint" style="padding-right:5.5rem">
+                  <button type="button" class="btn btn-link btn-sm field-verify" id="verifyMobileBtn" style="position:absolute;right:.5rem;top:50%;transform:translateY(-50%)">Verify</button>
+                  <span class="field-state state-success"><svg class="ic" aria-hidden="true"><use href="#i-circle-check"/></svg></span>
+                </div>
+                <div class="invalid-feedback">Mobile number must be 9 digits and start with 5</div>
+                <div class="form-text" id="mobileHint">We'll send a one-time password (OTP) to verify this number.</div>
+              </div>
+              <div class="col-md-6"><label class="form-label" for="email">Email address<span class="opt">(optional)</span></label><div class="field"><input type="email" class="form-control" id="email" name="email" placeholder="name@company.sa" aria-describedby="emailHint" autocomplete="email"><span class="field-state state-error"><svg class="ic" aria-hidden="true"><use href="#i-circle-alert"/></svg></span><span class="field-state state-success"><svg class="ic" aria-hidden="true"><use href="#i-circle-check"/></svg></span></div><div class="invalid-feedback">Enter a valid email address (e.g. name@company.sa)</div><div class="form-text" id="emailHint">Used for notifications — verification is not required.</div></div>
+            </div>
+          </div>
+
+          <div class="card-actions">
+            <a href="index.html" class="btn btn-secondary">Cancel</a>
+            <div class="end">
+              <button type="submit" class="btn btn-primary" id="nextBtn" disabled>Next <svg class="ic ic-sm" aria-hidden="true"><use href="#i-arrow-right"/></svg></button>
+            </div>
+          </div>
+          <p class="form-text text-end mt-2 mb-0 v-only" id="nextHint"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-info"/></svg> Verify your mobile number to continue.</p>
+        </form>
+        <p class="auth-foot-link">Already registered? <a href="login.html">Log in</a></p>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- OTP verification (triggered on mobile field exit) -->
+<div class="modal fade" id="otpModal" tabindex="-1" aria-labelledby="otpTitle" aria-hidden="true" data-bs-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered modal-nama">
+    <div class="modal-content">
+      <div class="m-head">
+        <h2 class="m-title" id="otpTitle">Verify your mobile number</h2>
+        <button type="button" class="m-close" data-bs-dismiss="modal" aria-label="Close"><svg class="ic ic-lg" aria-hidden="true"><use href="#i-circle-x"/></svg></button>
+      </div>
+      <div class="m-body m-center">
+        <div class="m-icon info"><svg class="ic" aria-hidden="true"><use href="#i-smartphone"/></svg></div>
+        <p class="mb-0">Enter the 6-digit code sent to <b class="text-body" id="otpTarget">+966 5X XXX XXXX</b></p>
+        <div class="otp" id="otpBoxes" role="group" aria-label="One-time password">
+          <input type="text" inputmode="numeric" maxlength="1" aria-label="Digit 1" autocomplete="one-time-code">
+          <input type="text" inputmode="numeric" maxlength="1" aria-label="Digit 2">
+          <input type="text" inputmode="numeric" maxlength="1" aria-label="Digit 3">
+          <input type="text" inputmode="numeric" maxlength="1" aria-label="Digit 4">
+          <input type="text" inputmode="numeric" maxlength="1" aria-label="Digit 5">
+          <input type="text" inputmode="numeric" maxlength="1" aria-label="Digit 6">
+        </div>
+        <p class="text-error small mb-2 d-none" id="otpError" role="alert">The code you entered is incorrect. Please try again.</p>
+        <p class="t-caption mb-0">Didn't receive the code? <button type="button" class="btn btn-link btn-sm p-0 align-baseline" id="otpResend" disabled>Resend in <span id="otpTimer">00:30</span></button></p>
+        <p class="t-caption mt-2 mb-0 opacity-75 v-only">Prototype: any 6-digit code works; 000000 shows the error state.</p>
+      </div>
+      <div class="m-foot">
+        <button type="button" class="btn btn-soft" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" id="otpVerify" disabled>Verify</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/vendor/bootstrap.bundle.min.js"></script>
+<script src="js/app.js"></script>
+<script src="js/pages/register.js"></script>
+</body>
+</html>

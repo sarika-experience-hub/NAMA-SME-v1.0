@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Application – Documents · NAMA SME Cards</title>
+<meta name="description" content="Upload the documents required for the Cards product.">
+<meta name="theme-color" content="#003366">
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="css/vendor/bootstrap.min.css">
+<link rel="stylesheet" href="css/nama.css">
+</head>
+<body data-page="application" data-demo-onboarded data-mode="application">
+<script src="js/icons.js"></script>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="app">
+  <aside class="sidebar offcanvas-lg offcanvas-start" tabindex="-1" id="sidebar" aria-label="Main navigation">
+    <div class="offcanvas-body">
+      <div class="sidebar-brand">
+        <a href="dashboard.html"><img src="images/logo-nama-white.svg" alt="NAMA Financing" width="92" height="65"></a>
+      </div>
+      <nav>
+      <ul class="side-nav">
+        <li><a class="side-link" href="dashboard.html" data-nav="home" data-requires-onboarding><svg class="ic" aria-hidden="true"><use href="#i-home"/></svg><span>Home</span></a></li>
+        <li><a class="side-link" href="onboarding-corporate.html" data-nav="onboarding"><svg class="ic" aria-hidden="true"><use href="#i-building"/></svg><span>Onboarding</span></a></li>
+        <li><a class="side-link" href="application-new.html" data-nav="application" data-requires-onboarding><svg class="ic" aria-hidden="true"><use href="#i-circle-plus"/></svg><span>New Application</span></a></li>
+        <li><a class="side-link" href="tracker.html" data-nav="tracker" data-requires-onboarding><svg class="ic" aria-hidden="true"><use href="#i-activity"/></svg><span>Tracker</span></a></li>
+        <li><a class="side-link" href="settings.html" data-nav="settings"><svg class="ic" aria-hidden="true"><use href="#i-settings"/></svg><span>Settings</span></a></li>
+        <li><a class="side-link logout" href="login.html" data-logout><svg class="ic" aria-hidden="true"><use href="#i-log-out"/></svg><span>Logout</span></a></li>
+      </ul>
+      </nav>
+      <div class="side-foot">v1.0.0 · NAMA UNITED<br><img src="images/logo-azentio-white.svg" alt="Powered by Azentio" width="51" height="14"></div>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <button type="button" class="btn btn-icon btn-soft menu-btn" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar" aria-label="Open menu"><svg class="ic" aria-hidden="true"><use href="#i-menu"/></svg></button>
+      <h1 class="page-title">Cards Application</h1>
+      <div class="tools">
+        <button type="button" class="bell" aria-label="Notifications, 2 unread"><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg><span class="count">2</span></button>
+        <span class="vsep" aria-hidden="true"></span>
+        <div class="dropdown">
+          <button type="button" class="who" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="avatar" data-admin-initials>FA</span>
+            <span class="txt"><span class="nm d-block" data-admin-name>Faisal Al-Qahtani</span><span class="role d-block">SME Admin</span></span>
+            <svg class="ic ic-sm text-3" aria-hidden="true"><use href="#i-chevron-down"/></svg>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end user-menu">
+            <li class="um-head">
+              <span class="avatar" data-admin-initials>FA</span>
+              <div class="min-w-0"><div class="um-name text-truncate" data-admin-name>Faisal Al-Qahtani</div><div class="um-role text-truncate">SME Admin · <span data-corp-name>Al Noor Trading Company</span></div></div>
+            </li>
+            <li class="um-login">
+              <p class="t-overline mb-2">Last login</p>
+              <div class="um-row"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-clock"/></svg><span data-last-login-time>Today, 08:34</span></div>
+              <div class="um-row"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-monitor"/></svg><span data-last-login-device>Chrome on Windows</span></div>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="settings.html"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-settings"/></svg> Settings</a></li>
+            <li><a class="dropdown-item" href="login.html" data-logout><svg class="ic ic-sm" aria-hidden="true"><use href="#i-log-out"/></svg> Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <main class="content" id="main">
+      <div class="content-narrow">
+      <nav class="crumb" aria-label="Breadcrumb"><a href="application-new.html"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-chevron-left"/></svg> New Application</a><span aria-hidden="true">/</span><span aria-current="page">Cards</span></nav>
+      <div class="page-head">
+        <div><h2>Documents</h2><p>Please upload the required documents specific to the Card product.</p></div>
+        <span class="id-chip" data-app-chip>Draft application</span>
+      </div>
+      <nav class="stepper-card" aria-label="Progress"><ol class="stepper"><li class="done is-link"><a class="step-link" href="card-application.html" title="Go back to Card Products"><span class="dot"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg></span><span class="lbl">Card Products</span><span class="visually-hidden"> (completed, select to review or edit)</span></a><span class="line" aria-hidden="true"></span></li><li class="done is-link"><a class="step-link" href="application-corporate.html" title="Go back to Business Details"><span class="dot"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg></span><span class="lbl">Business Details</span><span class="visually-hidden"> (completed, select to review or edit)</span></a><span class="line" aria-hidden="true"></span></li><li class="done is-link"><a class="step-link" href="application-key-people.html" title="Go back to Key People"><span class="dot"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg></span><span class="lbl">Key People</span><span class="visually-hidden"> (completed, select to review or edit)</span></a><span class="line" aria-hidden="true"></span></li><li class="done is-link"><a class="step-link" href="application-address.html" title="Go back to Address"><span class="dot"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg></span><span class="lbl">Address</span><span class="visually-hidden"> (completed, select to review or edit)</span></a><span class="line" aria-hidden="true"></span></li><li class="active" aria-current="step"><span class="dot">5</span><span class="lbl">Documents</span><span class="line" aria-hidden="true"></span></li><li class=""><span class="dot">6</span><span class="lbl">Review &amp; Submit</span></li></ol><p class="stepper-caption" aria-hidden="true">Step 5 of 6 · Documents</p></nav>
+
+      <form id="docsForm" data-guard class="card-nama card-pad" novalidate>
+        <div class="card-head">
+          <div><h3 class="card-title-nama">Card product documents</h3><p class="t-sub mb-0">Only documents specific to the Cards product are requested here.</p></div>
+          <div class="text-end" style="min-width:180px">
+            <div class="small fw-600"><span id="docDone">0</span> of 3 required uploaded</div>
+            <div class="progress mt-2" style="height:6px" role="progressbar" aria-label="Required documents uploaded" aria-valuemin="0" aria-valuemax="3" aria-valuenow="0" id="docProgress"><div class="progress-bar" style="width:0%;background:var(--nama-success)"></div></div>
+          </div>
+        </div>
+        <div class="d-grid gap-3">
+          <div class="upload" data-upload data-doc="cardform" data-title="Card facility application form (signed)" data-required="true">
+            <span class="u-ic"><svg class="ic" aria-hidden="true"><use href="#i-file-text"/></svg></span>
+            <div class="u-main"><div class="u-title">Card facility application form (signed) <span class="req-badge">Required</span></div><div class="u-meta">Signed by an authorized signatory · PDF, JPG or PNG · max 10 MB</div><div class="u-bar"><span></span></div></div>
+            <div class="u-actions"><button type="button" class="btn btn-sm btn-secondary" data-pick><svg class="ic ic-sm" aria-hidden="true"><use href="#i-upload"/></svg> Upload</button></div>
+            <input type="file" accept=".pdf,.jpg,.jpeg,.png" aria-label="Upload Card facility application form (signed)">
+          </div><div class="upload" data-upload data-doc="boardres" data-title="Board resolution for the card facility" data-required="true">
+            <span class="u-ic"><svg class="ic" aria-hidden="true"><use href="#i-file-text"/></svg></span>
+            <div class="u-main"><div class="u-title">Board resolution for the card facility <span class="req-badge">Required</span></div><div class="u-meta">Approving the requested card products and limits · PDF, JPG or PNG · max 10 MB</div><div class="u-bar"><span></span></div></div>
+            <div class="u-actions"><button type="button" class="btn btn-sm btn-secondary" data-pick><svg class="ic ic-sm" aria-hidden="true"><use href="#i-upload"/></svg> Upload</button></div>
+            <input type="file" accept=".pdf,.jpg,.jpeg,.png" aria-label="Upload Board resolution for the card facility">
+          </div><div class="upload" data-upload data-doc="statements" data-title="Bank statements – last 6 months" data-required="true">
+            <span class="u-ic"><svg class="ic" aria-hidden="true"><use href="#i-file-text"/></svg></span>
+            <div class="u-main"><div class="u-title">Bank statements – last 6 months <span class="req-badge">Required</span></div><div class="u-meta">For the settlement account · PDF, JPG or PNG · max 10 MB</div><div class="u-bar"><span></span></div></div>
+            <div class="u-actions"><button type="button" class="btn btn-sm btn-secondary" data-pick><svg class="ic ic-sm" aria-hidden="true"><use href="#i-upload"/></svg> Upload</button></div>
+            <input type="file" accept=".pdf,.jpg,.jpeg,.png" aria-label="Upload Bank statements – last 6 months">
+          </div><div class="upload" data-upload data-doc="cardholders" data-title="Initial cardholder list" data-required="false">
+            <span class="u-ic"><svg class="ic" aria-hidden="true"><use href="#i-file-text"/></svg></span>
+            <div class="u-main"><div class="u-title">Initial cardholder list <span class="opt-badge">Optional</span></div><div class="u-meta">Employees who will receive cards (can be added later) · PDF, JPG or PNG · max 10 MB</div><div class="u-bar"><span></span></div></div>
+            <div class="u-actions"><button type="button" class="btn btn-sm btn-secondary" data-pick><svg class="ic ic-sm" aria-hidden="true"><use href="#i-upload"/></svg> Upload</button></div>
+            <input type="file" accept=".pdf,.jpg,.jpeg,.png" aria-label="Upload Initial cardholder list">
+          </div>
+        </div>
+        <div class="registry-group mt-4">
+          <button type="button" class="registry-toggle" data-bs-toggle="collapse" data-bs-target="#reusedDocs" aria-expanded="false" aria-controls="reusedDocs">
+            <svg class="ic text-3" aria-hidden="true"><use href="#i-repeat"/></svg><span>Already provided during onboarding <span class="t-caption fw-normal ms-1">· not requested again</span></span><span class="pill pill-success ms-2" id="reusedCount">4</span><svg class="ic chev" aria-hidden="true"><use href="#i-chevron-down"/></svg>
+          </button>
+          <div class="collapse" id="reusedDocs"><div class="registry-body"><ul class="reuse-list" id="reusedList"><li><svg class="ic ic-sm" aria-hidden="true"><use href="#i-file-check"/></svg><span>Commercial Registration (CR) certificate</span></li><li><svg class="ic ic-sm" aria-hidden="true"><use href="#i-file-check"/></svg><span>Articles of Association</span></li><li><svg class="ic ic-sm" aria-hidden="true"><use href="#i-file-check"/></svg><span>VAT registration certificate</span></li><li><svg class="ic ic-sm" aria-hidden="true"><use href="#i-file-check"/></svg><span>National address certificate</span></li><li><svg class="ic ic-sm" aria-hidden="true"><use href="#i-file-check"/></svg><span>Admin authorization letter</span></li></ul></div></div>
+        </div>
+        <div class="card-actions">
+          <a href="application-address.html" class="btn btn-secondary"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-arrow-left"/></svg> Back</a>
+          <div class="end"><button type="button" class="btn btn-link" id="cancelBtn">Cancel</button><button type="submit" class="btn btn-primary" id="docsNext" disabled>Next <svg class="ic ic-sm" aria-hidden="true"><use href="#i-arrow-right"/></svg></button></div>
+        </div>
+      </form>
+      </div>
+    </main>
+    <footer class="app-footer"><span>© <span data-year>2026</span> NAMA United Financing Company. All rights reserved.</span><span>Secured session · Powered by Azentio</span></footer>
+  </div>
+</div>
+
+<script src="js/vendor/bootstrap.bundle.min.js"></script>
+<script src="js/app.js"></script>
+<script src="js/pages/onboarding.js"></script>
+<script src="js/pages/documents.js"></script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Application – Card Products & Requested Limits · NAMA SME Cards</title>
+<meta name="description" content="Select card products and requested limits for your SME.">
+<meta name="theme-color" content="#003366">
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="css/vendor/bootstrap.min.css">
+<link rel="stylesheet" href="css/nama.css">
+</head>
+<body data-page="application" data-demo-onboarded data-mode="application">
+<script src="js/icons.js"></script>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="app">
+  <aside class="sidebar offcanvas-lg offcanvas-start" tabindex="-1" id="sidebar" aria-label="Main navigation">
+    <div class="offcanvas-body">
+      <div class="sidebar-brand">
+        <a href="dashboard.html"><img src="images/logo-nama-white.svg" alt="NAMA Financing" width="92" height="65"></a>
+      </div>
+      <nav>
+      <ul class="side-nav">
+        <li><a class="side-link" href="dashboard.html" data-nav="home" data-requires-onboarding><svg class="ic" aria-hidden="true"><use href="#i-home"/></svg><span>Home</span></a></li>
+        <li><a class="side-link" href="onboarding-corporate.html" data-nav="onboarding"><svg class="ic" aria-hidden="true"><use href="#i-building"/></svg><span>Onboarding</span></a></li>
+        <li><a class="side-link" href="application-new.html" data-nav="application" data-requires-onboarding><svg class="ic" aria-hidden="true"><use href="#i-circle-plus"/></svg><span>New Application</span></a></li>
+        <li><a class="side-link" href="tracker.html" data-nav="tracker" data-requires-onboarding><svg class="ic" aria-hidden="true"><use href="#i-activity"/></svg><span>Tracker</span></a></li>
+        <li><a class="side-link" href="settings.html" data-nav="settings"><svg class="ic" aria-hidden="true"><use href="#i-settings"/></svg><span>Settings</span></a></li>
+        <li><a class="side-link logout" href="login.html" data-logout><svg class="ic" aria-hidden="true"><use href="#i-log-out"/></svg><span>Logout</span></a></li>
+      </ul>
+      </nav>
+      <div class="side-foot">v1.0.0 · NAMA UNITED<br><img src="images/logo-azentio-white.svg" alt="Powered by Azentio" width="51" height="14"></div>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <button type="button" class="btn btn-icon btn-soft menu-btn" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar" aria-label="Open menu"><svg class="ic" aria-hidden="true"><use href="#i-menu"/></svg></button>
+      <h1 class="page-title">Cards Application</h1>
+      <div class="tools">
+        <button type="button" class="bell" aria-label="Notifications, 2 unread"><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg><span class="count">2</span></button>
+        <span class="vsep" aria-hidden="true"></span>
+        <div class="dropdown">
+          <button type="button" class="who" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="avatar" data-admin-initials>FA</span>
+            <span class="txt"><span class="nm d-block" data-admin-name>Faisal Al-Qahtani</span><span class="role d-block">SME Admin</span></span>
+            <svg class="ic ic-sm text-3" aria-hidden="true"><use href="#i-chevron-down"/></svg>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end user-menu">
+            <li class="um-head">
+              <span class="avatar" data-admin-initials>FA</span>
+              <div class="min-w-0"><div class="um-name text-truncate" data-admin-name>Faisal Al-Qahtani</div><div class="um-role text-truncate">SME Admin · <span data-corp-name>Al Noor Trading Company</span></div></div>
+            </li>
+            <li class="um-login">
+              <p class="t-overline mb-2">Last login</p>
+              <div class="um-row"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-clock"/></svg><span data-last-login-time>Today, 08:34</span></div>
+              <div class="um-row"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-monitor"/></svg><span data-last-login-device>Chrome on Windows</span></div>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="settings.html"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-settings"/></svg> Settings</a></li>
+            <li><a class="dropdown-item" href="login.html" data-logout><svg class="ic ic-sm" aria-hidden="true"><use href="#i-log-out"/></svg> Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <main class="content" id="main">
+      <div class="content-narrow">
+      <nav class="crumb" aria-label="Breadcrumb"><a href="application-new.html"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-chevron-left"/></svg> New Application</a><span aria-hidden="true">/</span><span aria-current="page">Cards</span></nav>
+      <div class="page-head">
+        <div><h2>Card Products &amp; Requested Limits</h2><p>Select the card products required for your SME and specify the requested limit for each selected product.</p></div>
+        <span class="id-chip" id="appChip" data-app-chip>Draft application</span>
+      </div>
+      <nav class="stepper-card" aria-label="Progress"><ol class="stepper"><li class="active" aria-current="step"><span class="dot">1</span><span class="lbl">Card Products</span><span class="line" aria-hidden="true"></span></li><li class=""><span class="dot">2</span><span class="lbl">Business Details</span><span class="line" aria-hidden="true"></span></li><li class=""><span class="dot">3</span><span class="lbl">Key People</span><span class="line" aria-hidden="true"></span></li><li class=""><span class="dot">4</span><span class="lbl">Address</span><span class="line" aria-hidden="true"></span></li><li class=""><span class="dot">5</span><span class="lbl">Documents</span><span class="line" aria-hidden="true"></span></li><li class=""><span class="dot">6</span><span class="lbl">Review &amp; Submit</span></li></ol><p class="stepper-caption" aria-hidden="true">Step 1 of 6 · Card Products</p></nav>
+      <div id="appNotice"></div>
+
+      <form id="appForm" data-guard novalidate>
+        <div class="row g-4">
+          <div class="col-lg-8">
+            <div class="card-nama card-pad">
+              <div class="card-head">
+                <div><h3 class="card-title-nama">Available card products</h3><p class="t-sub mb-0">Select one or more products. Products are offered based on your company profile.</p></div>
+                <span class="pill pill-neutral"><span id="selCount">0</span>&nbsp;selected</span>
+              </div>
+              <div class="row g-3" id="productGrid">
+                <div class="col-md-6">
+            <div class="product" data-product="business" data-name="Business Card">
+              <div class="p-top">
+                <span class="p-ic"><svg class="ic" aria-hidden="true"><use href="#i-briefcase"/></svg></span>
+                <div class="min-w-0"><p class="p-name">Business Card</p><p class="p-desc">General business expenses and day-to-day operational spend.</p></div>
+                <input class="form-check-input p-check" type="checkbox" id="chk_business" aria-label="Select Business Card">
+              </div>
+              <div class="p-limit">
+                <label class="form-label" for="lim_business">Requested limit<span class="req">*</span></label>
+                <div class="field field-prefix"><span class="prefix">SAR</span><input type="text" class="form-control num limit-input" id="lim_business" placeholder="0" inputmode="numeric" autocomplete="off"><span class="field-state state-error"><svg class="ic" aria-hidden="true"><use href="#i-circle-alert"/></svg></span></div>
+                <div class="invalid-feedback">Enter a limit between 10,000 and 1,000,000 SAR</div>
+                <div class="form-text">Min 10,000 · Max 1,000,000 SAR</div>
+              </div>
+            </div>
+          </div><div class="col-md-6">
+            <div class="product" data-product="procurement" data-name="Procurement Card">
+              <div class="p-top">
+                <span class="p-ic"><svg class="ic" aria-hidden="true"><use href="#i-cart"/></svg></span>
+                <div class="min-w-0"><p class="p-name">Procurement Card</p><p class="p-desc">Supplier payments, purchasing and recurring vendor spend.</p></div>
+                <input class="form-check-input p-check" type="checkbox" id="chk_procurement" aria-label="Select Procurement Card">
+              </div>
+              <div class="p-limit">
+                <label class="form-label" for="lim_procurement">Requested limit<span class="req">*</span></label>
+                <div class="field field-prefix"><span class="prefix">SAR</span><input type="text" class="form-control num limit-input" id="lim_procurement" placeholder="0" inputmode="numeric" autocomplete="off"><span class="field-state state-error"><svg class="ic" aria-hidden="true"><use href="#i-circle-alert"/></svg></span></div>
+                <div class="invalid-feedback">Enter a limit between 10,000 and 1,000,000 SAR</div>
+                <div class="form-text">Min 10,000 · Max 1,000,000 SAR</div>
+              </div>
+            </div>
+          </div><div class="col-md-6">
+            <div class="product" data-product="travel" data-name="Travel Card">
+              <div class="p-top">
+                <span class="p-ic"><svg class="ic" aria-hidden="true"><use href="#i-plane"/></svg></span>
+                <div class="min-w-0"><p class="p-name">Travel Card</p><p class="p-desc">Flights, hotels and employee business travel.</p></div>
+                <input class="form-check-input p-check" type="checkbox" id="chk_travel" aria-label="Select Travel Card">
+              </div>
+              <div class="p-limit">
+                <label class="form-label" for="lim_travel">Requested limit<span class="req">*</span></label>
+                <div class="field field-prefix"><span class="prefix">SAR</span><input type="text" class="form-control num limit-input" id="lim_travel" placeholder="0" inputmode="numeric" autocomplete="off"><span class="field-state state-error"><svg class="ic" aria-hidden="true"><use href="#i-circle-alert"/></svg></span></div>
+                <div class="invalid-feedback">Enter a limit between 10,000 and 1,000,000 SAR</div>
+                <div class="form-text">Min 10,000 · Max 1,000,000 SAR</div>
+              </div>
+            </div>
+          </div><div class="col-md-6">
+            <div class="product" data-product="food" data-name="Food Card">
+              <div class="p-top">
+                <span class="p-ic"><svg class="ic" aria-hidden="true"><use href="#i-utensils"/></svg></span>
+                <div class="min-w-0"><p class="p-name">Food Card</p><p class="p-desc">Employee meals, per-diem and daily allowances.</p></div>
+                <input class="form-check-input p-check" type="checkbox" id="chk_food" aria-label="Select Food Card">
+              </div>
+              <div class="p-limit">
+                <label class="form-label" for="lim_food">Requested limit<span class="req">*</span></label>
+                <div class="field field-prefix"><span class="prefix">SAR</span><input type="text" class="form-control num limit-input" id="lim_food" placeholder="0" inputmode="numeric" autocomplete="off"><span class="field-state state-error"><svg class="ic" aria-hidden="true"><use href="#i-circle-alert"/></svg></span></div>
+                <div class="invalid-feedback">Enter a limit between 10,000 and 1,000,000 SAR</div>
+                <div class="form-text">Min 10,000 · Max 1,000,000 SAR</div>
+              </div>
+            </div>
+          </div>
+              </div>
+              <div class="invalid-feedback d-none mt-3" id="noProductErr" style="display:block">Select at least one card product to continue.</div>
+              <div class="card-actions">
+                <a href="application-new.html" class="btn btn-secondary"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-arrow-left"/></svg> Back</a>
+                <div class="end"><button type="button" class="btn btn-link" id="draftBtn">Save Draft</button><button type="submit" class="btn btn-primary" id="submitBtn">Next <svg class="ic ic-sm" aria-hidden="true"><use href="#i-arrow-right"/></svg></button></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <aside class="panel-navy sticky-lg" aria-live="polite">
+              <p class="t-overline mb-0">Requested group limit</p>
+              <h3 class="num" id="groupTotal">0 SAR</h3>
+              <p class="sub mb-0" data-corp-name>Al Noor Trading Company</p>
+              <hr>
+              <div id="sumList"><p class="empty mb-0">No products selected yet.</p></div>
+              <hr>
+              <div class="inner">
+                <div class="d-flex gap-2 align-items-start small" style="color:rgba(255,255,255,.82)"><svg class="ic ic-sm mt-1" aria-hidden="true"><use href="#i-info"/></svg><span>The group limit is the sum of product limits. Final limits are subject to credit assessment and approval.</span></div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </form>
+      </div>
+    </main>
+    <footer class="app-footer"><span>© <span data-year>2026</span> NAMA United Financing Company. All rights reserved.</span><span>Secured session · Powered by Azentio</span></footer>
+  </div>
+</div>
+
+<script src="js/vendor/bootstrap.bundle.min.js"></script>
+<script src="js/app.js"></script>
+<script src="js/pages/application.js"></script>
+</body>
+</html>

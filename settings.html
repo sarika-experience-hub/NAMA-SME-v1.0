@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Settings · NAMA SME Cards</title>
+<meta name="description" content="Profile, security and language settings.">
+<meta name="theme-color" content="#003366">
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="css/vendor/bootstrap.min.css">
+<link rel="stylesheet" href="css/nama.css">
+</head>
+<body data-page="settings" data-demo-onboarded>
+<script src="js/icons.js"></script>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="app">
+  <aside class="sidebar offcanvas-lg offcanvas-start" tabindex="-1" id="sidebar" aria-label="Main navigation">
+    <div class="offcanvas-body">
+      <div class="sidebar-brand">
+        <a href="dashboard.html"><img src="images/logo-nama-white.svg" alt="NAMA Financing" width="92" height="65"></a>
+      </div>
+      <nav>
+      <ul class="side-nav">
+        <li><a class="side-link" href="dashboard.html" data-nav="home" data-requires-onboarding><svg class="ic" aria-hidden="true"><use href="#i-home"/></svg><span>Home</span></a></li>
+        <li><a class="side-link" href="onboarding-corporate.html" data-nav="onboarding"><svg class="ic" aria-hidden="true"><use href="#i-building"/></svg><span>Onboarding</span></a></li>
+        <li><a class="side-link" href="application-new.html" data-nav="application" data-requires-onboarding><svg class="ic" aria-hidden="true"><use href="#i-circle-plus"/></svg><span>New Application</span></a></li>
+        <li><a class="side-link" href="tracker.html" data-nav="tracker" data-requires-onboarding><svg class="ic" aria-hidden="true"><use href="#i-activity"/></svg><span>Tracker</span></a></li>
+        <li><a class="side-link" href="settings.html" data-nav="settings"><svg class="ic" aria-hidden="true"><use href="#i-settings"/></svg><span>Settings</span></a></li>
+        <li><a class="side-link logout" href="login.html" data-logout><svg class="ic" aria-hidden="true"><use href="#i-log-out"/></svg><span>Logout</span></a></li>
+      </ul>
+      </nav>
+      <div class="side-foot">v1.0.0 · NAMA UNITED<br><img src="images/logo-azentio-white.svg" alt="Powered by Azentio" width="51" height="14"></div>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <button type="button" class="btn btn-icon btn-soft menu-btn" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar" aria-label="Open menu"><svg class="ic" aria-hidden="true"><use href="#i-menu"/></svg></button>
+      <h1 class="page-title">Settings</h1>
+      <div class="tools">
+        <button type="button" class="bell" aria-label="Notifications, 2 unread"><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg><span class="count">2</span></button>
+        <span class="vsep" aria-hidden="true"></span>
+        <div class="dropdown">
+          <button type="button" class="who" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="avatar" data-admin-initials>FA</span>
+            <span class="txt"><span class="nm d-block" data-admin-name>Faisal Al-Qahtani</span><span class="role d-block">SME Admin</span></span>
+            <svg class="ic ic-sm text-3" aria-hidden="true"><use href="#i-chevron-down"/></svg>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end user-menu">
+            <li class="um-head">
+              <span class="avatar" data-admin-initials>FA</span>
+              <div class="min-w-0"><div class="um-name text-truncate" data-admin-name>Faisal Al-Qahtani</div><div class="um-role text-truncate">SME Admin · <span data-corp-name>Al Noor Trading Company</span></div></div>
+            </li>
+            <li class="um-login">
+              <p class="t-overline mb-2">Last login</p>
+              <div class="um-row"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-clock"/></svg><span data-last-login-time>Today, 08:34</span></div>
+              <div class="um-row"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-monitor"/></svg><span data-last-login-device>Chrome on Windows</span></div>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="settings.html"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-settings"/></svg> Settings</a></li>
+            <li><a class="dropdown-item" href="login.html" data-logout><svg class="ic ic-sm" aria-hidden="true"><use href="#i-log-out"/></svg> Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <main class="content" id="main">
+      <div class="row g-4">
+        <div class="col-lg-7 d-flex flex-column gap-4">
+          <section class="card-nama card-pad">
+            <div class="d-flex align-items-center gap-3">
+              <span class="avatar" style="width:64px;height:64px;font-size:1.25rem" data-admin-initials>FA</span>
+              <div>
+                <div class="d-flex align-items-center gap-2 flex-wrap"><span class="t-h4 text-uppercase" data-admin-name>Faisal Al-Qahtani</span><span class="tag tag-success">SME Admin</span></div>
+                <div class="t-sub" data-last-login>Last: Today 08:34</div>
+              </div>
+            </div>
+            <hr class="card-divider">
+            <div class="d-flex gap-2 flex-wrap"><button type="button" class="btn btn-primary btn-sm text-uppercase">Update Profile</button><button type="button" class="btn btn-secondary btn-sm text-uppercase">View Audit Log</button></div>
+          </section>
+          <section class="card-nama card-pad">
+            <div class="accent-bar mb-2"><h3 class="card-title-nama">Security &amp; Authentication</h3><p class="t-sub mb-0">Manage passwords and sign-in verification.</p></div>
+            <a class="set-row" href="#"><svg class="ic ic-l ic-lg" aria-hidden="true"><use href="#i-lock"/></svg><div><b>Change password</b><span>Keep your account secure with regular updates</span></div><svg class="ic chev" aria-hidden="true"><use href="#i-chevron-right"/></svg></a>
+            <a class="set-row" href="#"><svg class="ic ic-l ic-lg" aria-hidden="true"><use href="#i-smartphone"/></svg><div><b>OTP verification</b><span>Codes are sent to your registered mobile number</span></div><svg class="ic chev" aria-hidden="true"><use href="#i-chevron-right"/></svg></a>
+            <a class="set-row" href="#"><svg class="ic ic-l ic-lg" aria-hidden="true"><use href="#i-palette"/></svg><div><b>Select theme</b><span>Currently: System default (Light)</span></div><svg class="ic chev" aria-hidden="true"><use href="#i-chevron-right"/></svg></a>
+          </section>
+        </div>
+        <div class="col-lg-5">
+          <section class="card-nama card-pad">
+            <div class="d-flex gap-3 mb-3"><svg class="ic ic-lg text-primary-nama" aria-hidden="true"><use href="#i-globe"/></svg><div><h3 class="card-title-nama">Language Settings</h3><p class="t-sub mb-0">Select your preferred language for the interface.</p></div></div>
+            <label class="lang-opt"><span class="code">EN</span><div><b>English</b><span>Global default</span></div><input class="form-check-input" type="radio" name="lang" checked></label>
+            <label class="lang-opt"><span class="code">AR</span><div><b>Arabic</b><span lang="ar">اللغة العربية</span></div><input class="form-check-input" type="radio" name="lang"></label>
+          </section>
+        </div>
+      </div>
+    </main>
+    <footer class="app-footer"><span>© <span data-year>2026</span> NAMA United Financing Company. All rights reserved.</span><span>Secured session · Powered by Azentio</span></footer>
+  </div>
+</div>
+
+<script src="js/vendor/bootstrap.bundle.min.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>

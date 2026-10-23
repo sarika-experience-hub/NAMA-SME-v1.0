@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin User Login · NAMA SME Cards</title>
+<meta name="description" content="Log in to your NAMA SME Admin account.">
+<meta name="theme-color" content="#003366">
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="css/vendor/bootstrap.min.css">
+<link rel="stylesheet" href="css/nama.css">
+</head>
+<body data-page="login">
+<script src="js/icons.js"></script>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="auth">
+  <aside class="auth-panel" aria-label="NAMA Financing">
+    <div class="deco" aria-hidden="true"></div>
+    <a class="brand" href="index.html"><img src="images/logo-nama-white.svg" alt="NAMA Financing" width="168" height="119"></a>
+    <div class="pitch">
+      <h2>Fast &amp; transparent financial solutions built for your speed.</h2>
+      <p>With a deep understanding of SMEs' needs, we leverage technology to offer fast and transparent card financing designed for modern business.</p>
+
+    </div>
+    <div class="panel-foot">
+      <span>© <span data-year>2026</span> NAMA United Financing Company</span>
+      <span class="d-inline-flex align-items-center gap-2">Powered by <img src="images/logo-azentio-white.svg" alt="Azentio" width="58" height="16"></span>
+    </div>
+  </aside>
+  <main class="auth-main" id="main">
+    <div class="auth-top">
+      <button type="button" class="lang" aria-label="Switch language to Arabic"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-globe"/></svg><span lang="ar">العربية</span></button>
+    </div>
+    <div class="auth-body">
+      <div class="auth-form fade-in">
+        <div id="loginNotice"></div>
+        <h1>Admin User Login</h1>
+        <p class="lead-sub">Log in to access your SME Admin account</p>
+        <form id="loginForm" novalidate>
+          <div class="mb-3">
+            <div class="label-row"><label class="form-label" for="loginUser">User name</label><button type="button" class="btn btn-link btn-sm p-0 mb-2 d-none" id="notYouBtn">Not you?</button></div>
+            <div class="field"><svg class="ic ic-lead" aria-hidden="true"><use href="#i-user"/></svg><input type="text" class="form-control" id="loginUser" placeholder="Enter your username" autocomplete="username" required></div>
+          </div>
+          <div class="mb-2">
+            <div class="label-row"><label class="form-label" for="loginPass">Password</label><a href="#" id="forgotLink">Forgot password?</a></div>
+            <div class="field"><svg class="ic ic-lead" aria-hidden="true"><use href="#i-lock"/></svg><input type="password" class="form-control" id="loginPass" placeholder="Enter your password" autocomplete="current-password" required style="padding-right:3rem"><button type="button" class="field-action" data-toggle-password="loginPass" aria-label="Show password" aria-pressed="false"><svg class="ic" aria-hidden="true"><use href="#i-eye"/></svg></button></div>
+          </div>
+          <div class="form-check mt-3">
+            <input class="form-check-input" type="checkbox" id="rememberMe">
+            <label class="form-check-label" for="rememberMe">Remember my username</label>
+            <button type="button" class="help-tip" data-help data-bs-title="Remember my username" data-bs-content="&lt;p&gt;We&#x27;ll fill in your username the next time you log in on this device. Your password is never saved.&lt;/p&gt;&lt;p class=&#x27;help-where&#x27;&gt;Don&#x27;t use this on shared or public computers.&lt;/p&gt;" aria-label="Help: Remember my username"><svg class="ic" aria-hidden="true"><use href="#i-info"/></svg></button>
+          </div>
+          <div id="loginError" class="mt-3" aria-live="assertive"></div>
+          <div class="auth-actions">
+            <a href="index.html" class="btn btn-secondary btn-lg">Cancel</a>
+            <button type="submit" class="btn btn-primary btn-lg" id="loginBtn">Login</button>
+          </div>
+        </form>
+        <p class="auth-foot-link">New to NAMA? <a href="register.html">Start Onboarding</a></p>
+        <p class="t-caption text-center mb-0">Prototype: password <b>wrong</b> shows the error state; 3 failed attempts suspend the account.</p>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Login OTP (sent by SMS to the registered mobile) -->
+<div class="modal fade" id="loginOtpModal" tabindex="-1" aria-labelledby="loginOtpTitle" aria-hidden="true" data-bs-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered modal-nama">
+    <div class="modal-content">
+      <div class="m-head">
+        <h2 class="m-title" id="loginOtpTitle">Enter the verification code</h2>
+        <button type="button" class="m-close" data-bs-dismiss="modal" aria-label="Close"><svg class="ic ic-lg" aria-hidden="true"><use href="#i-circle-x"/></svg></button>
+      </div>
+      <div class="m-body m-center">
+        <div class="m-icon info"><svg class="ic" aria-hidden="true"><use href="#i-smartphone"/></svg></div>
+        <p class="mb-0">We sent a 6-digit code by SMS to your registered mobile <b class="text-body" id="loginOtpTarget">+966 5X XXX XX67</b></p>
+        <div class="otp" id="loginOtpBoxes" role="group" aria-label="One-time password">
+          <input type="text" inputmode="numeric" maxlength="1" aria-label="Digit 1" autocomplete="one-time-code">
+          <input type="text" inputmode="numeric" maxlength="1" aria-label="Digit 2">
+          <input type="text" inputmode="numeric" maxlength="1" aria-label="Digit 3">
+          <input type="text" inputmode="numeric" maxlength="1" aria-label="Digit 4">
+          <input type="text" inputmode="numeric" maxlength="1" aria-label="Digit 5">
+          <input type="text" inputmode="numeric" maxlength="1" aria-label="Digit 6">
+        </div>
+        <p class="text-error small mb-2 d-none" id="loginOtpError" role="alert"></p>
+        <p class="t-caption mb-0">Didn't receive the code? <button type="button" class="btn btn-link btn-sm p-0 align-baseline" id="loginOtpResend" disabled>Resend in <span id="loginOtpTimer">00:30</span></button></p>
+        <p class="t-caption mt-2 mb-0 opacity-75">Prototype: any 6-digit code works; 000000 is rejected.</p>
+      </div>
+      <div class="m-foot">
+        <button type="button" class="btn btn-soft" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" id="loginOtpVerify" disabled>Verify &amp; Log in</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/vendor/bootstrap.bundle.min.js"></script>
+<script src="js/app.js"></script>
+<script src="js/pages/login.js"></script>
+</body>
+</html>

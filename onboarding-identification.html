@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Identification Details · NAMA SME Cards</title>
+<meta name="description" content="Review and add your company's identification numbers.">
+<meta name="theme-color" content="#003366">
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="css/vendor/bootstrap.min.css">
+<link rel="stylesheet" href="css/nama.css">
+</head>
+<body data-page="onboarding" data-mode="onboarding">
+<script src="js/icons.js"></script>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="app">
+  <aside class="sidebar offcanvas-lg offcanvas-start" tabindex="-1" id="sidebar" aria-label="Main navigation">
+    <div class="offcanvas-body">
+      <div class="sidebar-brand">
+        <a href="dashboard.html"><img src="images/logo-nama-white.svg" alt="NAMA Financing" width="92" height="65"></a>
+      </div>
+      <nav>
+      <ul class="side-nav">
+        <li><a class="side-link" href="dashboard.html" data-nav="home" data-requires-onboarding><svg class="ic" aria-hidden="true"><use href="#i-home"/></svg><span>Home</span></a></li>
+        <li><a class="side-link" href="onboarding-corporate.html" data-nav="onboarding"><svg class="ic" aria-hidden="true"><use href="#i-building"/></svg><span>Onboarding</span></a></li>
+        <li><a class="side-link" href="application-new.html" data-nav="application" data-requires-onboarding><svg class="ic" aria-hidden="true"><use href="#i-circle-plus"/></svg><span>New Application</span></a></li>
+        <li><a class="side-link" href="tracker.html" data-nav="tracker" data-requires-onboarding><svg class="ic" aria-hidden="true"><use href="#i-activity"/></svg><span>Tracker</span></a></li>
+        <li><a class="side-link" href="settings.html" data-nav="settings"><svg class="ic" aria-hidden="true"><use href="#i-settings"/></svg><span>Settings</span></a></li>
+        <li><a class="side-link logout" href="login.html" data-logout><svg class="ic" aria-hidden="true"><use href="#i-log-out"/></svg><span>Logout</span></a></li>
+      </ul>
+      </nav>
+      <div class="side-foot">v1.0.0 · NAMA UNITED<br><img src="images/logo-azentio-white.svg" alt="Powered by Azentio" width="51" height="14"></div>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <button type="button" class="btn btn-icon btn-soft menu-btn" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar" aria-label="Open menu"><svg class="ic" aria-hidden="true"><use href="#i-menu"/></svg></button>
+      <h1 class="page-title">Corporate Onboarding</h1>
+      <div class="tools">
+        <button type="button" class="bell" aria-label="Notifications, 2 unread"><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg><span class="count">2</span></button>
+        <span class="vsep" aria-hidden="true"></span>
+        <div class="dropdown">
+          <button type="button" class="who" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="avatar" data-admin-initials>FA</span>
+            <span class="txt"><span class="nm d-block" data-admin-name>Faisal Al-Qahtani</span><span class="role d-block">SME Admin</span></span>
+            <svg class="ic ic-sm text-3" aria-hidden="true"><use href="#i-chevron-down"/></svg>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end user-menu">
+            <li class="um-head">
+              <span class="avatar" data-admin-initials>FA</span>
+              <div class="min-w-0"><div class="um-name text-truncate" data-admin-name>Faisal Al-Qahtani</div><div class="um-role text-truncate">SME Admin · <span data-corp-name>Al Noor Trading Company</span></div></div>
+            </li>
+            <li class="um-login">
+              <p class="t-overline mb-2">Last login</p>
+              <div class="um-row"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-clock"/></svg><span data-last-login-time>Today, 08:34</span></div>
+              <div class="um-row"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-monitor"/></svg><span data-last-login-device>Chrome on Windows</span></div>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="settings.html"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-settings"/></svg> Settings</a></li>
+            <li><a class="dropdown-item" href="login.html" data-logout><svg class="ic ic-sm" aria-hidden="true"><use href="#i-log-out"/></svg> Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <main class="content" id="main">
+      <div class="content-narrow">
+      <div class="page-head">
+        <div><h2>Identification Details</h2><p>Your primary identification is filled in from registration. Add any other company identification numbers.</p></div>
+        <span class="status status-progress">Onboarding in progress</span>
+      </div>
+      <nav class="stepper-card" aria-label="Progress"><ol class="stepper"><li class="done is-link"><a class="step-link" href="onboarding-corporate.html" title="Go back to Business Details"><span class="dot"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg></span><span class="lbl">Business Details</span><span class="visually-hidden"> (completed, select to review or edit)</span></a><span class="line" aria-hidden="true"></span></li><li class="done is-link"><a class="step-link" href="onboarding-key-people.html" title="Go back to Key People"><span class="dot"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg></span><span class="lbl">Key People</span><span class="visually-hidden"> (completed, select to review or edit)</span></a><span class="line" aria-hidden="true"></span></li><li class="done is-link"><a class="step-link" href="onboarding-address.html" title="Go back to Address"><span class="dot"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg></span><span class="lbl">Address</span><span class="visually-hidden"> (completed, select to review or edit)</span></a><span class="line" aria-hidden="true"></span></li><li class="active" aria-current="step"><span class="dot">4</span><span class="lbl">Identification</span><span class="line" aria-hidden="true"></span></li><li class=""><span class="dot">5</span><span class="lbl">Banking &amp; IBAN</span><span class="line" aria-hidden="true"></span></li><li class=""><span class="dot">6</span><span class="lbl">Documents</span><span class="line" aria-hidden="true"></span></li><li class=""><span class="dot">7</span><span class="lbl">Review</span><span class="line" aria-hidden="true"></span></li><li class=""><span class="dot">8</span><span class="lbl">Complete</span></li></ol><p class="stepper-caption" aria-hidden="true">Step 4 of 8 · Identification</p></nav>
+      <form id="idForm" novalidate>
+      <section class="card-nama card-pad rgrid-card" id="idGridCard">
+        <div class="card-head">
+          <div><h3 class="card-title-nama">Identification records <span class="text-3 fw-normal" data-grid-count>(0)</span></h3><p class="t-sub mb-0"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-lock"/></svg> The primary identification can't be deleted. Each ID type can be added once.</p></div>
+        </div>
+        <div class="rgrid-tools">
+          <div class="field rgrid-search"><svg class="ic ic-lead" aria-hidden="true"><use href="#i-search"/></svg><input type="search" class="form-control" placeholder="Search identification" aria-label="Search identification" data-grid-search></div>
+          <button type="button" class="btn btn-primary" data-grid-add><svg class="ic ic-sm" aria-hidden="true"><use href="#i-plus"/></svg> Add Identification</button>
+        </div>
+        <div class="rgrid-wrap">
+          <table class="rgrid" id="idGrid">
+            <thead><tr><th scope="col">ID type</th><th scope="col">ID number</th><th scope="col">Is base</th><th scope="col" class="act-col"><span class="visually-hidden">Actions</span></th></tr></thead>
+            <tbody></tbody>
+          </table>
+          <div class="rgrid-empty d-none" data-grid-empty><p class="fw-600 mb-1">No identification yet</p><p class="t-sub mb-0">Add the company's identification numbers.</p></div>
+          <div class="rgrid-nomatch d-none" data-grid-nomatch>No results match your search.</div>
+        </div>
+
+      </section>
+      <div class="card-actions border-0 mt-0">
+        <a href="onboarding-address.html" class="btn btn-secondary"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-arrow-left"/></svg> Back</a>
+        <div class="end"><button type="button" class="btn btn-link" id="cancelBtn">Cancel</button><button type="submit" class="btn btn-primary">Next <svg class="ic ic-sm" aria-hidden="true"><use href="#i-arrow-right"/></svg></button></div>
+      </div>
+      </form>
+      </div>
+
+<div class="modal fade" id="identModal" tabindex="-1" aria-labelledby="identModalTitle" aria-hidden="true" data-bs-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-form-lg">
+    <div class="modal-content">
+      <div class="m-head ruled">
+        <h2 class="m-title" id="identModalTitle">Add Identification</h2>
+        <button type="button" class="m-close" data-bs-dismiss="modal" aria-label="Close"><svg class="ic ic-lg" aria-hidden="true"><use href="#i-circle-x"/></svg></button>
+      </div>
+      <form class="d-contents" id="identModalForm" novalidate>
+        <div class="m-body scroll"><div class="section-block"><p class="t-section">Identification</p><div class="row g-3"><div class="col-md-6"><label class="form-label" for="idType">ID type<span class="req">*</span></label><select class="form-select" id="idType" name="idType" required aria-describedby="idTypeHint" ><option value="" selected disabled>Select ID type</option><option value="unn">Unified National Number</option><option value="cr">Commercial Registration Number</option><option value="vat">VAT Number</option></select><div class="invalid-feedback">Select an ID type</div><div class="form-text" id="idTypeHint">Each ID type can be added once</div></div><div class="col-md-6"><label class="form-label" for="idNo">ID number<span class="req">*</span></label><div class="field"><input type="text" class="form-control" id="idNo" name="idNo" placeholder="Enter the ID number" required inputmode="numeric" autocomplete="off"><span class="field-state state-error"><svg class="ic" aria-hidden="true"><use href="#i-circle-alert"/></svg></span><span class="field-state state-success"><svg class="ic" aria-hidden="true"><use href="#i-circle-check"/></svg></span></div><div class="invalid-feedback">Enter the ID number</div></div><div class="col-md-6"><label class="form-label" for="idVersion">ID version number<span class="opt">(optional)</span></label><div class="field"><input type="text" class="form-control" id="idVersion" name="idVersion" placeholder="e.g. 2" inputmode="numeric"><span class="field-state state-error"><svg class="ic" aria-hidden="true"><use href="#i-circle-alert"/></svg></span><span class="field-state state-success"><svg class="ic" aria-hidden="true"><use href="#i-circle-check"/></svg></span></div></div><div class="col-md-6"><label class="form-label" for="idSponsor">Sponsor name<span class="opt">(optional)</span></label><div class="field"><input type="text" class="form-control" id="idSponsor" name="idSponsor" placeholder="Sponsor name" ><span class="field-state state-error"><svg class="ic" aria-hidden="true"><use href="#i-circle-alert"/></svg></span><span class="field-state state-success"><svg class="ic" aria-hidden="true"><use href="#i-circle-check"/></svg></span></div></div><div class="col-md-6"><label class="form-label" for="idExpiryG">ID expiry date (Gregorian)<span class="req">*</span></label><div class="field"><svg class="ic ic-lead" aria-hidden="true"><use href="#i-calendar"/></svg><input type="text" class="form-control num date-in" id="idExpiryG" name="idExpiryG" placeholder="DD/MM/YYYY" inputmode="numeric" maxlength="10" autocomplete="off" required aria-describedby="idExpiryGHint"><span class="field-state state-error"><svg class="ic" aria-hidden="true"><use href="#i-circle-alert"/></svg></span><span class="field-state state-success"><svg class="ic" aria-hidden="true"><use href="#i-circle-check"/></svg></span></div><div class="invalid-feedback">Enter a valid future expiry date (DD/MM/YYYY)</div><div class="form-text" id="idExpiryGHint">DD/MM/YYYY · fills in the Hijri date automatically</div></div><div class="col-md-6"><label class="form-label" for="idExpiryH">ID expiry date (Hijri)<span class="req">*</span></label><div class="field"><svg class="ic ic-lead" aria-hidden="true"><use href="#i-calendar"/></svg><input type="text" class="form-control num date-in" id="idExpiryH" name="idExpiryH" placeholder="DD/MM/YYYY" inputmode="numeric" maxlength="10" autocomplete="off" required aria-describedby="idExpiryHHint"><span class="field-state state-error"><svg class="ic" aria-hidden="true"><use href="#i-circle-alert"/></svg></span><span class="field-state state-success"><svg class="ic" aria-hidden="true"><use href="#i-circle-check"/></svg></span></div><div class="invalid-feedback">Enter a valid future expiry date (DD/MM/YYYY)</div><div class="form-text" id="idExpiryHHint">DD/MM/YYYY · fills in the Gregorian date automatically</div></div><div class="col-md-6"><label class="form-label" for="idIssueG">ID issuance date (Gregorian)</label><div class="field"><svg class="ic ic-lead" aria-hidden="true"><use href="#i-calendar"/></svg><input type="text" class="form-control num date-in" id="idIssueG" name="idIssueG" placeholder="DD/MM/YYYY" inputmode="numeric" maxlength="10" autocomplete="off" aria-describedby="idIssueGHint"><span class="field-state state-error"><svg class="ic" aria-hidden="true"><use href="#i-circle-alert"/></svg></span><span class="field-state state-success"><svg class="ic" aria-hidden="true"><use href="#i-circle-check"/></svg></span></div><div class="invalid-feedback">Enter a valid date (DD/MM/YYYY)</div><div class="form-text" id="idIssueGHint">DD/MM/YYYY</div></div><div class="col-md-6"><label class="form-label" for="idIssueH">ID issuance date (Hijri)</label><div class="field"><svg class="ic ic-lead" aria-hidden="true"><use href="#i-calendar"/></svg><input type="text" class="form-control num date-in" id="idIssueH" name="idIssueH" placeholder="DD/MM/YYYY" inputmode="numeric" maxlength="10" autocomplete="off" aria-describedby="idIssueHHint"><span class="field-state state-error"><svg class="ic" aria-hidden="true"><use href="#i-circle-alert"/></svg></span><span class="field-state state-success"><svg class="ic" aria-hidden="true"><use href="#i-circle-check"/></svg></span></div><div class="invalid-feedback">Enter a valid date (DD/MM/YYYY)</div><div class="form-text" id="idIssueHHint">DD/MM/YYYY</div></div><div class="col-md-6"><label class="form-label" for="idPlaceAr">ID issuance place (Arabic)<span class="opt">(optional)</span></label><div class="field"><input type="text" class="form-control" id="idPlaceAr" name="idPlaceAr" placeholder="مكان الإصدار" dir="rtl" lang="ar" ><span class="field-state state-error"><svg class="ic" aria-hidden="true"><use href="#i-circle-alert"/></svg></span><span class="field-state state-success"><svg class="ic" aria-hidden="true"><use href="#i-circle-check"/></svg></span></div></div><div class="col-md-6"><label class="form-label" for="idPlace">ID issuance place name<span class="opt">(optional)</span></label><div class="field"><input type="text" class="form-control" id="idPlace" name="idPlace" placeholder="e.g. Riyadh" ><span class="field-state state-error"><svg class="ic" aria-hidden="true"><use href="#i-circle-alert"/></svg></span><span class="field-state state-success"><svg class="ic" aria-hidden="true"><use href="#i-circle-check"/></svg></span></div></div><div class="col-md-6"><span class="form-label">Is base</span><label class="sign-check"><input class="form-check-input" type="checkbox" id="idBase" name="idBase"> <span>Use as the primary (base) identification</span></label></div></div></div>
+        </div>
+        <div class="m-foot ruled end">
+          <button type="button" class="btn btn-soft" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary" data-modal-save><svg class="ic ic-sm" aria-hidden="true"><use href="#i-check"/></svg> Add to list</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>    </main>
+    <footer class="app-footer"><span>© <span data-year>2026</span> NAMA United Financing Company. All rights reserved.</span><span>Secured session · Powered by Azentio</span></footer>
+  </div>
+</div>
+
+<script src="js/vendor/bootstrap.bundle.min.js"></script>
+<script src="js/app.js"></script>
+<script src="js/pages/onboarding.js"></script>
+<script src="js/pages/grid.js"></script>
+<script src="js/pages/identification.js"></script>
+</body>
+</html>

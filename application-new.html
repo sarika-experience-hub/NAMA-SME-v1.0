@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>New Application Request · NAMA SME Cards</title>
+<meta name="description" content="Select the financing product you would like to apply for.">
+<meta name="theme-color" content="#003366">
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="css/vendor/bootstrap.min.css">
+<link rel="stylesheet" href="css/nama.css">
+</head>
+<body data-page="application" data-demo-onboarded>
+<script src="js/icons.js"></script>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="app">
+  <aside class="sidebar offcanvas-lg offcanvas-start" tabindex="-1" id="sidebar" aria-label="Main navigation">
+    <div class="offcanvas-body">
+      <div class="sidebar-brand">
+        <a href="dashboard.html"><img src="images/logo-nama-white.svg" alt="NAMA Financing" width="92" height="65"></a>
+      </div>
+      <nav>
+      <ul class="side-nav">
+        <li><a class="side-link" href="dashboard.html" data-nav="home" data-requires-onboarding><svg class="ic" aria-hidden="true"><use href="#i-home"/></svg><span>Home</span></a></li>
+        <li><a class="side-link" href="onboarding-corporate.html" data-nav="onboarding"><svg class="ic" aria-hidden="true"><use href="#i-building"/></svg><span>Onboarding</span></a></li>
+        <li><a class="side-link" href="application-new.html" data-nav="application" data-requires-onboarding><svg class="ic" aria-hidden="true"><use href="#i-circle-plus"/></svg><span>New Application</span></a></li>
+        <li><a class="side-link" href="tracker.html" data-nav="tracker" data-requires-onboarding><svg class="ic" aria-hidden="true"><use href="#i-activity"/></svg><span>Tracker</span></a></li>
+        <li><a class="side-link" href="settings.html" data-nav="settings"><svg class="ic" aria-hidden="true"><use href="#i-settings"/></svg><span>Settings</span></a></li>
+        <li><a class="side-link logout" href="login.html" data-logout><svg class="ic" aria-hidden="true"><use href="#i-log-out"/></svg><span>Logout</span></a></li>
+      </ul>
+      </nav>
+      <div class="side-foot">v1.0.0 · NAMA UNITED<br><img src="images/logo-azentio-white.svg" alt="Powered by Azentio" width="51" height="14"></div>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <button type="button" class="btn btn-icon btn-soft menu-btn" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar" aria-label="Open menu"><svg class="ic" aria-hidden="true"><use href="#i-menu"/></svg></button>
+      <h1 class="page-title">New Application</h1>
+      <div class="tools">
+        <button type="button" class="bell" aria-label="Notifications, 2 unread"><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg><span class="count">2</span></button>
+        <span class="vsep" aria-hidden="true"></span>
+        <div class="dropdown">
+          <button type="button" class="who" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="avatar" data-admin-initials>FA</span>
+            <span class="txt"><span class="nm d-block" data-admin-name>Faisal Al-Qahtani</span><span class="role d-block">SME Admin</span></span>
+            <svg class="ic ic-sm text-3" aria-hidden="true"><use href="#i-chevron-down"/></svg>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end user-menu">
+            <li class="um-head">
+              <span class="avatar" data-admin-initials>FA</span>
+              <div class="min-w-0"><div class="um-name text-truncate" data-admin-name>Faisal Al-Qahtani</div><div class="um-role text-truncate">SME Admin · <span data-corp-name>Al Noor Trading Company</span></div></div>
+            </li>
+            <li class="um-login">
+              <p class="t-overline mb-2">Last login</p>
+              <div class="um-row"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-clock"/></svg><span data-last-login-time>Today, 08:34</span></div>
+              <div class="um-row"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-monitor"/></svg><span data-last-login-device>Chrome on Windows</span></div>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="settings.html"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-settings"/></svg> Settings</a></li>
+            <li><a class="dropdown-item" href="login.html" data-logout><svg class="ic ic-sm" aria-hidden="true"><use href="#i-log-out"/></svg> Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <main class="content" id="main">
+      <div class="content-narrow">
+      <div class="page-head">
+        <div><h2>New Application Request</h2><p>Select the financing product you would like to apply for and complete the required application steps.</p></div>
+      </div>
+      <div id="appNewNotice"></div>
+      <div class="alert-nama alert-success-nama no-close mb-4" role="status"><svg class="ic" aria-hidden="true"><use href="#i-repeat"/></svg><div><span class="alert-title">Your verified details are reused</span>Business details, key people, addresses and documents already verified during onboarding won't be requested again — you'll only be asked for what's specific to the product you choose.</div></div>
+
+      <form id="newAppForm" novalidate>
+        <div class="row g-4">
+          <div class="col-lg-8">
+            <section class="card-nama card-pad">
+              <div class="card-head"><div><h3 class="card-title-nama">Financing products</h3><p class="t-sub mb-0">Choose one product per application.</p></div></div>
+              <div class="row g-3" role="radiogroup" aria-label="Financing product">
+                <div class="col-md-6">
+              <label class="fin-product" for="fp_cards">
+                <input type="radio" name="finProduct" id="fp_cards" value="cards" data-name="Cards" checked>
+                <span class="fp-ic"><svg class="ic" aria-hidden="true"><use href="#i-credit-card"/></svg></span>
+                <span class="fp-main"><span class="fp-name">Cards</span><span class="fp-desc">Corporate cards with a requested limit per card product — business, procurement, travel and food.</span><span class="fp-meta"><span class="pill pill-info"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-layers"/></svg> 6 steps</span></span></span>
+                <span class="fp-radio" aria-hidden="true"></span>
+              </label>
+            </div><div class="col-md-6">
+              <label class="fin-product" for="fp_tawarruq">
+                <input type="radio" name="finProduct" id="fp_tawarruq" value="tawarruq" data-name="Tawarruq">
+                <span class="fp-ic"><svg class="ic" aria-hidden="true"><use href="#i-coins"/></svg></span>
+                <span class="fp-main"><span class="fp-name">Tawarruq</span><span class="fp-desc">Cash financing through a Sharia-compliant commodity purchase and sale arrangement.</span><span class="fp-meta"><span class="pill pill-neutral">Steps to be confirmed</span></span></span>
+                <span class="fp-radio" aria-hidden="true"></span>
+              </label>
+            </div><div class="col-md-6">
+              <label class="fin-product" for="fp_murabaha">
+                <input type="radio" name="finProduct" id="fp_murabaha" value="murabaha" data-name="Murabaha">
+                <span class="fp-ic"><svg class="ic" aria-hidden="true"><use href="#i-package"/></svg></span>
+                <span class="fp-main"><span class="fp-name">Murabaha</span><span class="fp-desc">Financing for goods or assets purchased for your business at a disclosed profit margin.</span><span class="fp-meta"><span class="pill pill-neutral">Steps to be confirmed</span></span></span>
+                <span class="fp-radio" aria-hidden="true"></span>
+              </label>
+            </div><div class="col-md-6">
+              <label class="fin-product" for="fp_ijarah">
+                <input type="radio" name="finProduct" id="fp_ijarah" value="ijarah" data-name="Ijarah">
+                <span class="fp-ic"><svg class="ic" aria-hidden="true"><use href="#i-car"/></svg></span>
+                <span class="fp-main"><span class="fp-name">Ijarah</span><span class="fp-desc">Lease-based financing for equipment, vehicles or property used by your business.</span><span class="fp-meta"><span class="pill pill-neutral">Steps to be confirmed</span></span></span>
+                <span class="fp-radio" aria-hidden="true"></span>
+              </label>
+            </div>
+              </div>
+            </section>
+          </div>
+          <div class="col-lg-4">
+            <aside class="card-nama card-pad sticky-lg" aria-live="polite">
+              <p class="t-overline mb-1">Application steps</p>
+              <h3 class="card-title-nama mb-3" id="fpTitle">Cards</h3>
+              <div class="fp-panel" data-steps-for="cards"><ol class="fp-steps"><li><span class="n">1</span><span>Card products &amp; limits</span></li><li><span class="n">2</span><span>Business details</span><span class=fp-reuse><svg class="ic ic-sm" aria-hidden="true"><use href="#i-repeat"/></svg> Reused</span></li><li><span class="n">3</span><span>Key people</span><span class=fp-reuse><svg class="ic ic-sm" aria-hidden="true"><use href="#i-repeat"/></svg> Reused</span></li><li><span class="n">4</span><span>Address details</span><span class=fp-reuse><svg class="ic ic-sm" aria-hidden="true"><use href="#i-repeat"/></svg> Reused</span></li><li><span class="n">5</span><span>Documents</span></li><li><span class="n">6</span><span>Review &amp; submit</span></li></ol></div><div class="fp-panel d-none" data-steps-for="tawarruq"><div class="fp-tbc"><svg class="ic" aria-hidden="true"><use href="#i-hourglass"/></svg><p class="mb-0">The Tawarruq application steps will be added once they are confirmed by PM Lending. Your onboarding details will be reused here too.</p></div></div><div class="fp-panel d-none" data-steps-for="murabaha"><div class="fp-tbc"><svg class="ic" aria-hidden="true"><use href="#i-hourglass"/></svg><p class="mb-0">The Murabaha application steps will be added once they are confirmed by PM Lending. Your onboarding details will be reused here too.</p></div></div><div class="fp-panel d-none" data-steps-for="ijarah"><div class="fp-tbc"><svg class="ic" aria-hidden="true"><use href="#i-hourglass"/></svg><p class="mb-0">The Ijarah application steps will be added once they are confirmed by PM Lending. Your onboarding details will be reused here too.</p></div></div>
+              <button type="submit" class="btn btn-primary btn-lg w-100 mt-4" id="startBtn">Start Cards Application <svg class="ic ic-sm" aria-hidden="true"><use href="#i-arrow-right"/></svg></button>
+            </aside>
+          </div>
+        </div>
+      </form>
+      <p class="t-caption mt-3">Prototype: add <b>?masterdata=missing</b> to the address to preview the Cards product set-up error.</p>
+      </div>
+    </main>
+    <footer class="app-footer"><span>© <span data-year>2026</span> NAMA United Financing Company. All rights reserved.</span><span>Secured session · Powered by Azentio</span></footer>
+  </div>
+</div>
+
+<script src="js/vendor/bootstrap.bundle.min.js"></script>
+<script src="js/app.js"></script>
+<script src="js/pages/appnew.js"></script>
+</body>
+</html>
