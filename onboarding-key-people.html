@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap">
 <link rel="stylesheet" href="css/vendor/bootstrap.min.css">
 <link rel="stylesheet" href="css/nama.css">
+<link rel="stylesheet" href="css/pages.css">
 </head>
 <body data-page="onboarding" data-mode="onboarding">
 <script src="js/icons.js"></script>
@@ -41,7 +42,13 @@
       <button type="button" class="btn btn-icon btn-soft menu-btn" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar" aria-label="Open menu"><svg class="ic" aria-hidden="true"><use href="#i-menu"/></svg></button>
       <h1 class="page-title">Corporate Onboarding</h1>
       <div class="tools">
-        <button type="button" class="bell" aria-label="Notifications, 2 unread"><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg><span class="count">2</span></button>
+        <div class="dropdown">
+          <button type="button" class="bell" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" aria-label="Notifications" id="bellBtn"><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg><span class="count d-none" data-notif-count>0</span></button>
+          <div class="dropdown-menu dropdown-menu-end notif-menu" aria-labelledby="bellBtn">
+            <div class="nm-head"><b>Notifications</b><button type="button" class="btn btn-link btn-sm p-0" data-notif-readall>Mark all as read</button></div>
+            <div class="nm-list" data-notif-list></div>
+          </div>
+        </div>
         <span class="vsep" aria-hidden="true"></span>
         <div class="dropdown">
           <button type="button" class="who" data-bs-toggle="dropdown" aria-expanded="false">
@@ -101,7 +108,7 @@
         <div class="end"><button type="button" class="btn btn-link" id="cancelBtn">Cancel</button><button type="submit" class="btn btn-primary" id="kpNext">Next <svg class="ic ic-sm" aria-hidden="true"><use href="#i-arrow-right"/></svg></button></div>
       </div>
       </form>
-      <p class="t-caption mt-2">Prototype: an ID ending in 0000 fails the identity check, 9999 returns an expired ID, and a mobile number ending in 000 isn't registered to the ID.</p>
+      <p class="t-caption mt-2">Prototype: an ID ending in 0000 fails the identity check, 9999 returns an expired ID, and a mobile number ending in 000 isn't registered to the ID (checked on save).</p>
       </div>
 
 <div class="modal fade" id="personModal" tabindex="-1" aria-labelledby="personModalTitle" aria-hidden="true" data-bs-backdrop="static">
@@ -114,14 +121,14 @@
       <form class="d-contents" id="personModalForm" novalidate>
         <div class="m-body scroll">
           <div class="kp-verify" id="kpVerifyBox">
-            <div class="d-flex gap-2 align-items-start"><svg class="ic kv-ic" aria-hidden="true"><use href="#i-shield-check"/></svg><div><p class="fw-600 mb-1">Identity &amp; mobile verification</p><p class="small text-3 mb-0">Enter the ID number, date of birth and mobile number, then verify. Personal details are filled in from the national identity service and the mobile number is checked against the ID.</p></div></div>
+            <div class="d-flex gap-2 align-items-start"><svg class="ic kv-ic" aria-hidden="true"><use href="#i-shield-check"/></svg><div><p class="fw-600 mb-1">Identity verification</p><p class="small text-3 mb-0">Enter the ID number and date of birth, then select Verify ID — personal details are filled in from the national identity service. The mobile number is checked against the ID when you save.</p></div></div>
             <div class="row g-3 mt-1">
               <div class="col-md-6"><label class="form-label" for="kpIdType">ID type<span class="req">*</span></label><select class="form-select" id="kpIdType" name="kpIdType" required ><option value="nid" selected>National ID</option><option value="iqama">Iqama</option><option value="gcc">GCC ID</option><option value="passport">Passport</option></select></div>
               <div class="col-md-6"><label class="form-label" for="kpIdNo">ID number<span class="req">*</span></label><div class="field"><input type="text" class="form-control" id="kpIdNo" name="kpIdNo" placeholder="1XXXXXXXXX" required inputmode="numeric" maxlength="10" autocomplete="off"><span class="field-state state-error"><svg class="ic" aria-hidden="true"><use href="#i-circle-alert"/></svg></span><span class="field-state state-success"><svg class="ic" aria-hidden="true"><use href="#i-circle-check"/></svg></span></div><div class="invalid-feedback">Enter a valid ID number</div></div>
               <div class="col-md-6"><label class="form-label" for="kpDobG">Date of birth (Gregorian)<span class="req">*</span></label><div class="field"><svg class="ic ic-lead" aria-hidden="true"><use href="#i-calendar"/></svg><input type="text" class="form-control num date-in" id="kpDobG" name="kpDobG" placeholder="DD/MM/YYYY" inputmode="numeric" maxlength="10" autocomplete="off" required aria-describedby="kpDobGHint"><span class="field-state state-error"><svg class="ic" aria-hidden="true"><use href="#i-circle-alert"/></svg></span><span class="field-state state-success"><svg class="ic" aria-hidden="true"><use href="#i-circle-check"/></svg></span></div><div class="invalid-feedback">Enter a valid date of birth (DD/MM/YYYY)</div><div class="form-text" id="kpDobGHint">DD/MM/YYYY · fills in the Hijri date automatically</div></div><div class="col-md-6"><label class="form-label" for="kpDobH">Date of birth (Hijri)<span class="req">*</span></label><div class="field"><svg class="ic ic-lead" aria-hidden="true"><use href="#i-calendar"/></svg><input type="text" class="form-control num date-in" id="kpDobH" name="kpDobH" placeholder="DD/MM/YYYY" inputmode="numeric" maxlength="10" autocomplete="off" required aria-describedby="kpDobHHint"><span class="field-state state-error"><svg class="ic" aria-hidden="true"><use href="#i-circle-alert"/></svg></span><span class="field-state state-success"><svg class="ic" aria-hidden="true"><use href="#i-circle-check"/></svg></span></div><div class="invalid-feedback">Enter a valid date of birth (DD/MM/YYYY)</div><div class="form-text" id="kpDobHHint">DD/MM/YYYY · fills in the Gregorian date automatically</div></div>
               <div class="col-md-6"><label class="form-label" for="kpMobile">Mobile 1<span class="req">*</span></label><div class="field field-prefix divided"><span class="prefix">+966</span><input type="tel" class="form-control" id="kpMobile" name="kpMobile" placeholder="5XXXXXXXX" required inputmode="numeric" maxlength="9"><span class="field-state state-error"><svg class="ic" aria-hidden="true"><use href="#i-circle-alert"/></svg></span><span class="field-state state-success"><svg class="ic" aria-hidden="true"><use href="#i-circle-check"/></svg></span></div><div class="invalid-feedback">9 digits starting with 5</div></div>
               <div class="col-md-6 d-flex align-items-end gap-3 flex-wrap">
-                <button type="button" class="btn btn-secondary" id="kpVerifyBtn"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-shield-check"/></svg> Verify ID &amp; mobile</button>
+                <button type="button" class="btn btn-secondary" id="kpVerifyBtn"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-shield-check"/></svg> Verify ID</button>
                 <span class="kp-vstate small" id="kpVerifyState" aria-live="polite"></span>
               </div>
             </div>

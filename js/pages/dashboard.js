@@ -50,6 +50,17 @@
     var dv = document.getElementById("dashView"); if (dv) dv.classList.add("d-none");
     var tb = document.querySelector('.page-head a[href="tracker.html"]'); if (tb) tb.classList.add("d-none");
   }
+  // Credit decision shown on Home (in-portal notification also added to the bell)
+  var status = NAMA.store.get("appStatus", "pending"), al2 = document.getElementById("dashAlert");
+  if (!noApp && al2 && status !== "pending") {
+    var A = {
+      approved: ["success", "circle-check", "Application approved", "Your card application <b class=\"text-body\">" + NAMA.esc(app.ref) + "</b> has been approved. Review your offer to continue.", "View Offer"],
+      declined: ["error", "circle-alert", "Application declined", "Your card application <b class=\"text-body\">" + NAMA.esc(app.ref) + "</b> wasn't approved. NAMA will contact you about the next steps.", "View details"],
+      draft: ["warning", "pencil", "Application not submitted", "Your card application draft is saved. Complete it and submit it for credit assessment.", "Complete Application"]
+    }[status];
+    al2.className = "alert-nama alert-" + A[0] + "-nama no-close mb-4";
+    al2.innerHTML = NAMA.icon(A[1]) + '<div class="flex-grow-1"><span class="alert-title">' + A[2] + "</span>" + A[3] + '</div><a href="' + (status === "draft" ? "card-application.html" : "tracker.html") + '" class="btn btn-sm ' + (status === "approved" ? "btn-success" : "btn-secondary") + ' align-self-center ms-2 text-nowrap">' + A[4] + "</a>";
+  }
   if (noApp && document.getElementById("appCard")) document.getElementById("appCard").classList.add("d-none");
   set('[data-stat="people"]', (people || NAMA.DEFAULTS.people).length);
   set('[data-stat="ibans"]', NAMA.store.get("ibanList", NAMA.DEFAULTS.ibanList).length);

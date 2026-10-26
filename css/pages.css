@@ -1,0 +1,58 @@
+/*!
+ * pages.css — page-level layout helpers for the NAMA SME portal.
+ * Loaded after nama.css (design system). Every visual rule lives in a stylesheet:
+ * the HTML pages and the markup created by the scripts carry no inline styles.
+ * Sections follow the page they belong to.
+ */
+
+/* ---------- Shared ---------- */
+/* Hidden SVG icon sprite injected by js/icons.js */
+.icon-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+/* Supporting note inside the navy summary panel */
+.panel-note { color: rgba(255, 255, 255, .82); }
+/* Large avatar (Settings profile) */
+.avatar.avatar-xl { width: 64px; height: 64px; font-size: 1.25rem; }
+/* Small icon next to a pop-up title */
+.m-icon.m-icon-sm { width: 40px; height: 40px; }
+/* Large success icon (Onboarding Complete) */
+.m-icon.m-icon-xl { width: 72px; height: 72px; }
+/* Stat tile icon in the success colour */
+.stat .s-ic.s-ic-success { background: var(--nama-success-50); color: var(--nama-success); }
+/* Text inputs switched to capitals (passport numbers) */
+.form-control.is-upper { text-transform: uppercase; }
+
+/* ---------- Fields with a trailing button ---------- */
+/* Show / hide password (Sign Up, Login) */
+.field:has(.field-action) > .form-control { padding-right: 3rem; }
+/* Inline "Verify" on the registration mobile number */
+.field .field-verify { position: absolute; right: .5rem; top: 50%; transform: translateY(-50%); }
+.field:has(.field-verify) > .form-control { padding-right: 5.5rem; }
+
+/* ---------- Registration: Create credentials ---------- */
+.auth-form.auth-form-narrow { max-width: 460px; }
+
+/* ---------- Onboarding: Banking & IBAN ---------- */
+.iban-ic { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: var(--nama-primary-50); color: var(--nama-primary); }
+
+/* ---------- Documents (onboarding and application) ---------- */
+.doc-progress { min-width: 180px; }
+.progress.progress-thin { height: 6px; }
+.progress-bar.progress-bar-success { width: 0; background: var(--nama-success); }
+
+/* ---------- Onboarding Complete ---------- */
+.complete-card { max-width: 880px; margin: 0 auto; }
+.card-pad.complete-pad { padding: 2.5rem 2rem 2rem; }
+.complete-text { max-width: 540px; }
+
+/* ---------- Card Products: read-only after submission ---------- */
+.product.is-locked { pointer-events: none; }
+
+/* ---------- Review ---------- */
+/* Arabic address line kept left-aligned under the English one */
+.rv-ar { text-align: left; }
+/* IBAN certificate file name */
+.rv-cert { max-width: 220px; }
+
+/* ---------- Tracker ---------- */
+.search-form .field.search-field { min-width: 260px; }
+@media (max-width: 767.98px) { .search-form .field.search-field { min-width: 0; } }

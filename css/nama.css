@@ -180,18 +180,18 @@ a:hover { color: var(--nama-primary-pressed); text-decoration: underline; }
    ===================================================================== */
 .form-label, .nama-label {
   display: block; margin-bottom: .5rem;
-  font-size: .75rem; line-height: 1rem; font-weight: 700;
-  text-transform: uppercase; letter-spacing: .02em; color: var(--nama-text);
+  font-size: .75rem; line-height: 1rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .03em; color: var(--nama-text-2);
 }
 .form-label .req, .nama-label .req { color: var(--nama-text); margin-left: .125rem; }
-.form-label .opt { font-weight: 500; text-transform: none; letter-spacing: 0; color: var(--nama-text-3); margin-left: .25rem; }
+.form-label .opt { font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--nama-text-3); margin-left: .25rem; }
 .label-row { display: flex; align-items: baseline; justify-content: space-between; gap: .5rem; }
 .label-row .form-label { margin-bottom: .5rem; }
 .label-row a { font-size: .8125rem; margin-bottom: .5rem; }
 
 .form-control, .form-select {
   height: 44px; padding: .625rem .875rem;
-  font-size: .875rem; font-weight: 500; color: var(--nama-text);
+  font-size: .875rem; font-weight: 400; color: var(--nama-text);
   background-color: var(--nama-input);
   border: 1px solid var(--nama-border); border-radius: var(--nama-radius);
   box-shadow: none;
@@ -209,7 +209,7 @@ textarea.form-control { height: auto; min-height: 96px; }
 .form-control:disabled, .form-select:disabled { background-color: var(--nama-border); color: var(--nama-text-disabled); border-color: var(--nama-border); cursor: not-allowed; }
 .form-control[readonly], .form-select.is-readonly {
   background-color: var(--nama-input-readonly); border-color: var(--nama-border);
-  color: var(--nama-text); font-weight: 600; cursor: default;
+  color: var(--nama-text); font-weight: 400; cursor: default;
 }
 .form-control[readonly]:focus { box-shadow: none; border-color: var(--nama-border); }
 .form-select {
@@ -253,7 +253,7 @@ textarea.form-control { height: auto; min-height: 96px; }
 .field-prefix { position: relative; }
 .field-prefix .prefix {
   position: absolute; left: .875rem; top: 50%; transform: translateY(-50%);
-  font-size: .875rem; font-weight: 600; color: var(--nama-text-3); pointer-events: none;
+  font-size: .875rem; font-weight: 500; color: var(--nama-text-3); pointer-events: none;
 }
 .field-prefix.divided .prefix { padding-right: .625rem; border-right: 1px solid var(--nama-border-strong); line-height: 1.1; color: var(--nama-text); }
 .field-prefix .form-control { padding-left: 3.25rem; }
@@ -1160,4 +1160,47 @@ body[data-page="login"] .auth-foot-link { margin-top: 1rem; margin-bottom: .25re
   .stepper:has(> li:nth-child(7)) li { gap: .25rem; min-width: 0; }
   .stepper:has(> li:nth-child(7)) .dot { width: 24px; height: 24px; font-size: .6875rem; }
   .stepper:has(> li:nth-child(7)) .line { min-width: 4px; }
+}
+
+/* =====================================================================
+ * SME-ONB-01 / SME-APP-02 (26 Oct 2026): notifications, tracker statuses
+ * ===================================================================== */
+/* In-portal notifications (header bell) */
+.notif-menu { width: 360px; max-width: calc(100vw - 24px); padding: 0; overflow: hidden; border-radius: var(--nama-radius-lg); }
+.notif-menu .nm-head { display: flex; align-items: center; justify-content: space-between; padding: .875rem 1rem; border-bottom: 1px solid var(--nama-border); }
+.notif-menu .nm-list { max-height: 380px; overflow-y: auto; }
+.notif-menu .nm-item { display: flex; gap: .75rem; padding: .875rem 1rem; text-decoration: none; color: var(--nama-text); border-bottom: 1px solid var(--nama-border); position: relative; }
+.notif-menu .nm-item:last-child { border-bottom: 0; }
+.notif-menu .nm-item:hover { background: #F6F9FC; }
+.notif-menu .nm-item.is-new { background: #F3F7FC; }
+.notif-menu .nm-item.is-new::after { content: ""; position: absolute; top: 1.125rem; right: 1rem; width: 8px; height: 8px; border-radius: 50%; background: var(--nama-primary); }
+.notif-menu .nm-ic { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: var(--nama-info-50); color: var(--nama-primary); }
+.notif-menu .nm-ic.ok { background: var(--nama-success-50); color: var(--nama-success); }
+.notif-menu .nm-ic.bad { background: var(--nama-error-50); color: var(--nama-error); }
+.notif-menu .nm-main { display: flex; flex-direction: column; gap: .125rem; min-width: 0; padding-right: 1rem; font-size: .8125rem; color: var(--nama-text-2); }
+.notif-menu .nm-main b { font-size: .875rem; color: var(--nama-text); }
+.notif-menu .nm-main small { color: var(--nama-text-3); font-size: .75rem; }
+.notif-menu .nm-empty { padding: 1.5rem 1rem; text-align: center; color: var(--nama-text-3); margin: 0; font-size: .875rem; }
+
+/* Lists inside info pop-ups (Forgot password) */
+.modal-list { list-style: none; padding: 0; margin: 0; display: grid; gap: .875rem; text-align: left; }
+.modal-list li { display: flex; gap: .75rem; align-items: flex-start; }
+.modal-list li > .ic { flex-shrink: 0; margin-top: .1875rem; color: var(--nama-primary); }
+.modal-list .ml-t { display: block; font-weight: 600; color: var(--nama-text); margin-bottom: .125rem; }
+
+/* "checked N days ago" next to the Yakeen result */
+.st-when { color: var(--nama-text-3); font-weight: 400; }
+
+/* Tracker: prototype status preview + declined step */
+.status-preview { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; margin-bottom: 1rem; padding: .625rem .75rem; border: 1px dashed var(--nama-border-strong); border-radius: var(--nama-radius-lg); background: #FAFBFC; }
+.status-preview .sp-lbl { display: inline-flex; align-items: center; gap: .375rem; font-size: .75rem; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; color: var(--nama-text-3); }
+.segmented.segmented-sm { min-height: 36px; padding: 3px; }
+.segmented.segmented-sm label { min-height: 28px; padding: 0 .75rem; font-size: .8125rem; white-space: nowrap; }
+.stepper li.is-failed .dot { background: var(--nama-error); border-color: var(--nama-error); color: #fff; }
+.stepper li.is-failed .lbl { color: var(--nama-error); }
+.notif-menu .nm-item, .notif-menu .nm-main span, .notif-menu .nm-main small { font-weight: 400; }
+.notif-menu .nm-main b { font-weight: 600; }
+@media (max-width: 575.98px) {
+  .status-preview .segmented-sm { flex-wrap: wrap; width: 100%; }
+  .status-preview .segmented-sm label { flex: 1 1 40%; }
 }

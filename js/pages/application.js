@@ -75,7 +75,7 @@
     var nb = document.getElementById("submitBtn");
     nb.outerHTML = '<a href="application-review.html" class="btn btn-primary">View application ' + NAMA.icon("arrow-right", "ic-sm") + "</a>";
     document.getElementById("draftBtn").classList.add("d-none");
-    tiles.forEach(function (t) { t.style.pointerEvents = "none"; });
+    tiles.forEach(function (t) { t.classList.add("is-locked"); });
     summary();
   }
 

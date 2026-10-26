@@ -67,7 +67,7 @@
       return '<div class="rv-iban"><span class="r-ic">' + icon("map-pin", "ic-sm") + '</span><div class="min-w-0 flex-grow-1"><div class="fw-600">' + esc(AD_TYPE[a.adType] || cap(a.adType) || "Address") +
         (a.adContact ? ' <span class="pill pill-success ms-1">' + icon("circle-check", "ic-sm") + " Contact address</span>" : "") + "</div>" +
         '<div class="p-meta">' + esc([a.adLine1, a.adLine2, cap(a.adCity), a.adZip].filter(Boolean).join(", ")) + "</div>" +
-        (a.adLine1Ar ? '<div class="p-meta" dir="rtl" lang="ar" style="text-align:left">' + esc([a.adLine1Ar, a.adLine2Ar].filter(Boolean).join("، ")) + "</div>" : "") + "</div></div>";
+        (a.adLine1Ar ? '<div class="p-meta rv-ar" dir="rtl" lang="ar">' + esc([a.adLine1Ar, a.adLine2Ar].filter(Boolean).join("، ")) + "</div>" : "") + "</div></div>";
     }).join("") + "</div>";
   }
 
@@ -85,7 +85,7 @@
       return '<div class="rv-iban"><span class="r-ic">' + icon("landmark", "ic-sm") + '</span><div class="min-w-0 flex-grow-1"><div class="fw-600">' + esc(b.bank) +
         (b.primary ? ' <span class="pill pill-info ms-1">' + icon("circle-check", "ic-sm") + " Primary settlement account</span>" : "") + "</div>" +
         '<div class="p-meta num">' + esc(b.iban) + "</div></div>" +
-        '<span class="small text-3 text-truncate d-none d-md-inline" style="max-width:220px">' + icon("file-check", "ic-sm") + " " + esc(b.cert || "IBAN certificate") + "</span></div>";
+        '<span class="small text-3 text-truncate d-none d-md-inline rv-cert">' + icon("file-check", "ic-sm") + " " + esc(b.cert || "IBAN certificate") + "</span></div>";
     }).join("") + "</div>";
   }
 
@@ -155,6 +155,7 @@
       steps: ["Card products & requested limits", "Business details, key people & addresses", "Documents", "Submitting for credit assessment"]
     }).then(function () {
       NAMA.store.set("application", rec);
+      NAMA.store.set("appStatus", "pending");
       NAMA.store.remove("appDraft");
       lock(rec);
       NAMA.modal({

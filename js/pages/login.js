@@ -59,9 +59,17 @@
       '<div><span class="alert-title">' + title + "</span>" + text + '</div><button type="button" class="alert-close" data-dismiss-alert aria-label="Dismiss">' + NAMA.icon("x", "ic-sm") + "</button></div>";
   }
 
+  /* Forgot password (SME-ONB-BR-10): an admin still on the SME Onboarding Profile contacts
+   * NAMA; once on the full SME Admin Profile, another admin resets it in User Management. */
   $("forgotLink").addEventListener("click", function (e) {
     e.preventDefault();
-    NAMA.modal({ type: "info", title: "Reset your password", text: "Password reset will send a secure link and OTP to your registered mobile number. This flow is outside the current prototype scope.", primary: { label: "OK" } });
+    NAMA.modal({
+      type: "info", title: "Forgot your password?",
+      html: '<ul class="modal-list">' +
+        "<li>" + NAMA.icon("building", "ic-sm") + "<div><span class='ml-t'>Still completing your SME onboarding?</span>Contact NAMA at <a href=\"tel:8001240000\">800 124 0000</a> and we'll help you reset your password.</div></li>" +
+        "<li>" + NAMA.icon("users", "ic-sm") + "<div><span class='ml-t'>Your SME is already onboarded?</span>Ask another SME Admin in your company to reset it from <b>User Management</b>. Your new password is sent to your registered email.</div></li></ul>",
+      primary: { label: "OK" }
+    });
   });
 
   /* Failed attempts (wrong password or wrong OTP): 3 in a row suspend the admin user */
@@ -69,7 +77,7 @@
   function fails() { return NAMA.store.get("loginFails", 0); }
   function suspended() {
     btn.disabled = true;
-    showError("Account suspended", "Your admin account has been suspended after " + MAX_TRIES + " unsuccessful login attempts. Please contact our call center at 800 124 0000 to reactivate it.");
+    showError("Account suspended", "Your admin account has been suspended after " + MAX_TRIES + " unsuccessful login attempts. To reactivate it, ask another SME Admin in your company (User Management) or contact NAMA at 800 124 0000.");
   }
   function failed(title, field) {
     var n = fails() + 1;
@@ -176,7 +184,7 @@
       btn.disabled = false;
       btn.textContent = "Login";
       if (u.value.trim().toLowerCase() === "locked") {
-        return showError("Account suspended", "Your admin account is suspended. Please contact our call center at 800 124 0000.");
+        return showError("Account suspended", "Your admin account is suspended. To reactivate it, ask another SME Admin in your company (User Management) or contact NAMA at 800 124 0000.");
       }
       if (p.value === "wrong") return failed("Invalid username or password", p);
       openOtp();

@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap">
 <link rel="stylesheet" href="css/vendor/bootstrap.min.css">
 <link rel="stylesheet" href="css/nama.css">
+<link rel="stylesheet" href="css/pages.css">
 </head>
 <body data-page="application" data-demo-onboarded data-mode="application">
 <script src="js/icons.js"></script>
@@ -41,7 +42,13 @@
       <button type="button" class="btn btn-icon btn-soft menu-btn" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar" aria-label="Open menu"><svg class="ic" aria-hidden="true"><use href="#i-menu"/></svg></button>
       <h1 class="page-title">Cards Application</h1>
       <div class="tools">
-        <button type="button" class="bell" aria-label="Notifications, 2 unread"><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg><span class="count">2</span></button>
+        <div class="dropdown">
+          <button type="button" class="bell" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" aria-label="Notifications" id="bellBtn"><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg><span class="count d-none" data-notif-count>0</span></button>
+          <div class="dropdown-menu dropdown-menu-end notif-menu" aria-labelledby="bellBtn">
+            <div class="nm-head"><b>Notifications</b><button type="button" class="btn btn-link btn-sm p-0" data-notif-readall>Mark all as read</button></div>
+            <div class="nm-list" data-notif-list></div>
+          </div>
+        </div>
         <span class="vsep" aria-hidden="true"></span>
         <div class="dropdown">
           <button type="button" class="who" data-bs-toggle="dropdown" aria-expanded="false">
@@ -71,7 +78,7 @@
       <div class="content-narrow">
       <nav class="crumb" aria-label="Breadcrumb"><a href="application-new.html"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-chevron-left"/></svg> New Application</a><span aria-hidden="true">/</span><span aria-current="page">Cards</span></nav>
       <div class="page-head">
-        <div><h2>Business Details</h2><p>Confirm or update your corporate details.</p></div>
+        <div><h2>Business Details</h2><p>Confirm or Update your Business Details.</p></div>
         <span class="id-chip" data-app-chip>Draft application</span>
       </div>
       <nav class="stepper-card" aria-label="Progress"><ol class="stepper"><li class="done is-link"><a class="step-link" href="card-application.html" title="Go back to Card Products"><span class="dot"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg></span><span class="lbl">Card Products</span><span class="visually-hidden"> (completed, select to review or edit)</span></a><span class="line" aria-hidden="true"></span></li><li class="active" aria-current="step"><span class="dot">2</span><span class="lbl">Business Details</span><span class="line" aria-hidden="true"></span></li><li class=""><span class="dot">3</span><span class="lbl">Key People</span><span class="line" aria-hidden="true"></span></li><li class=""><span class="dot">4</span><span class="lbl">Address</span><span class="line" aria-hidden="true"></span></li><li class=""><span class="dot">5</span><span class="lbl">Documents</span><span class="line" aria-hidden="true"></span></li><li class=""><span class="dot">6</span><span class="lbl">Review &amp; Submit</span></li></ol><p class="stepper-caption" aria-hidden="true">Step 2 of 6 · Business Details</p></nav>

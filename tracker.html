@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap">
 <link rel="stylesheet" href="css/vendor/bootstrap.min.css">
 <link rel="stylesheet" href="css/nama.css">
+<link rel="stylesheet" href="css/pages.css">
 </head>
 <body data-page="tracker" data-demo-onboarded>
 <script src="js/icons.js"></script>
@@ -41,7 +42,13 @@
       <button type="button" class="btn btn-icon btn-soft menu-btn" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar" aria-label="Open menu"><svg class="ic" aria-hidden="true"><use href="#i-menu"/></svg></button>
       <h1 class="page-title">Tracker</h1>
       <div class="tools">
-        <button type="button" class="bell" aria-label="Notifications, 2 unread"><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg><span class="count">2</span></button>
+        <div class="dropdown">
+          <button type="button" class="bell" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" aria-label="Notifications" id="bellBtn"><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg><span class="count d-none" data-notif-count>0</span></button>
+          <div class="dropdown-menu dropdown-menu-end notif-menu" aria-labelledby="bellBtn">
+            <div class="nm-head"><b>Notifications</b><button type="button" class="btn btn-link btn-sm p-0" data-notif-readall>Mark all as read</button></div>
+            <div class="nm-list" data-notif-list></div>
+          </div>
+        </div>
         <span class="vsep" aria-hidden="true"></span>
         <div class="dropdown">
           <button type="button" class="who" data-bs-toggle="dropdown" aria-expanded="false">
@@ -69,36 +76,40 @@
 
     <main class="content" id="main">
       <div class="page-head">
-        <div><h2>Applications raised by you</h2><p>Track the status of your submitted financing applications.</p></div>
+        <div><h2>Applications raised by you</h2><p>Application Management &amp; Tracking — follow the status of your financing applications.</p></div>
         <form class="d-flex gap-2 search-form" role="search" onsubmit="return false">
-          <div class="field" style="min-width:260px"><svg class="ic ic-lead" aria-hidden="true"><use href="#i-search"/></svg><input type="search" class="form-control bg-white" placeholder="Enter application number" aria-label="Search application number"></div>
+          <div class="field search-field"><svg class="ic ic-lead" aria-hidden="true"><use href="#i-search"/></svg><input type="search" class="form-control bg-white" placeholder="Enter application number" aria-label="Search application number"></div>
           <button type="button" class="btn btn-primary" id="refreshBtn">Refresh</button>
         </form>
       </div>
 
+      <div class="status-preview" role="group" aria-label="Prototype: preview application status">
+        <span class="sp-lbl"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-sparkle"/></svg> Prototype · preview status</span>
+        <div class="segmented segmented-sm">
+          <input type="radio" name="appStatus" id="st_pending" value="pending" checked><label for="st_pending">Pending approval</label>
+          <input type="radio" name="appStatus" id="st_approved" value="approved"><label for="st_approved">Approved</label>
+          <input type="radio" name="appStatus" id="st_declined" value="declined"><label for="st_declined">Declined</label>
+          <input type="radio" name="appStatus" id="st_draft" value="draft"><label for="st_draft">Draft</label>
+        </div>
+      </div>
+
       <article class="app-card" id="appCard">
         <div class="ac-head">
-          <div class="ac-no">Application no: <b data-app-ref>SME-2026-0417</b></div>
-          <span class="status status-pending">Pending approval</span>
+          <div class="ac-no"><span id="acNoLbl">Application no:</span> <b data-app-ref>SME-2026-0417</b></div>
+          <span class="status status-pending" id="acStatus">Pending approval</span>
         </div>
         <div class="ac-body">
           <div class="spec"><span class="t-overline">Product</span><span class="v">Cards</span><span class="t-caption" data-app-products>Business · Procurement · Travel</span></div>
-          <div class="spec"><span class="t-overline">Current stage</span><span class="stage-v">Credit Assessment</span></div>
+          <div class="spec"><span class="t-overline">Current stage</span><span class="stage-v" id="acStage">Credit Assessment</span></div>
           <div class="spec"><span class="t-overline">Requested limit</span><span class="v num" data-app-total>750,000 SAR</span></div>
-          <div class="spec"><span class="t-overline">Submitted on</span><span class="v" data-app-date>30 Sep 2026</span></div>
-          <div class="ac-actions"><button class="btn btn-soft" type="button" data-bs-toggle="collapse" data-bs-target="#life1" aria-expanded="true" aria-controls="life1">View Lifecycle</button><a class="btn btn-secondary" href="application-review.html">View Application</a></div>
+          <div class="spec"><span class="t-overline" id="acDateLbl">Submitted on</span><span class="v" data-app-date>30 Sep 2026</span></div>
+          <div class="ac-actions" id="acActions"></div>
         </div>
         <div class="collapse show" id="life1">
           <div class="px-4 pb-4 pt-1">
             <hr class="card-divider mt-0">
-            <ol class="stepper flex-wrap" aria-label="Application lifecycle">
-              <li class="done is-link"><a class="step-link" href="onboarding-complete.html" title="View onboarding summary"><span class="dot"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg></span><span class="lbl">Onboarding</span><span class="visually-hidden"> (completed, select to view)</span></a><span class="line"></span></li>
-              <li class="done is-link"><a class="step-link" href="application-review.html" title="View submitted application"><span class="dot"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg></span><span class="lbl">Submitted</span><span class="visually-hidden"> (completed, select to view)</span></a><span class="line"></span></li>
-              <li class="active" aria-current="step"><span class="dot">3</span><span class="lbl">Credit Assessment</span><span class="line"></span></li>
-              <li><span class="dot">4</span><span class="lbl">Contract Signing</span><span class="line"></span></li>
-              <li><span class="dot">5</span><span class="lbl">Card Issuance</span></li>
-            </ol>
-            <div class="alert-nama alert-info-nama no-close mt-4" role="status"><svg class="ic" aria-hidden="true"><use href="#i-info"/></svg><div><span class="alert-title">Under assessment</span>You can't submit another application while this one is under assessment. We'll notify you once a decision is available.</div></div>
+            <ol class="stepper flex-wrap" aria-label="Application lifecycle" id="acLife"></ol>
+            <div id="acMsg" class="mt-4"></div>
           </div>
         </div>
       </article>
@@ -123,5 +134,6 @@
 <script src="js/vendor/bootstrap.bundle.min.js"></script>
 <script src="js/app.js"></script>
 <script src="js/pages/dashboard.js"></script>
+<script src="js/pages/tracker.js"></script>
 </body>
 </html>

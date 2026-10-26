@@ -94,7 +94,7 @@
     var html =
       '<div class="modal fade modal-' + type + '" id="' + id + '" tabindex="-1" aria-labelledby="' + id + 'T" aria-hidden="true"' + (opts.static ? ' data-bs-backdrop="static" data-bs-keyboard="false"' : "") + ">" +
       '<div class="modal-dialog modal-dialog-centered modal-nama"><div class="modal-content">' +
-      '<div class="m-head">' + (opts.centered ? "" : '<span class="m-icon ' + type + ' m-0" style="width:40px;height:40px">' + icon(ICONS[type]) + "</span>") +
+      '<div class="m-head">' + (opts.centered ? "" : '<span class="m-icon m-icon-sm ' + type + ' m-0">' + icon(ICONS[type]) + "</span>") +
       '<h2 class="m-title" id="' + id + 'T">' + esc(opts.title) + "</h2>" +
       (opts.static ? "" : '<button type="button" class="m-close" data-bs-dismiss="modal" aria-label="Close">' + icon("circle-x", "ic-lg") + "</button>") + "</div>" +
       '<div class="m-body' + (opts.centered ? " m-center" : "") + '">' +
@@ -263,6 +263,46 @@
     document.querySelectorAll("[data-year]").forEach(function (el) { el.textContent = now.getFullYear(); });
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initShell); else initShell();
+
+  /* ---------- In-portal notifications (header bell) ----------
+   * Built from the prototype state: onboarding completion, application submitted and the
+   * credit decision (approved / declined → in-portal notification, SME-APP-BR-12). */
+  function notifications() {
+    var list = [], onboarded = store.get("onboarded", false) || document.body.hasAttribute("data-demo-onboarded");
+    var app = store.get("application", null) || (document.body.hasAttribute("data-demo-onboarded") ? { ref: "SME-2026-0417", date: new Date(Date.now() - 2 * 864e5).toISOString() } : null);
+    var status = store.get("appStatus", "pending");
+    if (app && status === "approved") list.push({ id: "approved-" + app.ref, icon: "circle-check", tone: "ok", title: "Application approved", text: "Your Cards application " + app.ref + " has been approved. Review your offer to continue.", href: "tracker.html", when: "Just now" });
+    if (app && status === "declined") list.push({ id: "declined-" + app.ref, icon: "circle-alert", tone: "bad", title: "Application declined", text: "Your Cards application " + app.ref + " was not approved. See the Tracker for details.", href: "tracker.html", when: "Just now" });
+    if (app && status !== "draft") list.push({ id: "submitted-" + app.ref, icon: "hourglass", tone: "info", title: "Application submitted", text: "Application " + app.ref + " is under credit assessment.", href: "tracker.html", when: new Date(app.date).toLocaleDateString("en-GB", { day: "2-digit", month: "short" }) });
+    if (onboarded) list.push({ id: "onboarded", icon: "building", tone: "ok", title: "SME onboarding complete", text: "Your SME profile is ready. You can apply for financing.", href: "application-new.html", when: "Earlier" });
+    return list;
+  }
+  function initNotifications() {
+    var box = document.querySelector("[data-notif-list]");
+    if (!box) return;
+    var countEl = document.querySelector("[data-notif-count]"), bell = document.getElementById("bellBtn");
+    function render() {
+      var read = store.get("notifRead", []), list = notifications();
+      var unread = list.filter(function (n) { return read.indexOf(n.id) < 0; }).length;
+      box.innerHTML = list.length ? list.map(function (n) {
+        var isNew = read.indexOf(n.id) < 0;
+        return '<a class="nm-item' + (isNew ? " is-new" : "") + '" href="' + n.href + '" data-notif-id="' + esc(n.id) + '"><span class="nm-ic ' + n.tone + '">' + icon(n.icon, "ic-sm") + '</span><span class="nm-main"><b>' + esc(n.title) + "</b><span>" + esc(n.text) + '</span><small>' + esc(n.when) + "</small></span></a>";
+      }).join("") : '<p class="nm-empty">No notifications yet.</p>';
+      countEl.textContent = unread;
+      countEl.classList.toggle("d-none", !unread);
+      bell.setAttribute("aria-label", "Notifications" + (unread ? ", " + unread + " unread" : ""));
+    }
+    box.addEventListener("click", function (e) {
+      var a = e.target.closest("[data-notif-id]"); if (!a) return;
+      var read = store.get("notifRead", []); if (read.indexOf(a.getAttribute("data-notif-id")) < 0) { read.push(a.getAttribute("data-notif-id")); store.set("notifRead", read); }
+    });
+    document.querySelector("[data-notif-readall]").addEventListener("click", function () {
+      store.set("notifRead", notifications().map(function (n) { return n.id; })); render();
+    });
+    document.addEventListener("nama:notifications", render);
+    render();
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initNotifications); else initNotifications();
 
   /* ---------- Unsaved-changes guard ----------
    * Forms marked [data-guard] become "dirty" as soon as the user types, picks an
@@ -480,7 +520,7 @@
       input.placeholder = sp.ph;
       input.maxLength = sp.max;
       input.setAttribute("inputmode", sp.numeric ? "numeric" : "text");
-      input.style.textTransform = sp.numeric ? "" : "uppercase";
+      input.classList.toggle("is-upper", !sp.numeric);
       hintEl.textContent = sp.hint;
       if (errEl) errEl.textContent = sp.err;
       if (typeChanged) {
