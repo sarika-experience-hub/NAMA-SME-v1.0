@@ -627,7 +627,8 @@
         var out = conv(src.value);
         if (out) { if (dst.value !== out) { dst.value = out; flash(dst); dst.classList.remove("is-invalid"); } }
         else mark(src, false);
-      } else if (src.value.length === 0) dst.value = dst.getAttribute("data-synced") === "1" ? "" : dst.value;
+      } else if (dst.disabled) dst.value = "";   // calculated field: clear until the date is complete
+      else if (src.value.length === 0) dst.value = dst.getAttribute("data-synced") === "1" ? "" : dst.value;
       dst.setAttribute("data-synced", "1");
     }
     g.addEventListener("input", function () { sync(g, h, hijri.fromGregorian); });

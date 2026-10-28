@@ -84,7 +84,9 @@
 /* =====================================================================
    2. BASE & TYPOGRAPHY  (Display 32/40 · H2 24/32 · H3 20/28 · Section 16/24)
    ===================================================================== */
-html { -webkit-text-size-adjust: 100%; }
+/* Base size 15px (93.75% of the browser default): every rem-based size — text, spacing,
+   radii — scales from this one value for a compact corporate look. */
+html { -webkit-text-size-adjust: 100%; font-size: 93.75%; }
 body {
   font-family: var(--nama-font);
   font-size: .875rem;
@@ -139,7 +141,7 @@ a:hover { color: var(--nama-primary-pressed); text-decoration: underline; }
   min-height: 40px; line-height: 1.25; letter-spacing: .005em;
   transition: background-color .15s ease, border-color .15s ease, color .15s ease, box-shadow .15s ease;
 }
-.btn-lg { --bs-btn-padding-y: .6875rem; --bs-btn-font-size: .9375rem; min-height: 46px; --bs-btn-border-radius: var(--nama-radius); }
+.btn-lg { --bs-btn-padding-y: .6875rem; --bs-btn-font-size: .9375rem; min-height: 42px; --bs-btn-border-radius: var(--nama-radius); }
 .btn-sm { --bs-btn-padding-x: .875rem; --bs-btn-padding-y: .375rem; --bs-btn-font-size: .8125rem; min-height: 34px; }
 .btn-primary {
   --bs-btn-color: #fff; --bs-btn-bg: var(--nama-primary); --bs-btn-border-color: var(--nama-primary);
@@ -190,7 +192,7 @@ a:hover { color: var(--nama-primary-pressed); text-decoration: underline; }
 .label-row a { font-size: .8125rem; margin-bottom: .5rem; }
 
 .form-control, .form-select {
-  height: 44px; padding: .625rem .875rem;
+  height: 40px; padding: .5625rem .875rem;
   font-size: .875rem; font-weight: 400; color: var(--nama-text);
   background-color: var(--nama-input);
   border: 1px solid var(--nama-border); border-radius: var(--nama-radius);
@@ -269,7 +271,7 @@ textarea.form-control { height: auto; min-height: 96px; }
 .form-check-label { font-size: .875rem; color: var(--nama-text-2); }
 
 /* Segmented control (Male | Female, Yes | No) */
-.segmented { display: flex; gap: 4px; padding: 4px; background: var(--nama-input); border: 1px solid var(--nama-border); border-radius: var(--nama-radius); min-height: 44px; }
+.segmented { display: flex; gap: 4px; padding: 4px; background: var(--nama-input); border: 1px solid var(--nama-border); border-radius: var(--nama-radius); min-height: 40px; }
 .segmented input { position: absolute; opacity: 0; pointer-events: none; }
 .segmented label {
   flex: 1; display: flex; align-items: center; justify-content: center; margin: 0;
@@ -438,7 +440,7 @@ textarea.form-control { height: auto; min-height: 96px; }
 .sidebar-user .meta { font-size: .6875rem; color: rgba(255, 255, 255, .6); }
 .side-nav { list-style: none; margin: 0; padding: 0 .625rem; display: flex; flex-direction: column; gap: 2px; }
 .side-link {
-  display: flex; align-items: center; gap: .75rem; height: 44px; padding: 0 .875rem; border-radius: var(--nama-radius);
+  display: flex; align-items: center; gap: .75rem; height: 40px; padding: 0 .875rem; border-radius: var(--nama-radius);
   color: rgba(255, 255, 255, .74); font-size: .875rem; font-weight: 500; text-decoration: none;
   transition: background-color .15s ease, color .15s ease;
 }
@@ -478,7 +480,7 @@ textarea.form-control { height: auto; min-height: 96px; }
 .content-narrow { max-width: 1120px; }
 @media (max-width: 767.98px) { .content { padding: 1.25rem 1rem; } }
 .page-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
-.page-head h2 { font-size: 1.5rem; line-height: 2rem; font-weight: 600; margin: 0; }
+.page-head h2 { font-size: 1.375rem; line-height: 1.875rem; font-weight: 600; margin: 0; }
 .page-head p { margin: .125rem 0 0; color: var(--nama-text-3); }
 .app-footer { padding: 1rem 2rem; font-size: .75rem; color: var(--nama-text-3); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
 .dropdown-menu { --bs-dropdown-border-color: var(--nama-border); --bs-dropdown-border-radius: var(--nama-radius); --bs-dropdown-font-size: .875rem; --bs-dropdown-link-active-bg: var(--nama-primary); box-shadow: var(--nama-shadow); padding: .375rem; }
@@ -512,10 +514,16 @@ textarea.form-control { height: auto; min-height: 96px; }
 .auth-body { flex: 1; display: flex; align-items: center; justify-content: center; padding: 2rem; }
 .auth-form { width: 100%; max-width: 400px; }
 .auth-form.wide { max-width: 760px; }
-.auth-form h1 { font-size: 1.75rem; line-height: 2.25rem; font-weight: 700; margin-bottom: .25rem; }
+.auth-form h1 { font-size: 1.625rem; line-height: 2.125rem; font-weight: 700; margin-bottom: .25rem; }
 .auth-form .lead-sub { font-size: .875rem; color: var(--nama-text-3); margin-bottom: 1.75rem; }
 .auth-foot-link { text-align: center; font-size: .875rem; color: var(--nama-text-2); margin-top: 1.25rem; }
 .auth-mini-brand { display: none; }
+/* Desktop: the navy panel stays fixed while a long form (e.g. registration) scrolls */
+@media (min-width: 992px) {
+  .auth { align-items: flex-start; }
+  .auth-panel { position: sticky; top: 0; height: 100vh; }
+  .auth-main { min-height: 100vh; align-self: stretch; }
+}
 @media (max-width: 991.98px) {
   .auth { flex-direction: column; }
   .auth-panel { flex: 0 0 auto; max-width: none; padding: 1.25rem 1.25rem; }
@@ -534,7 +542,7 @@ textarea.form-control { height: auto; min-height: 96px; }
 .auth-steps .s.active .n { background: var(--nama-primary); border-color: var(--nama-primary); color: #fff; }
 .auth-steps .s.done { color: var(--nama-success); }
 .auth-steps .s.done .n { background: var(--nama-success); border-color: var(--nama-success); color: #fff; }
-.auth-steps .bar { flex: 1; height: 2px; background: var(--nama-border); max-width: 72px; }
+.auth-steps .bar { flex: 1; height: 2px; background: var(--nama-border); min-width: 24px; max-width: 72px; }
 .auth-steps .bar.done { background: var(--nama-success); }
 
 /* Welcome screen extras */
@@ -545,21 +553,6 @@ textarea.form-control { height: auto; min-height: 96px; }
 .welcome-list span { font-size: .8125rem; color: var(--nama-text-3); }
 .eta { display: inline-flex; align-items: center; gap: .5rem; font-size: .8125rem; color: var(--nama-text-3); }
 
-/* Card stack illustration on welcome panel */
-.card-stack { position: relative; height: 170px; margin-top: 2.25rem; }
-.mini-card {
-  position: absolute; width: 250px; aspect-ratio: 1.586; border-radius: 14px; padding: 16px 18px;
-  display: flex; flex-direction: column; justify-content: space-between; color: #fff;
-  box-shadow: 0 18px 36px rgba(0, 10, 30, .35); border: 1px solid rgba(255, 255, 255, .14);
-}
-.mini-card .chip { width: 30px; height: 22px; border-radius: 5px; background: linear-gradient(135deg, #E9E3CF, #B9AE8A); }
-.mini-card .brand-row { display: flex; justify-content: space-between; align-items: flex-start; }
-.mini-card .brand-row img { width: 46px; }
-.mini-card .num { font-size: .8125rem; letter-spacing: .16em; opacity: .9; }
-.mini-card .foot { display: flex; justify-content: space-between; align-items: flex-end; font-size: .6875rem; }
-.mini-card .foot b { display: block; font-size: .75rem; }
-.mini-card.c1 { left: 0; top: 18px; background: linear-gradient(140deg, #0A4B8C 0%, #002A55 100%); transform: rotate(-6deg); }
-.mini-card.c2 { left: 120px; top: 0; background: linear-gradient(140deg, #1C2434 0%, #001E40 100%); transform: rotate(4deg); }
 
 /* =====================================================================
    11. MODALS  (Information · Success · Error · Warning · Processing · Form)
@@ -579,7 +572,7 @@ textarea.form-control { height: auto; min-height: 96px; }
 .m-body { padding: 1.25rem 1.75rem 0; color: var(--nama-text-2); font-size: .875rem; line-height: 1.55; }
 .m-body.scroll { max-height: min(62vh, 640px); overflow-y: auto; padding-bottom: .25rem; }
 .m-foot { display: flex; gap: .75rem; padding: 1.5rem 1.75rem 1.75rem; }
-.m-foot .btn { flex: 1; min-height: 46px; border-radius: var(--nama-radius); }
+.m-foot .btn { flex: 1; min-height: 42px; border-radius: var(--nama-radius); }
 .m-foot.end { justify-content: flex-end; }
 .m-foot.end .btn { flex: 0 0 auto; min-width: 120px; }
 .m-foot.ruled { border-top: 1px solid var(--nama-border); margin-top: 1.25rem; padding-top: 1.25rem; }
@@ -610,7 +603,7 @@ textarea.form-control { height: auto; min-height: 96px; }
 .proc-list li.fail .st { background: var(--nama-error); border-color: var(--nama-error); color: #fff; }
 /* OTP */
 .otp { display: flex; gap: .5rem; justify-content: center; margin: 1.25rem 0 .5rem; }
-.otp input { width: 48px; height: 54px; text-align: center; font-size: 1.25rem; font-weight: 700; color: var(--nama-text); background: var(--nama-input); border: 1px solid var(--nama-border); border-radius: var(--nama-radius); }
+.otp input { width: 44px; height: 50px; text-align: center; font-size: 1.25rem; font-weight: 700; color: var(--nama-text); background: var(--nama-input); border: 1px solid var(--nama-border); border-radius: var(--nama-radius); }
 .otp input:focus { outline: 0; background: #fff; border-color: var(--nama-primary); box-shadow: 0 0 0 3px rgba(0, 51, 102, .1); }
 .otp.is-invalid input { border-color: var(--nama-error); }
 @media (max-width: 575.98px) {
@@ -646,7 +639,7 @@ textarea.form-control { height: auto; min-height: 96px; }
 .skel::after { content: ""; position: absolute; inset: 0; transform: translateX(-100%); background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .6), transparent); animation: skel 1.3s infinite; }
 @keyframes skel { to { transform: translateX(100%); } }
 .skel-label { height: 10px; width: 38%; margin-bottom: 10px; }
-.skel-input { height: 44px; width: 100%; border-radius: 8px; }
+.skel-input { height: 40px; width: 100%; border-radius: 8px; }
 
 /* Upload */
 .upload {
@@ -655,7 +648,7 @@ textarea.form-control { height: auto; min-height: 96px; }
   transition: border-color .15s ease, background-color .15s ease;
 }
 .upload:hover, .upload.is-drag { border-color: var(--nama-primary); background: #F4F8FC; }
-.upload .u-ic { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: var(--nama-primary-50); color: var(--nama-primary); flex-shrink: 0; }
+.upload .u-ic { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: var(--nama-primary-50); color: var(--nama-primary); flex-shrink: 0; }
 .upload .u-main { flex: 1; min-width: 0; }
 .upload .u-title { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; font-weight: 600; color: var(--nama-text); }
 .upload .u-meta { font-size: .75rem; color: var(--nama-text-3); margin-top: .125rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -689,7 +682,7 @@ textarea.form-control { height: auto; min-height: 96px; }
 .product:hover { border-color: var(--nama-border-strong); }
 .product.is-selected { border-color: var(--nama-primary); box-shadow: 0 0 0 3px rgba(0, 51, 102, .08); }
 .product .p-top { display: flex; align-items: flex-start; gap: .875rem; }
-.product .p-ic { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: var(--nama-primary-50); color: var(--nama-primary); flex-shrink: 0; transition: all .15s ease; }
+.product .p-ic { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: var(--nama-primary-50); color: var(--nama-primary); flex-shrink: 0; transition: all .15s ease; }
 .product.is-selected .p-ic { background: var(--nama-primary); color: #fff; }
 .product .p-name { font-size: 1rem; font-weight: 600; color: var(--nama-text); margin: 0; }
 .product .p-desc { font-size: .8125rem; color: var(--nama-text-3); margin: .125rem 0 0; }
@@ -1004,7 +997,7 @@ body[data-page="login"] .auth-foot-link { margin-top: 1rem; margin-bottom: .25re
 @media (max-width: 479.98px) { .kp-row { grid-template-columns: 1fr; } }
 
 /* Add / edit owner form */
-.sign-check { display: flex; align-items: center; gap: .625rem; min-height: 44px; padding: 0 .875rem; border: 1px solid var(--nama-border); border-radius: var(--nama-radius); background: var(--nama-input); cursor: pointer; font-size: .875rem; font-weight: 500; }
+.sign-check { display: flex; align-items: center; gap: .625rem; min-height: 40px; padding: 0 .875rem; border: 1px solid var(--nama-border); border-radius: var(--nama-radius); background: var(--nama-input); cursor: pointer; font-size: .875rem; font-weight: 500; }
 .sign-check .form-check-input { margin: 0; }
 .kp-poa-col { transition: opacity .2s ease; }
 .kp-poa-col.is-off { opacity: .5; }
@@ -1050,7 +1043,7 @@ body[data-page="login"] .auth-foot-link { margin-top: 1rem; margin-bottom: .25re
 .fin-product input { position: absolute; opacity: 0; pointer-events: none; }
 .fin-product:has(input:checked) { border-color: var(--nama-primary); box-shadow: 0 0 0 3px rgba(0, 51, 102, .08); }
 .fin-product:has(input:focus-visible) { outline: 2px solid var(--nama-primary); outline-offset: 2px; }
-.fp-ic { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: var(--nama-primary-50); color: var(--nama-primary); flex-shrink: 0; transition: all .15s ease; }
+.fp-ic { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: var(--nama-primary-50); color: var(--nama-primary); flex-shrink: 0; transition: all .15s ease; }
 .fin-product:has(input:checked) .fp-ic { background: var(--nama-primary); color: #fff; }
 .fp-main { display: flex; flex-direction: column; gap: .25rem; min-width: 0; flex: 1; }
 .fp-name { font-size: 1rem; font-weight: 700; color: var(--nama-text); }
@@ -1145,7 +1138,7 @@ body[data-page="login"] .auth-foot-link { margin-top: 1rem; margin-bottom: .25re
 /* Add / Edit key people: identity & mobile verification panel */
 .kp-verify { border: 1px solid var(--nama-info-100); background: #F6F9FC; border-radius: var(--nama-radius-lg); padding: 1rem 1.125rem 1.125rem; margin-bottom: 1.5rem; }
 .kp-verify .kv-ic { color: var(--nama-primary); flex-shrink: 0; margin-top: .125rem; }
-.kp-vstate { display: inline-flex; align-items: center; gap: .25rem; color: var(--nama-text-3); min-height: 44px; }
+.kp-vstate { display: inline-flex; align-items: center; gap: .25rem; color: var(--nama-text-3); min-height: 40px; }
 .kp-vstate.ok { color: #047857; font-weight: 600; }
 .kp-vstate.bad { color: var(--nama-error); font-weight: 600; }
 .kp-vstate.warn { color: #B45309; font-weight: 600; }
@@ -1204,3 +1197,42 @@ body[data-page="login"] .auth-foot-link { margin-top: 1rem; margin-bottom: .25re
   .status-preview .segmented-sm { flex-wrap: wrap; width: 100%; }
   .status-preview .segmented-sm label { flex: 1 1 40%; }
 }
+
+/* ---------- Language / layout direction (js/lang.js) ---------- */
+.topbar .lang { display: inline-flex; align-items: center; gap: .375rem; height: 36px; font-size: .8125rem; font-weight: 600; color: var(--nama-text-2); background: var(--nama-bg); border: 0; border-radius: 999px; padding: 0 .75rem; }
+.topbar .lang:hover, .auth-top .lang:hover { color: var(--nama-primary); }
+.lang-note { display: flex; align-items: flex-start; gap: .5rem; margin: 1rem 0 0; font-size: .75rem; color: var(--nama-text-3); }
+.lang-note .ic { flex-shrink: 0; margin-top: .125rem; }
+@media (max-width: 575.98px) {
+  .topbar .lang { width: 36px; padding: 0; justify-content: center; }
+  .topbar .lang [data-lang-label] { display: none; }
+}
+
+/* ---------- RTL layout (html[dir="rtl"]) ----------
+   nama.rtl.css / pages.rtl.css / bootstrap.rtl.min.css are generated from the LTR files by
+   nama-build/rtl.py (left ⇄ right). Rules below only apply in RTL and are copied as they are.
+   Text is still English, so each text block keeps its own (left-to-right) word order while the
+   layout is mirrored and the text sits on the right. */
+[dir="rtl"] body { text-align: right; }
+[dir="rtl"] body :where(h1, h2, h3, h4, h5, h6, p, label, li, td, th, dt, dd, legend, a, button, small, b, strong, span, div, input, textarea, select, option) { unicode-bidi: plaintext; }
+[dir="rtl"] :is(.form-control, .form-select) { text-align: right; }
+/* Directional icons point the other way */
+[dir="rtl"] svg:has(> use[href="#i-arrow-left"]),
+[dir="rtl"] svg:has(> use[href="#i-arrow-right"]),
+[dir="rtl"] svg:has(> use[href="#i-chevron-left"]),
+[dir="rtl"] svg:has(> use[href="#i-chevron-right"]),
+[dir="rtl"] svg:has(> use[href="#i-log-in"]),
+[dir="rtl"] svg:has(> use[href="#i-log-out"]) { transform: scaleX(-1); }
+/* Codes and numbers typed digit by digit stay left to right */
+[dir="rtl"] .otp { direction: ltr; }
+[dir="rtl"] :is(#otpResend, #loginOtpResend) { flex-direction: row-reverse; }
+/* Inline extras inside English text keep their spacing on the text side */
+[dir="rtl"] :is(.form-label .req, .nama-label .req) { margin-left: .125rem; margin-right: 0; }
+[dir="rtl"] .form-label .opt { margin-left: .25rem; margin-right: 0; }
+[dir="rtl"] .kp-row.kp-th .help-tip { margin-left: .25rem; margin-right: 0; }
+[dir="rtl"] .app-card .ac-no b { margin-left: .5rem; margin-right: 0; }
+[dir="rtl"] .is-locked-field .form-label::after { margin-left: .375rem; margin-right: 0; }
+
+/* Error text under wrapped fields (.field / .field-prefix) */
+.field:has(.form-control.is-invalid) ~ .invalid-feedback { display: block; }
+.field:has(.form-control.is-invalid) ~ .form-text { display: none; }

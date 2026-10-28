@@ -1,12 +1,14 @@
 /*! register.js — Screen 2 Step 1: Corporate & Admin User Details
- * - Mobile number verified by OTP on field exit; "Next" stays disabled until verified.
+ * - Mobile number verified by OTP on field exit (or Verify). "Next" with an unverified mobile number
+ *   opens the OTP pop-up instead of continuing (always, even with field validation switched off);
+ *   once the code is verified the form continues automatically.
  * - On "Next": registry, employee-link and existing-relationship checks run, then branch.
  * - Employee ID type is detected from the first digit (1 = National ID, 2 = Iqama).
- * - Date of birth is captured in Hijri and Gregorian (each fills in the other).
+ * - Date of birth: Gregorian from a date picker; Hijri is disabled and calculated from it.
  * Prototype scenarios (last digit of Corporate ID):
- *   …5 → Corporate ID not found or not active (blocked)
- *   …6 → mobile number not registered to the employee's ID (blocked)
- *   …1 → employee does not belong to the company (blocked)
+ *   …5 → Corporate ID not found or not active (blocked)   [also: "Simulate" link under Corporate ID]
+ *   …6 → mobile number not registered to the employee's ID (blocked)   [also: link under Mobile number]
+ *   …1 → employee does not belong to the company (blocked)   [also: link under Employee ID]
  *   …2 → company exists in LOS but not in Digital Lending (credentials, then Digital onboarding)
  *   …4 → company exists in LOS and Digital Lending, no admin yet (credentials, then Home)
  *   …3 → admin account already exists (redirect to login)
@@ -25,7 +27,28 @@
   // Number fields follow the chosen ID type (placeholder, hint, error text, allowed characters)
   var corpIdField = NAMA.idField($("corpIdType"), $("corpIdNo"), NAMA.ID_SPECS.corporate, document.querySelector('label[for="corpIdNo"] [data-help]'));
   var empIdField = NAMA.autoId($("empIdNo"));
-  var dob = NAMA.datePair($("empDobG"), $("empDobH"));
+  // Date of birth: Gregorian from the date picker; Hijri is disabled and calculated from it
+  var dobG = $("empDobG"), dobH = $("empDobH");
+  function isoToDmy(v) { var r = /^(\d{4})-(\d{2})-(\d{2})$/.exec(v || ""); return r ? r[3] + "/" + r[2] + "/" + r[1] : ""; }
+  var today = new Date();
+  function iso(d) { return d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2); }
+  dobG.max = iso(today);
+  function dobEmpty() { dobG.classList.toggle("is-empty", !dobG.value); }
+  dobEmpty();
+  function dobChanged() {
+    dobEmpty();
+    var h = NAMA.hijri.fromGregorian(isoToDmy(dobG.value)) || "";
+    if (h !== dobH.value) {
+      dobH.value = h;
+      if (h) { dobH.classList.remove("synced"); void dobH.offsetWidth; dobH.classList.add("synced"); }
+    }
+  }
+  dobG.addEventListener("input", dobChanged);
+  dobG.addEventListener("change", dobChanged);
+  var dob = {
+    valid: function () { return !!dobH.value; },
+    age: function () { return dobG.value ? (Date.now() - new Date(dobG.value + "T00:00:00")) / 31557600000 : 0; }
+  };
 
   var rules = {
     corpIdNo: function () { return corpIdField.valid(); },
@@ -34,36 +57,82 @@
     empIdNo: function () { return empIdField.valid(); },
     mobile: function (v) { return /^5\d{8}$/.test(v); },
     email: function (v) { return !v || /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); },
-    empDobG: function () { return dob.valid() && dob.age() >= 18; },
-    empDobH: function () { return dob.valid(); }
+    empDobG: function () { return dob.valid() && dob.age() >= 18; }
   };
-  function check(id, showValid) { var el = $(id); return NAMA.mark(el, rules[id](el.value.trim()), showValid); }
+  // Field checks run before the "Validating your details" checks start. With the prototype's validation
+  // switch off only the mobile number is checked (it must be valid and verified by OTP).
+  function setState(el, ok, showValid) {
+    el.classList.toggle("is-invalid", !ok);
+    el.classList.toggle("is-valid", !!(ok && showValid));
+    if (ok) el.removeAttribute("aria-invalid"); else el.setAttribute("aria-invalid", "true");
+    return ok;
+  }
+  // Review mode (validation switch off): only the mobile number is required; other fields aren't blocked
+  function check(id, showValid) {
+    var el = $(id);
+    if (!NAMA.validationOn && id !== "mobile") return setState(el, true);
+    return setState(el, rules[id](el.value.trim()), showValid);
+  }
+  var FIELDS = ["corpIdNo", "corpName", "empName", "empIdNo", "empDobG", "mobile", "email"];
+  var errBox = $("regErrors"), errText = $("regErrorsText");
+  function labelOf(id) {
+    var l = document.querySelector('label[for="' + id + '"]');
+    return l ? l.childNodes[0].textContent.trim() : id;
+  }
+  function showErrors() {
+    var bad = FIELDS.filter(function (id) { return $(id).classList.contains("is-invalid"); });
+    errBox.classList.toggle("d-none", !bad.length);
+    if (bad.length) errText.textContent = (bad.length === 1 ? "1 field needs" : bad.length + " fields need") + " your attention: " + bad.map(labelOf).join(", ") + ".";
+    return bad;
+  }
+  // While the error summary is showing, fields clear their error as soon as they're corrected
+  form.addEventListener("input", function (e) {
+    var id = e.target.id;
+    if (errBox.classList.contains("d-none") || FIELDS.indexOf(id) < 0) return;
+    if (e.target.classList.contains("is-invalid") && (id === "mobile" ? /^5\d{8}$/.test(e.target.value) : rules[id](e.target.value.trim()))) setState(e.target, true);
+    showErrors();
+  });
+  form.addEventListener("change", function (e) { if (e.target.id === "empDobG" && e.target.classList.contains("is-invalid") && rules.empDobG()) { setState(e.target, true); showErrors(); } });
 
   // digits only for numeric fields
   mobile.addEventListener("input", function () { this.value = NAMA.fmt.digits(this.value); });
-  ["corpIdNo", "corpName", "empName", "empIdNo", "email", "empDobG", "empDobH"].forEach(function (id) {
+  ["corpIdNo", "corpName", "empName", "empIdNo", "email", "empDobG"].forEach(function (id) {
     $(id).addEventListener("blur", function () { if (this.value.trim()) check(id, id !== "email" || !!this.value.trim()); });
   });
 
   function setVerified(on) {
     mobile.classList.toggle("is-valid", on);
     verifyBtn.classList.toggle("d-none", on);
-    nextBtn.disabled = !on;
-    nextHint.classList.toggle("d-none", on);
+    nextHint.classList.toggle("d-none", on || !NAMA.validationOn);
     $("mobileHint").innerHTML = on
       ? '<span class="verified-inline">' + NAMA.icon("circle-check", "ic-sm") + " Mobile number verified</span>"
       : "We'll send a one-time password (OTP) to verify this number.";
   }
-  // UI review mode: "Next" is available without mobile verification
-  if (!NAMA.validationOn) { nextBtn.disabled = false; nextHint.classList.add("d-none"); }
+  // "Next" is always clickable: if the mobile number isn't verified yet it opens the OTP pop-up
+  // (this check applies even when the prototype's field validation is switched off)
+  nextBtn.disabled = false;
+  if (!NAMA.validationOn) nextHint.classList.add("d-none");
+  var continueAfterOtp = false;
   mobile.addEventListener("input", function () {
-    if (verifiedNumber && this.value !== verifiedNumber) { verifiedNumber = null; setVerified(false); if (!NAMA.validationOn) { nextBtn.disabled = false; nextHint.classList.add("d-none"); } }
+    if (verifiedNumber && this.value !== verifiedNumber) { verifiedNumber = null; setVerified(false); }
+    if (/^5\d{8}$/.test(this.value)) mobileError(false);
   });
+  function mobileError(on, noFocus) {
+    mobile.classList.toggle("is-invalid", on);
+    if (on) { mobile.setAttribute("aria-invalid", "true"); if (!noFocus) { mobile.focus(); mobile.scrollIntoView({ block: "center" }); } }
+    else mobile.removeAttribute("aria-invalid");
+  }
 
   /* OTP triggered on mobile field exit (or the inline Verify action) */
-  function openOtp() {
-    if (verifiedNumber === mobile.value || otpEl.classList.contains("show")) return;
-    if (!check("mobile")) return;
+  // fromBlur: leaving the field with a partial number shows the error only in validation mode;
+  // Next and Verify always show it. Returns true when the pop-up is (being) shown.
+  function openOtp(fromBlur) {
+    if (verifiedNumber && verifiedNumber === mobile.value) return false;
+    if (otpEl.classList.contains("show")) return true;
+    if (!/^5\d{8}$/.test(mobile.value)) {
+      if (fromBlur !== true || NAMA.validationOn) mobileError(true);
+      return false;
+    }
     var v = mobile.value;
     $("otpTarget").textContent = "+966 " + v.slice(0, 2) + " " + v.slice(2, 5) + " " + v.slice(5);
     boxes.forEach(function (b) { b.value = ""; });
@@ -72,10 +141,17 @@
     otpVerify.disabled = true;
     startTimer();
     otpModal.show();
+    return true;
   }
-  mobile.addEventListener("blur", function () { if (this.value.length === 9 || (!NAMA.validationOn && this.value)) openOtp(); });
-  verifyBtn.addEventListener("click", openOtp);
+  mobile.addEventListener("blur", function (e) {
+    if (!(this.value.length === 9 || (!NAMA.validationOn && this.value))) return;
+    var opened = openOtp(true);
+    // Leaving the field by clicking "Next": continue automatically once the code is verified
+    if (opened && e.relatedTarget === nextBtn) continueAfterOtp = true;
+  });
+  verifyBtn.addEventListener("click", function () { openOtp(false); });
   otpEl.addEventListener("shown.bs.modal", function () { boxes[0].focus(); });
+  otpEl.addEventListener("hidden.bs.modal", function () { if (!verifiedNumber) continueAfterOtp = false; });
 
   function startTimer() {
     var s = 30;
@@ -129,21 +205,56 @@
       verifiedNumber = mobile.value;
       setVerified(true);
       otpModal.hide();
+      if (continueAfterOtp) { continueAfterOtp = false; form.requestSubmit(); return; }
       NAMA.toast("Mobile number verified", "You can now continue to the next step.");
     }, 700);
+  });
+
+  /* Prototype: "Simulate" links under Corporate ID, Employee ID and Mobile number run one failure scenario.
+     Missing or invalid details are filled with demo data and the mobile number is treated as verified,
+     so the reviewer goes straight to the "Validating your details" checks without field errors. */
+  var simulate = null;
+  var DEMO = { corpIdNo: "7009139170", corpName: "Al Noor Trading Company", empName: "Faisal Al-Qahtani", empIdNo: "1029485761", mobile: "501234567" };
+  form.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-sim]");
+    if (!b) return;
+    Object.keys(DEMO).forEach(function (id) {
+      var el = $(id);
+      if (!rules[id](el.value.trim())) { el.value = DEMO[id]; el.dispatchEvent(new Event("input", { bubbles: true })); }
+    });
+    if (!rules.empDobG()) { dobG.value = "1990-05-15"; dobChanged(); }
+    if (!rules.email($("email").value.trim())) $("email").value = "";
+    FIELDS.forEach(function (id) { setState($(id), true); });
+    errBox.classList.add("d-none");
+    if (verifiedNumber !== mobile.value) { verifiedNumber = mobile.value; setVerified(true); }
+    simulate = b.getAttribute("data-sim");
+    form.requestSubmit();
   });
 
   /* Next → third-party validations and branching */
   form.addEventListener("submit", function (e) {
     e.preventDefault();
-    var ok = ["corpIdNo", "corpName", "empName", "empIdNo", "empDobG", "empDobH", "email"].map(function (id) { return check(id); }).every(Boolean);
-    if (!ok) { var f = form.querySelector(".is-invalid"); if (f) f.focus(); return; }
-    if (!verifiedNumber && NAMA.validationOn) { openOtp(); return; }
+    // 1. Required details first: inline errors + summary alert, nothing else runs
+    ["corpIdNo", "corpName", "empName", "empIdNo", "empDobG", "email"].forEach(function (id) { check(id); });
+    mobileError(!/^5\d{8}$/.test(mobile.value), true);
+    var bad = showErrors();
+    if (bad.length) {
+      var f = $(bad[0]);
+      f.focus();
+      f.scrollIntoView({ block: "center" });
+      return;
+    }
+    // 2. Mobile number verified by OTP, 3. then the registry / employee / relationship checks
+    if (verifiedNumber !== mobile.value || !mobile.value) { continueAfterOtp = openOtp(false); return; }
 
     var corpId = $("corpIdNo").value || NAMA.DEFAULTS.corp.idNo, last = $("corpIdNo").value.slice(-1);
+    // Failure scenario: chosen with a "Simulate" link, otherwise from the last digit of the Corporate ID
+    var fail = simulate || { "5": "corp", "6": "mobile", "1": "employee" }[last] || null;
+    simulate = null;
+    if (fail) last = "";
     NAMA.store.set("corp", Object.assign({}, NAMA.DEFAULTS.corp, { idType: $("corpIdType").selectedOptions[0].text, idNo: corpId, name: $("corpName").value.trim() || NAMA.DEFAULTS.corp.name }));
     NAMA.store.set("admin", Object.assign({}, NAMA.DEFAULTS.admin, {
-      name: $("empName").value.trim() || NAMA.DEFAULTS.admin.name, idType: empIdField.type() || "nid", idNo: $("empIdNo").value, dob: $("empDobG").value, dobHijri: $("empDobH").value,
+      name: $("empName").value.trim() || NAMA.DEFAULTS.admin.name, idType: empIdField.type() || "nid", idNo: $("empIdNo").value, dob: isoToDmy(dobG.value), dobHijri: dobH.value,
       mobile: mobile.value || NAMA.DEFAULTS.admin.mobile, email: $("email").value.trim()
     }));
 
@@ -151,16 +262,16 @@
       title: "Validating your details",
       text: "We are verifying your corporate and employee details. This only takes a few seconds.",
       steps: ["Corporate ID exists & is active", "Mobile number belongs to the employee", "Employee belongs to the company", "Existing NAMA relationship check"],
-      failAt: last === "5" ? 0 : last === "6" ? 1 : last === "1" ? 2 : -1
+      failAt: fail === "corp" ? 0 : fail === "mobile" ? 1 : fail === "employee" ? 2 : -1
     }).then(function (passed) {
-      if (!passed && last === "5") {
+      if (!passed && fail === "corp") {
         return NAMA.modal({
           type: "error", title: "Corporate ID not found or inactive",
           text: "We couldn't find an active company registered with this Corporate ID number. Please check the number or contact our call center for assistance.",
           primary: { label: "OK", onClick: function () { $("corpIdNo").focus(); } }
         });
       }
-      if (!passed && last === "6") {
+      if (!passed && fail === "mobile") {
         return NAMA.modal({
           type: "error", title: "Mobile number not verified",
           text: "This mobile number isn't registered to your ID number. Please use the mobile number registered to your National ID or Iqama.",

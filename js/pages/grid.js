@@ -18,6 +18,13 @@
  *   afterSave(r, list)         e.g. keep a single "primary" / "contact" record
  *   afterDelete(list)          e.g. move the "primary" flag back
  *   onChange(list)             after any change
+ *   extraActions(r)            more 3-dot items after Edit: [{ act, label, icon, danger }]
+ *   onAction(act, index, r)    called for an extra item
+ *   noMenu(r)                  text → the row shows a lock note instead of the 3-dot menu
+ *   savedToast(r, isNew)       [title, text] for the toast after saving
+ *   deleteText(r)              text of the delete confirmation
+ *   saveLabel(isNew)           text of the form's save button
+ *   check(r)                   → first invalid element or null; always runs (also with validation off)
  */
 (function () {
   "use strict";
@@ -79,8 +86,12 @@
         var cells = o.columns.map(function (c) {
           return '<td data-label="' + c.label + '"' + (c.cls ? ' class="' + c.cls + '"' : "") + ">" + c.cell(r, i) + "</td>";
         }).join("");
-        var menu = '<div class="dropdown"><button type="button" class="btn btn-icon btn-soft btn-sm" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Actions">' + NAMA.icon("more-vertical", "ic-sm") + "</button>" +
-          '<ul class="dropdown-menu dropdown-menu-end"><li><button type="button" class="dropdown-item" data-grid-edit="' + i + '">' + NAMA.icon("pencil", "ic-sm") + " Edit</button></li>" +
+        var locked = o.noMenu ? o.noMenu(r) : "";
+        var extra = (o.extraActions ? o.extraActions(r) : []).map(function (a) {
+          return '<li><button type="button" class="dropdown-item' + (a.danger ? " text-error" : "") + '" data-grid-act="' + a.act + '" data-i="' + i + '">' + NAMA.icon(a.icon, "ic-sm") + " " + a.label + "</button></li>";
+        }).join("");
+        var menu = locked ? '<span class="row-locked" title="' + NAMA.esc(locked) + '">' + NAMA.icon("lock", "ic-sm") + '<span class="visually-hidden">' + NAMA.esc(locked) + "</span></span>" : '<div class="dropdown"><button type="button" class="btn btn-icon btn-soft btn-sm" data-bs-toggle="dropdown" data-bs-popper-config=\'{"strategy":"fixed"}\' aria-expanded="false" aria-label="Actions">' + NAMA.icon("more-vertical", "ic-sm") + "</button>" +
+          '<ul class="dropdown-menu dropdown-menu-end"><li><button type="button" class="dropdown-item" data-grid-edit="' + i + '">' + NAMA.icon("pencil", "ic-sm") + " Edit</button></li>" + extra +
           (del ? '<li><button type="button" class="dropdown-item text-error" data-grid-del="' + i + '">' + NAMA.icon("trash", "ic-sm") + " Delete</button></li>"
             : '<li><span class="dropdown-item disabled d-flex align-items-center gap-2" title="' + NAMA.esc(o.lockedMsg || "") + '">' + NAMA.icon("lock", "ic-sm") + " Can't delete</span></li>") + "</ul></div>";
         return '<tr class="' + (r._bad ? "is-bad" : "") + '">' + cells + '<td class="act-col">' + menu + "</td></tr>";
@@ -96,7 +107,7 @@
       editing = typeof idx === "number" ? idx : -1;
       var r = editing >= 0 ? list[editing] : null;
       title.textContent = (editing >= 0 ? "Edit " : "Add ") + o.noun.replace(/^./, function (c) { return c.toUpperCase(); });
-      saveBtn.innerHTML = NAMA.icon("check", "ic-sm") + (editing >= 0 ? " Save changes" : " Add to list");
+      saveBtn.innerHTML = NAMA.icon("check", "ic-sm") + " " + (o.saveLabel ? o.saveLabel(editing < 0) : (editing >= 0 ? "Save changes" : "Add to list"));
       fill(r);
       if (o.onOpen) o.onOpen(r, editing < 0);
       dirty = false;
@@ -108,11 +119,13 @@
     card.addEventListener("click", function (e) {
       var ed = e.target.closest("[data-grid-edit]");
       if (ed) return open(Number(ed.getAttribute("data-grid-edit")));
+      var ac = e.target.closest("[data-grid-act]");
+      if (ac) { var k = Number(ac.getAttribute("data-i")); return o.onAction(ac.getAttribute("data-grid-act"), k, list[k]); }
       var dl = e.target.closest("[data-grid-del]");
       if (dl) {
         var i = Number(dl.getAttribute("data-grid-del"));
         NAMA.modal({
-          type: "warning", title: "Delete this " + o.noun + "?", text: "This " + o.noun + " will be removed from your company details.",
+          type: "warning", title: "Delete this " + o.noun + "?", text: o.deleteText ? o.deleteText(list[i]) : "This " + o.noun + " will be removed from your company details.",
           secondary: { label: "Keep" },
           primary: { label: "Delete", variant: "btn-danger", onClick: function () { list.splice(i, 1); if (o.afterDelete) o.afterDelete(list); render(); NAMA.markDirty(); } }
         });
@@ -133,10 +146,14 @@
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      // Disabled (locked) fields keep their stored value
+      // Disabled (locked) fields keep their stored value; calculated fields (data-always-disabled) keep the new one
       var prev = editing >= 0 ? list[editing] : null;
       var r = Object.assign({}, prev || {}, read());
-      fields().forEach(function (el) { if (el.disabled && prev && el.name in prev) r[el.name] = prev[el.name]; });
+      fields().forEach(function (el) { if (el.disabled && !el.hasAttribute("data-always-disabled") && prev && el.name in prev) r[el.name] = prev[el.name]; });
+      if (o.check) {   // checks that always run (also with the validation switch off)
+        var must = o.check(r);
+        if (must) { must.focus(); must.scrollIntoView({ block: "center" }); return; }
+      }
       if (NAMA.validationOn) {
         var bad = NAMA.validateRequired(form) || (o.validate ? o.validate(r) : null);
         if (bad) { bad.focus(); bad.scrollIntoView({ block: "center" }); return; }
@@ -149,7 +166,8 @@
         modal.hide();
         render();
         NAMA.markDirty();
-        NAMA.toast(editing >= 0 ? "Changes saved" : "Added to the list", o.savedMsg ? o.savedMsg(r) : "");
+        var t = o.savedToast ? o.savedToast(r, editing < 0) : [editing >= 0 ? "Changes saved" : "Added to the list", o.savedMsg ? o.savedMsg(r) : ""];
+        NAMA.toast(t[0], t[1]);
       }
       if (o.beforeSave) o.beforeSave(r, prev, commit); else commit(true);
     });

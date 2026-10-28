@@ -29,7 +29,7 @@
 .field:has(.field-verify) > .form-control { padding-right: 5.5rem; }
 
 /* ---------- Registration: Create credentials ---------- */
-.auth-form.auth-form-narrow { max-width: 460px; }
+.auth-form.auth-form-narrow { max-width: 540px; }
 
 /* ---------- Onboarding: Banking & IBAN ---------- */
 .iban-ic { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: var(--nama-primary-50); color: var(--nama-primary); }
@@ -56,3 +56,23 @@
 /* ---------- Tracker ---------- */
 .search-form .field.search-field { min-width: 260px; }
 @media (max-width: 767.98px) { .search-form .field.search-field { min-width: 0; } }
+
+/* Date picker fields (register.html date of birth) */
+.form-control[type="date"] { min-height: 40px; }
+.form-control[type="date"]::-webkit-calendar-picker-indicator { cursor: pointer; opacity: .55; }
+.form-control[type="date"]::-webkit-calendar-picker-indicator:hover { opacity: .9; }
+.field > .form-control[type="date"] ~ .field-state { right: 2.5rem; }
+.form-control[type="date"].is-invalid, .form-control[type="date"].is-valid { padding-right: 4.25rem; }
+/* Calculated (disabled) date stays readable */
+.form-control.date-calc:disabled { color: var(--nama-text-2); -webkit-text-fill-color: var(--nama-text-2); }
+[dir="rtl"] .field > .form-control[type="date"] ~ .field-state { left: .875rem; right: auto; }
+[dir="rtl"] .form-control[type="date"].is-invalid, [dir="rtl"] .form-control[type="date"].is-valid { padding-left: 2.5rem; }
+/* Browser date hint (dd-mm-yyyy) in uppercase and placeholder grey, like the other fields */
+.form-control[type="date"] { text-transform: uppercase; }
+.form-control[type="date"].is-empty { color: var(--nama-text-disabled); }
+.form-control.date-calc:disabled::placeholder { color: var(--nama-text-disabled); -webkit-text-fill-color: var(--nama-text-disabled); }
+
+/* Prototype-only "Simulate" links (register.html) */
+.sim-link { display: inline-flex; align-items: center; text-align: start; gap: .3rem; margin-top: .5rem; padding: .125rem .5rem; border: 1px dashed #F59E0B; border-radius: 999px; background: #FFFBEB; color: #92400E; font-size: .6875rem; font-weight: 600; line-height: 1.5; }
+.sim-link:hover { background: #FEF3C7; }
+.sim-link:focus-visible { outline: 2px solid var(--nama-primary); outline-offset: 2px; }

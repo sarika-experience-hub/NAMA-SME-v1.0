@@ -1,0 +1,78 @@
+/*!
+ * pages.css — page-level layout helpers for the NAMA SME portal.
+ * Loaded after nama.css (design system). Every visual rule lives in a stylesheet:
+ * the HTML pages and the markup created by the scripts carry no inline styles.
+ * Sections follow the page they belong to.
+ */
+
+/* ---------- Shared ---------- */
+/* Hidden SVG icon sprite injected by js/icons.js */
+.icon-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+/* Supporting note inside the navy summary panel */
+.panel-note { color: rgba(255, 255, 255, .82); }
+/* Large avatar (Settings profile) */
+.avatar.avatar-xl { width: 64px; height: 64px; font-size: 1.25rem; }
+/* Small icon next to a pop-up title */
+.m-icon.m-icon-sm { width: 40px; height: 40px; }
+/* Large success icon (Onboarding Complete) */
+.m-icon.m-icon-xl { width: 72px; height: 72px; }
+/* Stat tile icon in the success colour */
+.stat .s-ic.s-ic-success { background: var(--nama-success-50); color: var(--nama-success); }
+/* Text inputs switched to capitals (passport numbers) */
+.form-control.is-upper { text-transform: uppercase; }
+
+/* ---------- Fields with a trailing button ---------- */
+/* Show / hide password (Sign Up, Login) */
+.field:has(.field-action) > .form-control { padding-left: 3rem; }
+/* Inline "Verify" on the registration mobile number */
+.field .field-verify { position: absolute; left: .5rem; top: 50%; transform: translateY(-50%); }
+.field:has(.field-verify) > .form-control { padding-left: 5.5rem; }
+
+/* ---------- Registration: Create credentials ---------- */
+.auth-form.auth-form-narrow { max-width: 540px; }
+
+/* ---------- Onboarding: Banking & IBAN ---------- */
+.iban-ic { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: var(--nama-primary-50); color: var(--nama-primary); }
+
+/* ---------- Documents (onboarding and application) ---------- */
+.doc-progress { min-width: 180px; }
+.progress.progress-thin { height: 6px; }
+.progress-bar.progress-bar-success { width: 0; background: var(--nama-success); }
+
+/* ---------- Onboarding Complete ---------- */
+.complete-card { max-width: 880px; margin: 0 auto; }
+.card-pad.complete-pad { padding: 2.5rem 2rem 2rem; }
+.complete-text { max-width: 540px; }
+
+/* ---------- Card Products: read-only after submission ---------- */
+.product.is-locked { pointer-events: none; }
+
+/* ---------- Review ---------- */
+/* Arabic address line kept left-aligned under the English one */
+.rv-ar { text-align: right; }
+/* IBAN certificate file name */
+.rv-cert { max-width: 220px; }
+
+/* ---------- Tracker ---------- */
+.search-form .field.search-field { min-width: 260px; }
+@media (max-width: 767.98px) { .search-form .field.search-field { min-width: 0; } }
+
+/* Date picker fields (register.html date of birth) */
+.form-control[type="date"] { min-height: 40px; }
+.form-control[type="date"]::-webkit-calendar-picker-indicator { cursor: pointer; opacity: .55; }
+.form-control[type="date"]::-webkit-calendar-picker-indicator:hover { opacity: .9; }
+.field > .form-control[type="date"] ~ .field-state { left: 2.5rem; }
+.form-control[type="date"].is-invalid, .form-control[type="date"].is-valid { padding-left: 4.25rem; }
+/* Calculated (disabled) date stays readable */
+.form-control.date-calc:disabled { color: var(--nama-text-2); -webkit-text-fill-color: var(--nama-text-2); }
+[dir="rtl"] .field > .form-control[type="date"] ~ .field-state { left: .875rem; right: auto; }
+[dir="rtl"] .form-control[type="date"].is-invalid, [dir="rtl"] .form-control[type="date"].is-valid { padding-left: 2.5rem; }
+/* Browser date hint (dd-mm-yyyy) in uppercase and placeholder grey, like the other fields */
+.form-control[type="date"] { text-transform: uppercase; }
+.form-control[type="date"].is-empty { color: var(--nama-text-disabled); }
+.form-control.date-calc:disabled::placeholder { color: var(--nama-text-disabled); -webkit-text-fill-color: var(--nama-text-disabled); }
+
+/* Prototype-only "Simulate" links (register.html) */
+.sim-link { display: inline-flex; align-items: center; text-align: start; gap: .3rem; margin-top: .5rem; padding: .125rem .5rem; border: 1px dashed #F59E0B; border-radius: 999px; background: #FFFBEB; color: #92400E; font-size: .6875rem; font-weight: 600; line-height: 1.5; }
+.sim-link:hover { background: #FEF3C7; }
+.sim-link:focus-visible { outline: 2px solid var(--nama-primary); outline-offset: 2px; }
