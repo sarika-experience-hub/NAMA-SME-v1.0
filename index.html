@@ -10,9 +10,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap">
-<link rel="stylesheet" href="css/vendor/bootstrap.min.css">
-<link rel="stylesheet" href="css/nama.css">
-<link rel="stylesheet" href="css/pages.css">
+<link rel="stylesheet" href="css/vendor/bootstrap.min.css" data-rtl="css/vendor/bootstrap.rtl.min.css">
+<link rel="stylesheet" href="css/nama.css" data-rtl="css/nama.rtl.css">
+<link rel="stylesheet" href="css/pages.css" data-rtl="css/pages.rtl.css">
+<script src="js/lang.js"></script>
 </head>
 <body data-page="welcome">
 <script src="js/icons.js"></script>
@@ -25,10 +26,6 @@
       <h2>Digital financing for your business.</h2>
       <p>Onboard your SME once, then apply for Cards, Tawarruq, Murabaha or Ijarah financing — all managed from one secure portal.</p>
 
-      <div class="card-stack" aria-hidden="true">
-        <div class="mini-card c1"><div class="brand-row"><span class="chip"></span><img src="images/logo-nama-white.svg" alt=""></div><div class="num">5234 •••• •••• 0417</div><div class="foot"><div><span class="opacity-75">Business Card</span><b>AL NOOR TRADING CO.</b></div><span>12/29</span></div></div>
-        <div class="mini-card c2"><div class="brand-row"><span class="chip"></span><img src="images/logo-nama-white.svg" alt=""></div><div class="num">5234 •••• •••• 8821</div><div class="foot"><div><span class="opacity-75">Travel Card</span><b>AL NOOR TRADING CO.</b></div><span>12/29</span></div></div>
-      </div>
     </div>
     <div class="panel-foot">
       <span>© <span data-year>2026</span> NAMA United Financing Company</span>
@@ -37,7 +34,7 @@
   </aside>
   <main class="auth-main" id="main">
     <div class="auth-top">
-      <button type="button" class="lang" aria-label="Switch language to Arabic"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-globe"/></svg><span lang="ar">العربية</span></button>
+      <button type="button" class="lang" data-lang-toggle aria-label="Switch to Arabic layout (right to left)"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-globe"/></svg><span data-lang-label lang="ar">العربية</span></button>
     </div>
     <div class="auth-body">
       <div class="auth-form fade-in">

@@ -10,9 +10,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap">
-<link rel="stylesheet" href="css/vendor/bootstrap.min.css">
-<link rel="stylesheet" href="css/nama.css">
-<link rel="stylesheet" href="css/pages.css">
+<link rel="stylesheet" href="css/vendor/bootstrap.min.css" data-rtl="css/vendor/bootstrap.rtl.min.css">
+<link rel="stylesheet" href="css/nama.css" data-rtl="css/nama.rtl.css">
+<link rel="stylesheet" href="css/pages.css" data-rtl="css/pages.rtl.css">
+<script src="js/lang.js"></script>
 </head>
 <body data-page="application" data-demo-onboarded data-mode="application">
 <script src="js/icons.js"></script>
@@ -29,6 +30,7 @@
         <li><a class="side-link" href="onboarding-corporate.html" data-nav="onboarding"><svg class="ic" aria-hidden="true"><use href="#i-building"/></svg><span>Onboarding</span></a></li>
         <li><a class="side-link" href="application-new.html" data-nav="application" data-requires-onboarding><svg class="ic" aria-hidden="true"><use href="#i-circle-plus"/></svg><span>New Application</span></a></li>
         <li><a class="side-link" href="tracker.html" data-nav="tracker" data-requires-onboarding><svg class="ic" aria-hidden="true"><use href="#i-activity"/></svg><span>Tracker</span></a></li>
+        <li><a class="side-link" href="user-management.html" data-nav="users" data-requires-onboarding><svg class="ic" aria-hidden="true"><use href="#i-users"/></svg><span>User Management</span></a></li>
         <li><a class="side-link" href="settings.html" data-nav="settings"><svg class="ic" aria-hidden="true"><use href="#i-settings"/></svg><span>Settings</span></a></li>
         <li><a class="side-link logout" href="login.html" data-logout><svg class="ic" aria-hidden="true"><use href="#i-log-out"/></svg><span>Logout</span></a></li>
       </ul>
@@ -42,6 +44,7 @@
       <button type="button" class="btn btn-icon btn-soft menu-btn" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar" aria-label="Open menu"><svg class="ic" aria-hidden="true"><use href="#i-menu"/></svg></button>
       <h1 class="page-title">Cards Application</h1>
       <div class="tools">
+        <button type="button" class="lang lang-top" data-lang-toggle aria-label="Switch to Arabic layout (right to left)"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-globe"/></svg><span data-lang-label lang="ar">العربية</span></button>
         <div class="dropdown">
           <button type="button" class="bell" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" aria-label="Notifications" id="bellBtn"><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg><span class="count d-none" data-notif-count>0</span></button>
           <div class="dropdown-menu dropdown-menu-end notif-menu" aria-labelledby="bellBtn">

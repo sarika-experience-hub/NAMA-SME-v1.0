@@ -10,9 +10,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap">
-<link rel="stylesheet" href="css/vendor/bootstrap.min.css">
-<link rel="stylesheet" href="css/nama.css">
-<link rel="stylesheet" href="css/pages.css">
+<link rel="stylesheet" href="css/vendor/bootstrap.min.css" data-rtl="css/vendor/bootstrap.rtl.min.css">
+<link rel="stylesheet" href="css/nama.css" data-rtl="css/nama.rtl.css">
+<link rel="stylesheet" href="css/pages.css" data-rtl="css/pages.rtl.css">
+<script src="js/lang.js"></script>
 </head>
 <body data-page="login">
 <script src="js/icons.js"></script>
@@ -23,7 +24,7 @@
     <a class="brand" href="index.html"><img src="images/logo-nama-white.svg" alt="NAMA Financing" width="168" height="119"></a>
     <div class="pitch">
       <h2>Fast &amp; transparent financial solutions built for your speed.</h2>
-      <p>With a deep understanding of SMEs' needs, we leverage technology to offer fast and transparent card financing designed for modern business.</p>
+      <p>With a deep understanding of SMEs' needs, we leverage technology to offer fast and transparent financial services designed for modern businesses.</p>
 
     </div>
     <div class="panel-foot">
@@ -33,7 +34,7 @@
   </aside>
   <main class="auth-main" id="main">
     <div class="auth-top">
-      <button type="button" class="lang" aria-label="Switch language to Arabic"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-globe"/></svg><span lang="ar">العربية</span></button>
+      <button type="button" class="lang" data-lang-toggle aria-label="Switch to Arabic layout (right to left)"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-globe"/></svg><span data-lang-label lang="ar">العربية</span></button>
     </div>
     <div class="auth-body">
       <div class="auth-form fade-in">
@@ -42,7 +43,7 @@
         <p class="lead-sub">Log in to access your SME Admin account</p>
         <form id="loginForm" novalidate>
           <div class="mb-3">
-            <div class="label-row"><label class="form-label" for="loginUser">User name</label><button type="button" class="btn btn-link btn-sm p-0 mb-2 d-none" id="notYouBtn">Not you?</button></div>
+            <div class="label-row"><label class="form-label" for="loginUser">Username</label><button type="button" class="btn btn-link btn-sm p-0 mb-2 d-none" id="notYouBtn">Not you?</button></div>
             <div class="field"><svg class="ic ic-lead" aria-hidden="true"><use href="#i-user"/></svg><input type="text" class="form-control" id="loginUser" placeholder="Enter your username" autocomplete="username" required></div>
           </div>
           <div class="mb-2">
