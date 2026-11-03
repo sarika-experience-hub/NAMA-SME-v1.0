@@ -10,7 +10,7 @@
   var $ = function (id) { return document.getElementById(id); };
   var PROFILE = {
     admin: { name: "Admin Profile", info: "All post-booking services plus SME User Management." },
-    standard: { name: "Standard Profile", info: "Post-booking services without User Management, for regular employees." },
+    standard: { name: "Standard Profile", info: "Post-booking services without User Management, for regular users." },
     view: { name: "View-only Profile", info: "Read-only access to cards, product / group limits and the application tracker, for finance or audit staff." }
   };
   var STATUS = { active: '<span class="pill pill-success">Active</span>', suspended: '<span class="pill pill-warning">Suspended</span>' };

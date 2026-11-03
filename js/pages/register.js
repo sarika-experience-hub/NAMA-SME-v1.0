@@ -180,12 +180,14 @@
       if (e.key === "Enter" && !otpVerify.disabled) otpVerify.click();
     });
     b.addEventListener("paste", function (e) {
-      var d = NAMA.fmt.digits((e.clipboardData || window.clipboardData).getData("text")).slice(0, 6);
+      var d = NAMA.fmt.digits((e.clipboardData || window.clipboardData).getData("text")).slice(0, boxes.length);
       if (!d) return;
       e.preventDefault();
       d.split("").forEach(function (c, j) { if (boxes[j]) boxes[j].value = c; });
-      boxes[Math.min(d.length, 5)].focus();
-      otpVerify.disabled = d.length < 6;
+      boxes[Math.min(d.length, boxes.length - 1)].focus();
+      otpVerify.disabled = d.length < boxes.length;
+      otpError.classList.add("d-none");
+      document.getElementById("otpBoxes").classList.remove("is-invalid");
     });
   });
   otpVerify.addEventListener("click", function () {
@@ -194,11 +196,11 @@
     otpVerify.innerHTML = '<span class="spinner-border" aria-hidden="true"></span> Verifying';
     setTimeout(function () {
       otpVerify.innerHTML = "Verify";
-      if (code === "000000" && NAMA.validationOn) {
+      if (code === "0000" && NAMA.validationOn) {
         otpError.classList.remove("d-none");
         document.getElementById("otpBoxes").classList.add("is-invalid");
         otpVerify.disabled = false;
-        boxes[5].focus();
+        boxes[boxes.length - 1].focus();
         return;
       }
       clearInterval(timer);

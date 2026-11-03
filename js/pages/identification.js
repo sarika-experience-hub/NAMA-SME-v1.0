@@ -6,9 +6,10 @@
 (function () {
   "use strict";
   var $ = function (id) { return document.getElementById(id); };
-  var corp = NAMA.corp(), prof = NAMA.store.get("corpProfile", NAMA.DEFAULTS.corpProfile);
+  var corp = NAMA.corp();
   var baseType = /commercial/i.test(corp.idType || "") ? "cr" : "unn";
-  var defaults = [{ src: "primary", idType: baseType, idNo: corp.idNo, idExpiryG: prof.idExpG || "", idExpiryH: prof.idExpH || "", idBase: true }];
+  // The ID expiry date is no longer captured on Business Details (SME-ONB-01, 03 Nov); demo value shown here
+  var defaults = [{ src: "primary", idType: baseType, idNo: corp.idNo, idExpiryG: "13/10/2027", idExpiryH: NAMA.hijri.fromGregorian("13/10/2027"), idBase: true }];
   var G = NAMA.grid({
     card: $("idGridCard"), table: $("idGrid"), modal: $("identModal"),
     store: "ids", defaults: defaults, noun: "identification",

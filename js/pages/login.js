@@ -4,7 +4,7 @@
  *  - onboarding completed  → Dashboard (Home)
  *  - onboarding pending    → Corporate Details & KYB (start or continue)
  *  - authentication failed → stay on Login with an error banner
- * Prototype: password "wrong" → invalid credentials; OTP 000000 → wrong code;
+ * Prototype: password "wrong" → invalid credentials; OTP 0000 → wrong code;
  * username "locked" → suspended account. */
 (function () {
   "use strict";
@@ -131,12 +131,14 @@
       if (e.key === "Enter" && !otpVerify.disabled) otpVerify.click();
     });
     b.addEventListener("paste", function (e) {
-      var d = NAMA.fmt.digits((e.clipboardData || window.clipboardData).getData("text")).slice(0, 6);
+      var d = NAMA.fmt.digits((e.clipboardData || window.clipboardData).getData("text")).slice(0, boxes.length);
       if (!d) return;
       e.preventDefault();
       d.split("").forEach(function (c, j) { if (boxes[j]) boxes[j].value = c; });
-      boxes[Math.min(d.length, 5)].focus();
-      otpVerify.disabled = d.length < 6;
+      boxes[Math.min(d.length, boxes.length - 1)].focus();
+      otpVerify.disabled = d.length < boxes.length;
+      otpErr.classList.add("d-none");
+      $("loginOtpBoxes").classList.remove("is-invalid");
     });
   });
   otpVerify.addEventListener("click", function () {
@@ -145,7 +147,7 @@
     otpVerify.innerHTML = '<span class="spinner-border" aria-hidden="true"></span> Verifying';
     setTimeout(function () {
       otpVerify.innerHTML = "Verify &amp; Log in";
-      if (code === "000000") {
+      if (code === "0000") {
         var n = fails() + 1;
         NAMA.store.set("loginFails", n);
         if (n >= MAX_TRIES) { otpModal.hide(); suspended(); return; }

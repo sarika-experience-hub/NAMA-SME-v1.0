@@ -1105,6 +1105,9 @@ body[data-page="login"] .auth-foot-link { margin-top: 1rem; margin-bottom: .25re
 .rgrid-foot b { font-size: .9375rem; color: var(--nama-text); }
 .rgrid-foot.is-ok b { color: #047857; }
 .rgrid-foot.is-warn b { color: #B45309; }
+.rgrid-foot-msg { color: #B45309; }
+.rgrid-foot-msg:empty { display: none; }
+.rgrid-foot.is-bad b, .rgrid-foot.is-bad .rgrid-foot-msg { color: var(--nama-error); }
 .kp-status { display: flex; flex-wrap: wrap; gap: .25rem .75rem; margin-top: .125rem; font-size: .75rem; }
 .kp-status span { display: inline-flex; align-items: center; gap: .25rem; }
 .kp-status .ic { width: .75rem; height: .75rem; }

@@ -54,11 +54,6 @@
     lim.addEventListener("blur", function () { if (lim.value) NAMA.mark(lim, val(lim) >= MIN && val(lim) <= MAX); });
   });
 
-  document.getElementById("draftBtn").addEventListener("click", function () {
-    NAMA.markClean();
-    NAMA.toast("Draft saved", "You can come back and submit your application later.");
-  });
-
   function lockForm(app) {
     document.getElementById("appNotice").innerHTML =
       '<div class="alert-nama alert-info-nama no-close mb-4" role="status">' + NAMA.icon("hourglass") +
@@ -74,7 +69,6 @@
     form.querySelectorAll("input, button").forEach(function (el) { el.disabled = true; });
     var nb = document.getElementById("submitBtn");
     nb.outerHTML = '<a href="application-review.html" class="btn btn-primary">View application ' + NAMA.icon("arrow-right", "ic-sm") + "</a>";
-    document.getElementById("draftBtn").classList.add("d-none");
     tiles.forEach(function (t) { t.classList.add("is-locked"); });
     summary();
   }
@@ -98,7 +92,6 @@
     var sel = selected();
     return { products: sel.map(function (t) { return { key: t.getAttribute("data-product"), name: t.getAttribute("data-name"), limit: val(t.querySelector(".limit-input")) }; }), total: summary() };
   }
-  document.getElementById("draftBtn").addEventListener("click", function () { NAMA.store.set("appDraft", collect()); });
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();

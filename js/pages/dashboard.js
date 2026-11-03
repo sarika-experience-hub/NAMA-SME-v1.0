@@ -35,7 +35,7 @@
   if (noApp && document.getElementById("dashAlert")) {
     var al = document.getElementById("dashAlert");
     al.className = "alert-nama alert-success-nama no-close mb-4";
-    al.innerHTML = NAMA.icon("circle-check") + '<div class="flex-grow-1"><span class="alert-title">Your SME is onboarded</span>Apply for Cards, Tawarruq, Murabaha or Ijarah financing — your verified details are reused, so it only takes a few minutes.</div>' +
+    al.innerHTML = NAMA.icon("circle-check") + '<div class="flex-grow-1"><span class="alert-title">Your SME is onboarded</span>Apply for corporate cards — your verified details are reused, so it only takes a few minutes.</div>' +
       '<a href="application-new.html" class="btn btn-primary btn-sm align-self-center ms-2 text-nowrap">' + NAMA.icon("circle-plus", "ic-sm") + " New Application</a>";
     set('[data-stat="total"]', "—");
     set('[data-stat="products"]', "0");
@@ -55,6 +55,7 @@
   if (!noApp && al2 && status !== "pending") {
     var A = {
       approved: ["success", "circle-check", "Application approved", "Your card application <b class=\"text-body\">" + NAMA.esc(app.ref) + "</b> has been approved. Review your offer to continue.", "View Offer"],
+      signed: ["success", "circle-check", "Contract signed", "The contract for your card application <b class=\"text-body\">" + NAMA.esc(app.ref) + "</b> has been signed. Your cards are being set up — we'll notify you when you can start issuing them.", "View details"],
       declined: ["error", "circle-alert", "Application declined", "Your card application <b class=\"text-body\">" + NAMA.esc(app.ref) + "</b> wasn't approved. NAMA will contact you about the next steps.", "View details"],
       draft: ["warning", "pencil", "Application not submitted", "Your card application draft is saved. Complete it and submit it for credit assessment.", "Complete Application"]
     }[status];

@@ -102,18 +102,16 @@
       </div>
       <div class="m-body m-center">
         <div class="m-icon info"><svg class="ic" aria-hidden="true"><use href="#i-smartphone"/></svg></div>
-        <p class="mb-0">Enter the 6-digit code sent to <b class="text-body" id="otpTarget">+966 5X XXX XXXX</b></p>
+        <p class="mb-0">Enter the 4-digit code sent to <b class="text-body" id="otpTarget">+966 5X XXX XXXX</b></p>
         <div class="otp" id="otpBoxes" role="group" aria-label="One-time password">
           <input type="text" inputmode="numeric" maxlength="1" aria-label="Digit 1" autocomplete="one-time-code">
           <input type="text" inputmode="numeric" maxlength="1" aria-label="Digit 2">
           <input type="text" inputmode="numeric" maxlength="1" aria-label="Digit 3">
           <input type="text" inputmode="numeric" maxlength="1" aria-label="Digit 4">
-          <input type="text" inputmode="numeric" maxlength="1" aria-label="Digit 5">
-          <input type="text" inputmode="numeric" maxlength="1" aria-label="Digit 6">
         </div>
         <p class="text-error small mb-2 d-none" id="otpError" role="alert">The code you entered is incorrect. Please try again.</p>
         <p class="t-caption mb-0">Didn't receive the code? <button type="button" class="btn btn-link btn-sm p-0 align-baseline" id="otpResend" disabled>Resend in <span id="otpTimer">00:30</span></button></p>
-        <p class="t-caption mt-2 mb-0 opacity-75 v-only">Prototype: any 6-digit code works; 000000 shows the error state.</p>
+        <p class="t-caption mt-2 mb-0 opacity-75 v-only">Prototype: any 4-digit code works; 0000 shows the error state.</p>
       </div>
       <div class="m-foot">
         <button type="button" class="btn btn-soft" data-bs-dismiss="modal">Cancel</button>

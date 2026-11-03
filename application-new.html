@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>New Application Request · NAMA SME Cards</title>
-<meta name="description" content="Select the financing product you would like to apply for.">
+<meta name="description" content="Select the Cards product to apply for.">
 <meta name="theme-color" content="#003366">
 <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -80,43 +80,22 @@
     <main class="content" id="main">
       <div class="content-narrow">
       <div class="page-head">
-        <div><h2>New Application Request</h2><p>Select the financing product you would like to apply for and complete the required application steps.</p></div>
+        <div><h2>New Application Request</h2><p>Select the Cards product to apply for and complete the required application steps.</p></div>
       </div>
       <div id="appNewNotice"></div>
-      <div class="alert-nama alert-success-nama no-close mb-4" role="status"><svg class="ic" aria-hidden="true"><use href="#i-repeat"/></svg><div><span class="alert-title">Your verified details are reused</span>Business details, key people, addresses and documents already verified during onboarding won't be requested again — you'll only be asked for what's specific to the product you choose.</div></div>
+      <div class="alert-nama alert-success-nama no-close mb-4" role="status"><svg class="ic" aria-hidden="true"><use href="#i-repeat"/></svg><div><span class="alert-title">Your verified details are reused</span>Business details, key people, addresses and documents already verified during onboarding won't be requested again — you'll only be asked for what's specific to the Cards product.</div></div>
 
       <form id="newAppForm" novalidate>
         <div class="row g-4">
           <div class="col-lg-8">
             <section class="card-nama card-pad">
-              <div class="card-head"><div><h3 class="card-title-nama">Financing products</h3><p class="t-sub mb-0">Choose one product per application.</p></div></div>
-              <div class="row g-3" role="radiogroup" aria-label="Financing product">
-                <div class="col-md-6">
+              <div class="card-head"><div><h3 class="card-title-nama">Available financing product</h3><p class="t-sub mb-0">Cards is the financing product offered through the portal.</p></div></div>
+              <div class="row g-3" role="radiogroup" aria-label="Available financing product">
+                <div class="col-12">
               <label class="fin-product" for="fp_cards">
                 <input type="radio" name="finProduct" id="fp_cards" value="cards" data-name="Cards" checked>
                 <span class="fp-ic"><svg class="ic" aria-hidden="true"><use href="#i-credit-card"/></svg></span>
                 <span class="fp-main"><span class="fp-name">Cards</span><span class="fp-desc">Corporate cards with a requested limit per card product — business, procurement, travel and food.</span><span class="fp-meta"><span class="pill pill-info"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-layers"/></svg> 6 steps</span></span></span>
-                <span class="fp-radio" aria-hidden="true"></span>
-              </label>
-            </div><div class="col-md-6">
-              <label class="fin-product" for="fp_tawarruq">
-                <input type="radio" name="finProduct" id="fp_tawarruq" value="tawarruq" data-name="Tawarruq">
-                <span class="fp-ic"><svg class="ic" aria-hidden="true"><use href="#i-coins"/></svg></span>
-                <span class="fp-main"><span class="fp-name">Tawarruq</span><span class="fp-desc">Cash financing through a Sharia-compliant commodity purchase and sale arrangement.</span><span class="fp-meta"><span class="pill pill-neutral">Steps to be confirmed</span></span></span>
-                <span class="fp-radio" aria-hidden="true"></span>
-              </label>
-            </div><div class="col-md-6">
-              <label class="fin-product" for="fp_murabaha">
-                <input type="radio" name="finProduct" id="fp_murabaha" value="murabaha" data-name="Murabaha">
-                <span class="fp-ic"><svg class="ic" aria-hidden="true"><use href="#i-package"/></svg></span>
-                <span class="fp-main"><span class="fp-name">Murabaha</span><span class="fp-desc">Financing for goods or assets purchased for your business at a disclosed profit margin.</span><span class="fp-meta"><span class="pill pill-neutral">Steps to be confirmed</span></span></span>
-                <span class="fp-radio" aria-hidden="true"></span>
-              </label>
-            </div><div class="col-md-6">
-              <label class="fin-product" for="fp_ijarah">
-                <input type="radio" name="finProduct" id="fp_ijarah" value="ijarah" data-name="Ijarah">
-                <span class="fp-ic"><svg class="ic" aria-hidden="true"><use href="#i-car"/></svg></span>
-                <span class="fp-main"><span class="fp-name">Ijarah</span><span class="fp-desc">Lease-based financing for equipment, vehicles or property used by your business.</span><span class="fp-meta"><span class="pill pill-neutral">Steps to be confirmed</span></span></span>
                 <span class="fp-radio" aria-hidden="true"></span>
               </label>
             </div>
@@ -127,7 +106,7 @@
             <aside class="card-nama card-pad sticky-lg" aria-live="polite">
               <p class="t-overline mb-1">Application steps</p>
               <h3 class="card-title-nama mb-3" id="fpTitle">Cards</h3>
-              <div class="fp-panel" data-steps-for="cards"><ol class="fp-steps"><li><span class="n">1</span><span>Card products &amp; limits</span></li><li><span class="n">2</span><span>Business details</span><span class=fp-reuse><svg class="ic ic-sm" aria-hidden="true"><use href="#i-repeat"/></svg> Reused</span></li><li><span class="n">3</span><span>Key people</span><span class=fp-reuse><svg class="ic ic-sm" aria-hidden="true"><use href="#i-repeat"/></svg> Reused</span></li><li><span class="n">4</span><span>Address details</span><span class=fp-reuse><svg class="ic ic-sm" aria-hidden="true"><use href="#i-repeat"/></svg> Reused</span></li><li><span class="n">5</span><span>Documents</span></li><li><span class="n">6</span><span>Review &amp; submit</span></li></ol></div><div class="fp-panel d-none" data-steps-for="tawarruq"><div class="fp-tbc"><svg class="ic" aria-hidden="true"><use href="#i-hourglass"/></svg><p class="mb-0">The Tawarruq application steps will be added once they are confirmed by PM Lending. Your onboarding details will be reused here too.</p></div></div><div class="fp-panel d-none" data-steps-for="murabaha"><div class="fp-tbc"><svg class="ic" aria-hidden="true"><use href="#i-hourglass"/></svg><p class="mb-0">The Murabaha application steps will be added once they are confirmed by PM Lending. Your onboarding details will be reused here too.</p></div></div><div class="fp-panel d-none" data-steps-for="ijarah"><div class="fp-tbc"><svg class="ic" aria-hidden="true"><use href="#i-hourglass"/></svg><p class="mb-0">The Ijarah application steps will be added once they are confirmed by PM Lending. Your onboarding details will be reused here too.</p></div></div>
+              <div class="fp-panel" data-steps-for="cards"><ol class="fp-steps"><li><span class="n">1</span><span>Card products &amp; limits</span></li><li><span class="n">2</span><span>Business details</span><span class=fp-reuse><svg class="ic ic-sm" aria-hidden="true"><use href="#i-repeat"/></svg> Reused</span></li><li><span class="n">3</span><span>Key people</span><span class=fp-reuse><svg class="ic ic-sm" aria-hidden="true"><use href="#i-repeat"/></svg> Reused</span></li><li><span class="n">4</span><span>Address details</span><span class=fp-reuse><svg class="ic ic-sm" aria-hidden="true"><use href="#i-repeat"/></svg> Reused</span></li><li><span class="n">5</span><span>Documents</span></li><li><span class="n">6</span><span>Review &amp; submit</span></li></ol></div>
               <button type="submit" class="btn btn-primary btn-lg w-100 mt-4" id="startBtn">Start Cards Application <svg class="ic ic-sm" aria-hidden="true"><use href="#i-arrow-right"/></svg></button>
             </aside>
           </div>

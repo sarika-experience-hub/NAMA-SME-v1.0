@@ -1,9 +1,8 @@
 /*! appnew.js — Screen 5 Step 1: New Application Request
- * Common entry for all financing products (Cards, Tawarruq, Murabaha, Ijarah).
- * Selecting a product shows its application steps; "Start" opens that product's
- * journey. Only the Cards journey is defined so far — the others are specified in
- * separate documents. While an application is pending approval, a new one can't be
- * started (assumption to confirm with PM Lending / NAMA).
+ * Application entry for the Cards financing product (SME-APP-02, 03 Nov: Cards only).
+ * The Cards application steps are listed; "Start Cards Application" opens Step 2.1.
+ * While an application is pending approval, a new one can't be started
+ * (assumption to confirm with PM Lending / NAMA, Q-28).
  * Prototype: ?masterdata=missing → Cards product & fee master data not set up. */
 (function () {
   "use strict";
@@ -35,14 +34,6 @@
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
-    var r = current();
-    if (r.value !== "cards") {
-      return NAMA.modal({
-        type: "info", title: r.getAttribute("data-name") + " application",
-        text: "The " + r.getAttribute("data-name") + " application journey is defined in a separate document and isn't part of this prototype yet. Your onboarding details will be reused for it as well.",
-        primary: { label: "OK" }
-      });
-    }
     if (masterMissing) {
       return NAMA.modal({
         type: "error", title: "Cards product not available",

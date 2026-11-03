@@ -90,42 +90,32 @@
         <div class="card-head">
           <div><h3 class="card-title-nama">Card product documents</h3><p class="t-sub mb-0">Only documents specific to the Cards product are requested here.</p></div>
           <div class="text-end doc-progress">
-            <div class="small fw-600"><span id="docDone">0</span> of 3 required uploaded</div>
-            <div class="progress progress-thin mt-2" role="progressbar" aria-label="Required documents uploaded" aria-valuemin="0" aria-valuemax="3" aria-valuenow="0" id="docProgress"><div class="progress-bar progress-bar-success"></div></div>
+            <div class="small fw-600"><span id="docDone">0</span> of 2 required uploaded</div>
+            <div class="progress progress-thin mt-2" role="progressbar" aria-label="Required documents uploaded" aria-valuemin="0" aria-valuemax="2" aria-valuenow="0" id="docProgress"><div class="progress-bar progress-bar-success"></div></div>
           </div>
         </div>
         <div class="d-grid gap-3">
-          <div class="upload" data-upload data-doc="cardform" data-title="Card facility application form (signed)" data-required="true">
+          <div class="upload" data-upload data-doc="financials" data-title="Financial Statements" data-required="true">
             <span class="u-ic"><svg class="ic" aria-hidden="true"><use href="#i-file-text"/></svg></span>
-            <div class="u-main"><div class="u-title">Card facility application form (signed) <span class="req-badge">Required</span></div><div class="u-meta">Signed by an authorized signatory · PDF, JPG or PNG · max 10 MB</div><div class="u-bar"><span></span></div></div>
+            <div class="u-main"><div class="u-title">Financial Statements <span class="req-badge">Required</span></div><div class="u-meta">Latest audited financial statements · PDF, JPG or PNG · max 10 MB</div><div class="u-bar"><span></span></div></div>
             <div class="u-actions"><button type="button" class="btn btn-sm btn-secondary" data-pick><svg class="ic ic-sm" aria-hidden="true"><use href="#i-upload"/></svg> Upload</button></div>
-            <input type="file" accept=".pdf,.jpg,.jpeg,.png" aria-label="Upload Card facility application form (signed)">
-          </div><div class="upload" data-upload data-doc="boardres" data-title="Board resolution for the card facility" data-required="true">
+            <input type="file" accept=".pdf,.jpg,.jpeg,.png" aria-label="Upload Financial Statements">
+          </div><div class="upload" data-upload data-doc="statements" data-title="Bank Statements" data-required="true">
             <span class="u-ic"><svg class="ic" aria-hidden="true"><use href="#i-file-text"/></svg></span>
-            <div class="u-main"><div class="u-title">Board resolution for the card facility <span class="req-badge">Required</span></div><div class="u-meta">Approving the requested card products and limits · PDF, JPG or PNG · max 10 MB</div><div class="u-bar"><span></span></div></div>
+            <div class="u-main"><div class="u-title">Bank Statements <span class="req-badge">Required</span></div><div class="u-meta">Statements of the settlement account · PDF, JPG or PNG · max 10 MB</div><div class="u-bar"><span></span></div></div>
             <div class="u-actions"><button type="button" class="btn btn-sm btn-secondary" data-pick><svg class="ic ic-sm" aria-hidden="true"><use href="#i-upload"/></svg> Upload</button></div>
-            <input type="file" accept=".pdf,.jpg,.jpeg,.png" aria-label="Upload Board resolution for the card facility">
-          </div><div class="upload" data-upload data-doc="statements" data-title="Bank statements – last 6 months" data-required="true">
-            <span class="u-ic"><svg class="ic" aria-hidden="true"><use href="#i-file-text"/></svg></span>
-            <div class="u-main"><div class="u-title">Bank statements – last 6 months <span class="req-badge">Required</span></div><div class="u-meta">For the settlement account · PDF, JPG or PNG · max 10 MB</div><div class="u-bar"><span></span></div></div>
-            <div class="u-actions"><button type="button" class="btn btn-sm btn-secondary" data-pick><svg class="ic ic-sm" aria-hidden="true"><use href="#i-upload"/></svg> Upload</button></div>
-            <input type="file" accept=".pdf,.jpg,.jpeg,.png" aria-label="Upload Bank statements – last 6 months">
-          </div><div class="upload" data-upload data-doc="cardholders" data-title="Initial cardholder list" data-required="false">
-            <span class="u-ic"><svg class="ic" aria-hidden="true"><use href="#i-file-text"/></svg></span>
-            <div class="u-main"><div class="u-title">Initial cardholder list <span class="opt-badge">Optional</span></div><div class="u-meta">Employees who will receive cards (can be added later) · PDF, JPG or PNG · max 10 MB</div><div class="u-bar"><span></span></div></div>
-            <div class="u-actions"><button type="button" class="btn btn-sm btn-secondary" data-pick><svg class="ic ic-sm" aria-hidden="true"><use href="#i-upload"/></svg> Upload</button></div>
-            <input type="file" accept=".pdf,.jpg,.jpeg,.png" aria-label="Upload Initial cardholder list">
+            <input type="file" accept=".pdf,.jpg,.jpeg,.png" aria-label="Upload Bank Statements">
           </div>
         </div>
         <div class="registry-group mt-4">
           <button type="button" class="registry-toggle" data-bs-toggle="collapse" data-bs-target="#reusedDocs" aria-expanded="false" aria-controls="reusedDocs">
-            <svg class="ic text-3" aria-hidden="true"><use href="#i-repeat"/></svg><span>Already provided during onboarding <span class="t-caption fw-normal ms-1">· not requested again</span></span><span class="pill pill-success ms-2" id="reusedCount">4</span><svg class="ic chev" aria-hidden="true"><use href="#i-chevron-down"/></svg>
+            <svg class="ic text-3" aria-hidden="true"><use href="#i-repeat"/></svg><span>Already provided during onboarding <span class="t-caption fw-normal ms-1">· not requested again</span></span><span class="pill pill-success ms-2" id="reusedCount">3</span><svg class="ic chev" aria-hidden="true"><use href="#i-chevron-down"/></svg>
           </button>
-          <div class="collapse" id="reusedDocs"><div class="registry-body"><ul class="reuse-list" id="reusedList"><li><svg class="ic ic-sm" aria-hidden="true"><use href="#i-file-check"/></svg><span>Commercial Registration (CR) certificate</span></li><li><svg class="ic ic-sm" aria-hidden="true"><use href="#i-file-check"/></svg><span>Articles of Association</span></li><li><svg class="ic ic-sm" aria-hidden="true"><use href="#i-file-check"/></svg><span>VAT registration certificate</span></li><li><svg class="ic ic-sm" aria-hidden="true"><use href="#i-file-check"/></svg><span>National address certificate</span></li><li><svg class="ic ic-sm" aria-hidden="true"><use href="#i-file-check"/></svg><span>Admin authorization letter</span></li></ul></div></div>
+          <div class="collapse" id="reusedDocs"><div class="registry-body"><ul class="reuse-list" id="reusedList"><li><svg class="ic ic-sm" aria-hidden="true"><use href="#i-file-check"/></svg><span>Commercial Registration (CR)</span></li><li><svg class="ic ic-sm" aria-hidden="true"><use href="#i-file-check"/></svg><span>Tax / GOSI records</span></li><li><svg class="ic ic-sm" aria-hidden="true"><use href="#i-file-check"/></svg><span>Owner / Signatory IDs</span></li><li><svg class="ic ic-sm" aria-hidden="true"><use href="#i-file-check"/></svg><span>Articles / PoA</span></li></ul></div></div>
         </div>
         <div class="card-actions">
           <a href="application-address.html" class="btn btn-secondary"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-arrow-left"/></svg> Back</a>
-          <div class="end"><button type="button" class="btn btn-link" id="cancelBtn">Cancel</button><button type="submit" class="btn btn-primary" id="docsNext" disabled>Next <svg class="ic ic-sm" aria-hidden="true"><use href="#i-arrow-right"/></svg></button></div>
+          <div class="end"><button type="submit" class="btn btn-primary" id="docsNext" disabled>Next <svg class="ic ic-sm" aria-hidden="true"><use href="#i-arrow-right"/></svg></button></div>
         </div>
       </form>
       </div>

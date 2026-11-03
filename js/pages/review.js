@@ -26,7 +26,7 @@
     people.forEach(function (p, i) { p.yakeen = true; p.idValid = true; p.mobileOk = true; p.kpExpG = ["14/03/2029", "02/11/2030"][i]; if (!p.kpMobile) p.kpMobile = "551112233"; });
   }
   var addresses = NAMA.store.get("addresses", NAMA.DEFAULTS.addresses);
-  var ids = NAMA.store.get("ids", [{ src: "primary", idType: "unn", idNo: corp.idNo, idExpiryG: prof.idExpG, idBase: true }]);
+  var ids = NAMA.store.get("ids", [{ src: "primary", idType: "unn", idNo: corp.idNo, idExpiryG: "13/10/2027", idBase: true }]);
   var ibans = NAMA.store.get("ibanList", NAMA.DEFAULTS.ibanList);
   var docs = NAMA.store.get("docList", NAMA.DEFAULTS.docList);
   var submitted = NAMA.store.get("application", null);
@@ -46,8 +46,9 @@
   // Business details
   $("rvCorp").innerHTML = kv([
     ["Corporate ID type", corp.idType], ["Corporate ID number", corp.idNo], ["Corporate name", corp.name],
-    ["Industry", prof.industry], ["Ownership pattern", prof.ownership], ["Revenue", prof.revenue ? "SAR " + prof.revenue : ""],
-    ["Customer segment", prof.segment], ["Number of employees", prof.employees], ["ID expiry date", prof.idExpG ? prof.idExpG + " · " + prof.idExpH + " H" : ""]
+    ["Place of registration", prof.placeReg], ["Industry", prof.industry], ["Unique facility code", prof.ufc],
+    ["Ownership pattern", prof.ownership], ["Legal managing form", prof.legalForm], ["Customer segment", prof.segment],
+    ["Revenues", prof.revenue ? "SAR " + prof.revenue : ""], ["Number of employees", prof.employees]
   ]);
 
   // Key people
@@ -56,7 +57,7 @@
     var ok = p.yakeen && p.idValid && p.mobileOk;
     return '<div class="rv-person"><span class="avatar">' + NAMA.initials(p.kpName) + '</span><div class="min-w-0 flex-grow-1">' +
       '<div class="p-name">' + esc(p.kpName) + ' <span class="role-tag">' + (ROLES[p.kpType] || "Key person") + "</span>" + (p.kpSign === "yes" ? ' <span class="role-tag tag-sign">Signatory</span>' : "") + "</div>" +
-      '<div class="p-meta">' + (ID_LABEL[p.kpIdType] || "ID") + " " + mask(p.kpIdNo) + (p.kpExpG ? " · ID valid to " + esc(p.kpExpG) : "") + (p.kpMobile ? " · +966 " + esc(p.kpMobile) : "") + "</div></div>" +
+      '<div class="p-meta">' + [p.kpIdNo ? (ID_LABEL[p.kpIdType] || "ID") + " " + mask(p.kpIdNo) : "No ID provided", p.kpExpG ? "ID valid to " + esc(p.kpExpG) : "", p.kpMobile ? "+966 " + esc(p.kpMobile) : ""].filter(Boolean).join(" · ") + "</div></div>" +
       '<div class="rv-share num">' + (p.kpShare ? esc(p.kpShare) + "%" : "—") + "</div>" +
       (ok ? '<span class="status status-completed d-none d-sm-inline-flex">' + icon("check") + " Verified</span>" : '<span class="status status-pending d-none d-sm-inline-flex">Not verified</span>') + "</div>";
   }).join("") + '<div class="rv-person rv-total"><span class="text-3">Total share</span><b class="num ' + (total === 100 ? "text-success-nama" : "") + '">' + total + "%</b></div></div>";
@@ -90,7 +91,7 @@
   }
 
   // Documents
-  var docList = app ? NAMA.store.get("cardDocList", ["Card facility application form (signed)", "Board resolution for the card facility", "Bank statements – last 6 months"]) : docs;
+  var docList = app ? NAMA.store.get("cardDocList", ["Financial Statements", "Bank Statements"]) : docs;
   $("rvDocs").innerHTML = '<ul class="rv-docs">' + docList.map(function (t) { return "<li>" + icon("file-check", "ic-sm") + "<span>" + esc(t) + "</span></li>"; }).join("") + "</ul>" +
     (app ? '<p class="small text-3 mt-2 mb-0">' + icon("repeat", "ic-sm") + " Plus " + (docs.length + 1) + " documents reused from your onboarding.</p>" : "");
 

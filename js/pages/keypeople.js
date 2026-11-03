@@ -9,14 +9,18 @@
  *   be expired. The mobile number is checked (Tahaquq) when the key person is saved.
  * - Yakeen results are valid for 14 days (configurable): within that window the earlier
  *   result is reused, after it a fresh call is made.
- * - "Next" sends the key people for AML & blacklist screening (done by LOS).
+ * - ID type, ID number, ID expiry, date of birth, share % and authorized signatory are optional
+ *   (SME-ONB-01, 03 Nov). When an ID number is entered it must be verified before saving.
+ * - "Next" needs the total share of all key people to be exactly 100% (always checked).
+ * - "Next" shows the "Verifying Individual Information" stage (key people details only;
+ *   AML & blacklist screening is done by LOS, not by the portal — SME-ONB-01 7.2.2).
  * Prototype: ID ending 0000 → identity check fails; 9999 → expired ID; mobile ending 000 → not registered to the ID. */
 (function () {
   "use strict";
   var $ = function (id) { return document.getElementById(id); };
   var app = document.body.getAttribute("data-mode") === "application";
   var ID_LABEL = { nid: "National ID", iqama: "Iqama", gcc: "GCC ID", passport: "Passport" };
-  var NAME_F = ["kpFirst", "kpMiddle", "kpThird", "kpFamily", "kpFirstAr", "kpMiddleAr", "kpThirdAr", "kpFamilyAr"];
+  var NAME_F = ["kpFirst", "kpThird", "kpFamily", "kpFirstAr", "kpMiddleAr", "kpThirdAr", "kpFamilyAr"];
   var REG_LOCK = ["kpType", "kpName", "kpIdType", "kpIdNo", "kpDobG", "kpDobH", "kpShare", "kpMobile"].concat(NAME_F);
   var YAKEEN_LOCK = ["kpName", "kpNat", "kpIssueG", "kpIssueH", "kpExpG", "kpExpH"].concat(NAME_F);
   var VALID_DAYS = 14; // Yakeen response validity (centrally configurable)
@@ -40,7 +44,7 @@
     return out;
   }
   function tahaquq(mobile) { return !!mobile && !/000$/.test(mobile); }
-  function fullName(r) { return [r.kpFirst, r.kpMiddle, r.kpThird, r.kpFamily].filter(Boolean).join(" "); }
+  function fullName(r) { return [r.kpFirst, r.kpThird, r.kpFamily].filter(Boolean).join(" "); }
   function age(dobG) {
     var p = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(dobG || ""); if (!p) return "";
     var d = new Date(+p[3], +p[2] - 1, +p[1]), n = new Date(), a = n.getFullYear() - d.getFullYear();
@@ -77,6 +81,7 @@
     if (r.yakeen === false) bits.push('<span class="st-bad">' + NAMA.icon("circle-alert", "ic-sm") + " Identity not verified</span>");
     else if (r.yakeen && !r.idValid) bits.push('<span class="st-bad">' + NAMA.icon("circle-alert", "ic-sm") + " ID expired " + NAMA.esc(r.kpExpG) + "</span>");
     else if (r.yakeen) bits.push('<span class="st-ok" title="' + checkedText(r) + '">' + NAMA.icon("circle-check", "ic-sm") + " ID valid to " + NAMA.esc(r.kpExpG) + (checkedText(r) ? ' <span class="st-when">· ' + checkedText(r) + "</span>" : "") + "</span>");
+    else if (!r.kpIdNo) bits.push('<span class="st-wait">No ID provided</span>');
     else bits.push('<span class="st-wait">Identity check pending</span>');
     if (!r.kpMobile) bits.push('<span class="st-warn">' + NAMA.icon("triangle-alert", "ic-sm") + " Mobile needed</span>");
     else if (r.mobileOk) bits.push('<span class="st-ok">' + NAMA.icon("circle-check", "ic-sm") + " Mobile verified</span>");
@@ -86,6 +91,8 @@
   function total(list) { return Math.round(list.reduce(function (s, r) { return s + (parseFloat(r.kpShare) || 0); }, 0) * 100) / 100; }
   function bad(r) { return r.yakeen === false || (r.yakeen && !r.idValid) || !r.kpMobile || (r.yakeen !== undefined && !r.mobileOk); }
 
+  var shareTried = false; // "Next" was blocked by the total share check
+  function shareMsg(t) { return "The total share of all key people must be exactly 100% to continue. It is currently " + t + "%. Update the Share % of your key people."; }
   var mVerified = null; // verification result inside the open form
   G = NAMA.grid({
     card: $("kpGridCard"), table: $("kpGrid"), modal: $("personModal"),
@@ -100,7 +107,7 @@
         return '<div class="kp-who"><span class="avatar">' + NAMA.initials(r.kpName) + '</span><div class="min-w-0"><div class="p-name">' + NAMA.esc(r.kpName || "New key person") + " " + tag + '</div><div class="kp-status">' + statusLine(r) + "</div></div></div>";
       } },
       { label: "Key people type", cell: function (r) { return NAMA.esc(G.text("kpType", r.kpType)) + (r.kpSign === "yes" ? '<div><span class="role-tag tag-sign">Signatory</span></div>' : ""); } },
-      { label: "ID number", cell: function (r) { return '<span class="num">' + NAMA.esc(r.kpIdNo) + '</span><div class="small text-3">' + (ID_LABEL[r.kpIdType] || "") + "</div>"; } },
+      { label: "ID number", cell: function (r) { return r.kpIdNo ? '<span class="num">' + NAMA.esc(r.kpIdNo) + '</span><div class="small text-3">' + (ID_LABEL[r.kpIdType] || "") + "</div>" : '<span class="text-3">—</span>'; } },
       { label: "Mobile 1", cell: function (r) { return r.kpMobile ? '<span class="num">+966 ' + NAMA.esc(r.kpMobile) + "</span>" : '<span class="text-3">—</span>'; } },
       { label: "Share %", cls: "num-col", cell: function (r) { return r.kpShare ? '<b class="num">' + NAMA.esc(r.kpShare) + "%</b>" : '<span class="text-3">—</span>'; } }
     ],
@@ -108,9 +115,14 @@
       list.forEach(function (r) { r._bad = r.yakeen !== undefined && bad(r); });
       var t = total(list), f = $("kpTotal");
       $("kpTotalVal").textContent = t + "%";
+      $("kpTotalMsg").textContent = t === 100 ? "" : "Must be exactly 100%";
       f.classList.toggle("is-ok", t === 100);
       f.classList.toggle("is-warn", t !== 100);
-      $("kpErr").classList.add("d-none");
+      // after a blocked "Next", the share error stays until the total is 100%
+      var keep = shareTried && t !== 100;
+      f.classList.toggle("is-bad", keep);
+      if (keep) $("kpErr").textContent = shareMsg(t);
+      $("kpErr").classList.toggle("d-none", !keep);
     },
     onOpen: function (r, isNew) {
       mVerified = r && r.yakeen !== undefined ? { idNo: r.kpIdNo, dob: r.kpDobG, ok: r.yakeen && r.idValid, r: r } : null;
@@ -120,10 +132,11 @@
       $("kpVerifyBox").classList.toggle("is-registry", !!(r && r.src === "registry"));
     },
     validate: function (r) {
-      if (!current() || !mVerified.ok) { showState("need"); return $("kpVerifyBtn"); }
+      // ID details are optional; an ID number that is entered must be verified
+      if (r.kpIdNo && (!current() || !mVerified.ok)) { showState("need"); return $("kpVerifyBtn"); }
       if (!NAMA.mark($("kpMobile"), /^5\d{8}$/.test(r.kpMobile))) return $("kpMobile");
       var sh = parseFloat(r.kpShare);
-      if (!NAMA.mark($("kpShare"), r.kpShare !== "" && sh >= 0 && sh <= 100)) return $("kpShare");
+      if (!NAMA.mark($("kpShare"), r.kpShare === "" || (sh >= 0 && sh <= 100))) return $("kpShare");
       return null;
     },
     beforeSave: function (r, prev, done) {
@@ -169,7 +182,7 @@
   $("kpShare").addEventListener("input", function () { this.value = this.value.replace(/[^\d.]/g, ""); });
   $("kpNetWorth").addEventListener("input", function () { var n = Number(NAMA.fmt.digits(this.value)); this.value = n ? NAMA.fmt.num(n) : ""; });
   ["kpDobG", "kpDobH"].forEach(function (id) { $(id).addEventListener("input", function () { setTimeout(function () { $("kpAge").value = age($("kpDobG").value); }, 0); }); });
-  NAME_F.slice(0, 4).forEach(function (id) { $(id).addEventListener("input", function () { if (!$("kpName").disabled) $("kpName").value = fullName({ kpFirst: $("kpFirst").value, kpMiddle: $("kpMiddle").value, kpThird: $("kpThird").value, kpFamily: $("kpFamily").value }); }); });
+  NAME_F.slice(0, 3).forEach(function (id) { $(id).addEventListener("input", function () { if (!$("kpName").disabled) $("kpName").value = fullName({ kpFirst: $("kpFirst").value, kpThird: $("kpThird").value, kpFamily: $("kpFamily").value }); }); });
 
   function current() { return mVerified && mVerified.idNo === $("kpIdNo").value && mVerified.dob === $("kpDobG").value; }
   function failText(r) {
@@ -212,7 +225,7 @@
       mVerified = { idNo: r.kpIdNo, dob: r.kpDobG, ok: r.yakeen && r.idValid, r: r };
       if (r.yakeen) {
         YAKEEN_LOCK.forEach(function (k) { var el = form.querySelector('[name="' + k + '"]'); if (el && r[k] !== undefined && !el.disabled) { el.value = r[k]; el.classList.remove("synced"); void el.offsetWidth; el.classList.add("synced"); } });
-        if (!$("kpName").disabled) $("kpName").value = fullName({ kpFirst: $("kpFirst").value, kpMiddle: $("kpMiddle").value, kpThird: $("kpThird").value, kpFamily: $("kpFamily").value });
+        if (!$("kpName").disabled) $("kpName").value = fullName({ kpFirst: $("kpFirst").value, kpThird: $("kpThird").value, kpFamily: $("kpFamily").value });
         $("kpAge").value = r.kpAge;
       }
       showState(mVerified.ok ? "ok" : "fail", failText(r));
@@ -244,22 +257,32 @@
     } else lookupSummary(G.list());
   }
 
-  /* ---------- Next → AML screening (done by LOS) ---------- */
+  /* ---------- Next → Verifying Individual Information (AML is done by LOS) ---------- */
   $("kpForm").addEventListener("submit", function (e) {
     e.preventDefault();
     var list = G.list(), err = $("kpErr");
     if (NAMA.validationOn) {
-      var issues = list.filter(function (r) { return r.yakeen === undefined || bad(r); });
+      var issues = list.filter(function (r) { return (r.kpIdNo && r.yakeen === undefined) || !r.kpMobile || bad(r); });
       if (!list.length) { err.textContent = "Add at least one key person to continue."; err.classList.remove("d-none"); return; }
       if (issues.length) {
         err.textContent = "Fix the highlighted key people before continuing: " + issues.map(function (r) { return r.kpName || "New key person"; }).join(", ") + ".";
         err.classList.remove("d-none"); G.render(); return;
       }
     }
+    // Total share must be exactly 100% to continue (always checked, also in UI review mode)
+    var t = total(list);
+    if (t !== 100) {
+      shareTried = true;
+      err.textContent = shareMsg(t);
+      err.classList.remove("d-none");
+      $("kpTotal").classList.add("is-bad");
+      $("kpTotal").scrollIntoView({ block: "center", behavior: "smooth" });
+      return;
+    }
     NAMA.process({
       title: "Verifying Individual Information",
       text: "We are validating the information provided with the relevant government and compliance services. Please wait while we complete the required validations.",
-      steps: ["Key people details", "AML & blacklist screening"]
+      steps: ["Key people details"]
     }).then(function (ok) { if (ok) NAMA.go(app ? "application-address.html" : "onboarding-address.html"); });
   });
 })();

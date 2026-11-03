@@ -35,16 +35,16 @@
     admin: { name: "Faisal Al-Qahtani", username: "faisal.qahtani", mobile: "501234567", email: "faisal@alnoortrading.sa" },
     corp: { idType: "Unified National Number", idNo: "7009139175", name: "Al Noor Trading Company", nameAr: "شركة النور التجارية" },
     // Captured on Business Details (non-registry fields) — used by Review and the application journey
-    corpProfile: { industry: "Wholesale & retail trade", ownership: "Limited Liability Company", revenue: "12,500,000", segment: "Small",
-      employees: "6 – 49", referral: "", idExpG: "13/10/2027", idExpH: "13/05/1449" },
+    corpProfile: { placeReg: "Riyadh", industry: "Wholesale & retail trade", ufc: "", ownership: "Limited Liability Company", legalForm: "Manager(s)",
+      segment: "Small", revenue: "12,500,000", employees: "6 – 49" },
     // Key people returned by the commercial registry (can't be deleted; returned fields read-only)
     people: [
-      { src: "registry", kpType: "owner", kpBasedOn: "individual", kpName: "Abdulrahman Saad Al-Otaibi", kpFirst: "Abdulrahman", kpMiddle: "Saad", kpFamily: "Al-Otaibi",
+      { src: "registry", kpType: "owner", kpBasedOn: "individual", kpName: "Abdulrahman Saad Al-Otaibi", kpFirst: "Abdulrahman", kpFamily: "Al-Otaibi",
         kpFirstAr: "عبدالرحمن", kpMiddleAr: "سعد", kpFamilyAr: "العتيبي", kpIdType: "nid", kpIdNo: "1023456789", kpDobG: "14/03/1978", kpDobH: "05/04/1398",
-        kpShare: "60", kpMobile: "505551234", kpSign: "yes", kpContract: "yes", kpExec: "yes", kpPosition: "General Manager" },
-      { src: "registry", kpType: "partner", kpBasedOn: "individual", kpName: "Sara Khalid Al-Mutairi", kpFirst: "Sara", kpMiddle: "Khalid", kpFamily: "Al-Mutairi",
+        kpShare: "60", kpMobile: "505551234", kpSign: "yes", kpExec: "yes", kpPosition: "General Manager" },
+      { src: "registry", kpType: "partner", kpBasedOn: "individual", kpName: "Sara Khalid Al-Mutairi", kpFirst: "Sara", kpFamily: "Al-Mutairi",
         kpFirstAr: "سارة", kpMiddleAr: "خالد", kpFamilyAr: "المطيري", kpIdType: "nid", kpIdNo: "1098765432", kpDobG: "02/11/1985", kpDobH: "18/02/1406",
-        kpShare: "40", kpMobile: "", kpSign: "no", kpContract: "no", kpExec: "no", kpPosition: "Partner" }
+        kpShare: "40", kpMobile: "", kpSign: "no", kpExec: "no", kpPosition: "Partner" }
     ],
     // Address returned by the commercial registry (can't be deleted)
     addresses: [
@@ -54,7 +54,7 @@
         adNational: true, adContact: true, adMobile1: "501234567", adEmail: "info@alnoortrading.sa" }
     ],
     ibanList: [{ iban: "SA03 8000 0000 6080 1016 7519", bank: "Al Rajhi Bank", primary: true, cert: "IBAN_letter_AlRajhi.pdf" }],
-    docList: ["Commercial Registration (CR) certificate", "Articles of Association", "VAT registration certificate", "National address certificate", "Admin authorization letter"]
+    docList: ["Commercial Registration (CR)", "Tax / GOSI records", "Owner / Signatory IDs", "Articles / PoA"]
   };
   function admin() { return store.get("admin", DEFAULTS.admin); }
 
@@ -266,12 +266,14 @@
 
   /* ---------- In-portal notifications (header bell) ----------
    * Built from the prototype state: onboarding completion, application submitted and the
-   * credit decision (approved / declined → in-portal notification, SME-APP-BR-12). */
+   * credit decision (approved / declined → in-portal notification, SME-APP-BR-12) and the
+   * signed contract. */
   function notifications() {
     var list = [], onboarded = store.get("onboarded", false) || document.body.hasAttribute("data-demo-onboarded");
     var app = store.get("application", null) || (document.body.hasAttribute("data-demo-onboarded") ? { ref: "SME-2026-0417", date: new Date(Date.now() - 2 * 864e5).toISOString() } : null);
     var status = store.get("appStatus", "pending");
-    if (app && status === "approved") list.push({ id: "approved-" + app.ref, icon: "circle-check", tone: "ok", title: "Application approved", text: "Your Cards application " + app.ref + " has been approved. Review your offer to continue.", href: "tracker.html", when: "Just now" });
+    if (app && status === "signed") list.push({ id: "signed-" + app.ref, icon: "circle-check", tone: "ok", title: "Contract signed", text: "The contract for your Cards application " + app.ref + " has been signed. Your cards are being set up.", href: "tracker.html", when: "Just now" });
+    if (app && (status === "approved" || status === "signed")) list.push({ id: "approved-" + app.ref, icon: "circle-check", tone: "ok", title: "Application approved", text: "Your Cards application " + app.ref + " has been approved. Review your offer to continue.", href: "tracker.html", when: "Just now" });
     if (app && status === "declined") list.push({ id: "declined-" + app.ref, icon: "circle-alert", tone: "bad", title: "Application declined", text: "Your Cards application " + app.ref + " was not approved. See the Tracker for details.", href: "tracker.html", when: "Just now" });
     if (app && status !== "draft") list.push({ id: "submitted-" + app.ref, icon: "hourglass", tone: "info", title: "Application submitted", text: "Application " + app.ref + " is under credit assessment.", href: "tracker.html", when: new Date(app.date).toLocaleDateString("en-GB", { day: "2-digit", month: "short" }) });
     if (onboarded) list.push({ id: "onboarded", icon: "building", tone: "ok", title: "SME onboarding complete", text: "Your SME profile is ready. You can apply for financing.", href: "application-new.html", when: "Earlier" });

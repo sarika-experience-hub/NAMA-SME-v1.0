@@ -89,51 +89,36 @@
         <div class="card-head">
           <div><h3 class="card-title-nama">Company documents</h3><p class="t-sub mb-0">Each document has its own upload. Accepted formats: PDF, JPG or PNG up to 10 MB.</p></div>
           <div class="text-end doc-progress">
-            <div class="small fw-600"><span id="docDone">0</span> of 5 required uploaded</div>
-            <div class="progress progress-thin mt-2" role="progressbar" aria-label="Required documents uploaded" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0" id="docProgress"><div class="progress-bar progress-bar-success"></div></div>
+            <div class="small fw-600"><span id="docDone">0</span> of 4 required uploaded</div>
+            <div class="progress progress-thin mt-2" role="progressbar" aria-label="Required documents uploaded" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0" id="docProgress"><div class="progress-bar progress-bar-success"></div></div>
           </div>
         </div>
         <div class="d-grid gap-3">
-          <div class="upload" data-upload data-doc="cr" data-title="Commercial Registration (CR) certificate" data-required="true">
+          <div class="upload" data-upload data-doc="cr" data-title="Commercial Registration (CR)" data-required="true">
             <span class="u-ic"><svg class="ic" aria-hidden="true"><use href="#i-file-text"/></svg></span>
-            <div class="u-main"><div class="u-title">Commercial Registration (CR) certificate <span class="req-badge">Required</span></div><div class="u-meta">Issued by the Ministry of Commerce · PDF, JPG or PNG · max 10 MB</div><div class="u-bar"><span></span></div></div>
+            <div class="u-main"><div class="u-title">Commercial Registration (CR) <span class="req-badge">Required</span></div><div class="u-meta">Issued by the Ministry of Commerce · PDF, JPG or PNG · max 10 MB</div><div class="u-bar"><span></span></div></div>
             <div class="u-actions"><button type="button" class="btn btn-sm btn-secondary" data-pick><svg class="ic ic-sm" aria-hidden="true"><use href="#i-upload"/></svg> Upload</button></div>
-            <input type="file" accept=".pdf,.jpg,.jpeg,.png" aria-label="Upload Commercial Registration (CR) certificate">
-          </div><div class="upload" data-upload data-doc="aoa" data-title="Articles of Association" data-required="true">
+            <input type="file" accept=".pdf,.jpg,.jpeg,.png" aria-label="Upload Commercial Registration (CR)">
+          </div><div class="upload" data-upload data-doc="taxgosi" data-title="Tax / GOSI records" data-required="true">
             <span class="u-ic"><svg class="ic" aria-hidden="true"><use href="#i-file-text"/></svg></span>
-            <div class="u-main"><div class="u-title">Articles of Association <span class="req-badge">Required</span></div><div class="u-meta">Latest version including amendments · PDF, JPG or PNG · max 10 MB</div><div class="u-bar"><span></span></div></div>
+            <div class="u-main"><div class="u-title">Tax / GOSI records <span class="req-badge">Required</span></div><div class="u-meta">VAT registration (ZATCA) and GOSI employer records · PDF, JPG or PNG · max 10 MB</div><div class="u-bar"><span></span></div></div>
             <div class="u-actions"><button type="button" class="btn btn-sm btn-secondary" data-pick><svg class="ic ic-sm" aria-hidden="true"><use href="#i-upload"/></svg> Upload</button></div>
-            <input type="file" accept=".pdf,.jpg,.jpeg,.png" aria-label="Upload Articles of Association">
-          </div><div class="upload" data-upload data-doc="vat" data-title="VAT registration certificate" data-required="true">
+            <input type="file" accept=".pdf,.jpg,.jpeg,.png" aria-label="Upload Tax / GOSI records">
+          </div><div class="upload" data-upload data-doc="ids" data-title="Owner / Signatory IDs" data-required="true">
             <span class="u-ic"><svg class="ic" aria-hidden="true"><use href="#i-file-text"/></svg></span>
-            <div class="u-main"><div class="u-title">VAT registration certificate <span class="req-badge">Required</span></div><div class="u-meta">Issued by ZATCA · PDF, JPG or PNG · max 10 MB</div><div class="u-bar"><span></span></div></div>
+            <div class="u-main"><div class="u-title">Owner / Signatory IDs <span class="req-badge">Required</span></div><div class="u-meta">National ID or Iqama of the owners and authorized signatories · PDF, JPG or PNG · max 10 MB</div><div class="u-bar"><span></span></div></div>
             <div class="u-actions"><button type="button" class="btn btn-sm btn-secondary" data-pick><svg class="ic ic-sm" aria-hidden="true"><use href="#i-upload"/></svg> Upload</button></div>
-            <input type="file" accept=".pdf,.jpg,.jpeg,.png" aria-label="Upload VAT registration certificate">
-          </div><div class="upload" data-upload data-doc="address" data-title="National address certificate" data-required="true">
+            <input type="file" accept=".pdf,.jpg,.jpeg,.png" aria-label="Upload Owner / Signatory IDs">
+          </div><div class="upload" data-upload data-doc="aoapoa" data-title="Articles / PoA" data-required="true">
             <span class="u-ic"><svg class="ic" aria-hidden="true"><use href="#i-file-text"/></svg></span>
-            <div class="u-main"><div class="u-title">National address certificate <span class="req-badge">Required</span></div><div class="u-meta">Issued by Saudi Post (SPL) · PDF, JPG or PNG · max 10 MB</div><div class="u-bar"><span></span></div></div>
+            <div class="u-main"><div class="u-title">Articles / PoA <span class="req-badge">Required</span></div><div class="u-meta">Articles of Association and Power of Attorney, if applicable · PDF, JPG or PNG · max 10 MB</div><div class="u-bar"><span></span></div></div>
             <div class="u-actions"><button type="button" class="btn btn-sm btn-secondary" data-pick><svg class="ic ic-sm" aria-hidden="true"><use href="#i-upload"/></svg> Upload</button></div>
-            <input type="file" accept=".pdf,.jpg,.jpeg,.png" aria-label="Upload National address certificate">
-          </div><div class="upload" data-upload data-doc="auth" data-title="Admin authorization letter" data-required="true">
-            <span class="u-ic"><svg class="ic" aria-hidden="true"><use href="#i-file-text"/></svg></span>
-            <div class="u-main"><div class="u-title">Admin authorization letter <span class="req-badge">Required</span></div><div class="u-meta">Board resolution or letter authorizing the admin user · PDF, JPG or PNG · max 10 MB</div><div class="u-bar"><span></span></div></div>
-            <div class="u-actions"><button type="button" class="btn btn-sm btn-secondary" data-pick><svg class="ic ic-sm" aria-hidden="true"><use href="#i-upload"/></svg> Upload</button></div>
-            <input type="file" accept=".pdf,.jpg,.jpeg,.png" aria-label="Upload Admin authorization letter">
-          </div><div class="upload" data-upload data-doc="chamber" data-title="Chamber of Commerce membership" data-required="false">
-            <span class="u-ic"><svg class="ic" aria-hidden="true"><use href="#i-file-text"/></svg></span>
-            <div class="u-main"><div class="u-title">Chamber of Commerce membership <span class="opt-badge">Optional</span></div><div class="u-meta">Valid membership certificate · PDF, JPG or PNG · max 10 MB</div><div class="u-bar"><span></span></div></div>
-            <div class="u-actions"><button type="button" class="btn btn-sm btn-secondary" data-pick><svg class="ic ic-sm" aria-hidden="true"><use href="#i-upload"/></svg> Upload</button></div>
-            <input type="file" accept=".pdf,.jpg,.jpeg,.png" aria-label="Upload Chamber of Commerce membership">
-          </div><div class="upload" data-upload data-doc="financials" data-title="Latest audited financial statements" data-required="false">
-            <span class="u-ic"><svg class="ic" aria-hidden="true"><use href="#i-file-text"/></svg></span>
-            <div class="u-main"><div class="u-title">Latest audited financial statements <span class="opt-badge">Optional</span></div><div class="u-meta">Helps speed up the credit assessment · PDF, JPG or PNG · max 10 MB</div><div class="u-bar"><span></span></div></div>
-            <div class="u-actions"><button type="button" class="btn btn-sm btn-secondary" data-pick><svg class="ic ic-sm" aria-hidden="true"><use href="#i-upload"/></svg> Upload</button></div>
-            <input type="file" accept=".pdf,.jpg,.jpeg,.png" aria-label="Upload Latest audited financial statements">
+            <input type="file" accept=".pdf,.jpg,.jpeg,.png" aria-label="Upload Articles / PoA">
           </div>
         </div>
         <div class="card-actions">
           <a href="onboarding-banking.html" class="btn btn-secondary"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-arrow-left"/></svg> Back</a>
-          <div class="end"><button type="button" class="btn btn-link" id="cancelBtn">Cancel</button><button type="submit" class="btn btn-primary" id="docsNext" disabled>Next <svg class="ic ic-sm" aria-hidden="true"><use href="#i-arrow-right"/></svg></button></div>
+          <div class="end"><button type="submit" class="btn btn-primary" id="docsNext" disabled>Next <svg class="ic ic-sm" aria-hidden="true"><use href="#i-arrow-right"/></svg></button></div>
         </div>
       </form>
       </div>

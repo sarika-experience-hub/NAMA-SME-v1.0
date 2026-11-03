@@ -1,7 +1,8 @@
 /*! documents.js — Document Checklist Upload
- * Onboarding (Screen 4 Step 4) and Cards application documents (Screen 5 Step 2.4,
+ * Onboarding (Screen 4 Step 6) and Cards application documents (Screen 5 Step 2.5,
  * body[data-mode="application"]). Each document has its own label and upload.
- * "Next" enables once all required documents are uploaded, then goes to Review. */
+ * Onboarding "Next" runs the external validation stage (ZATCA, GOSI; AML by LOS) and then
+ * opens Review (SME-ONB-01, 03 Nov). Application "Next" goes straight to Review & Submit. */
 (function () {
   "use strict";
   var app = document.body.getAttribute("data-mode") === "application";
@@ -38,7 +39,12 @@
       var list = uploaded.length ? uploaded : NAMA.DEFAULTS.docList;
       NAMA.store.set("docList", list);
       NAMA.store.set("docs", list.length);
-      NAMA.go("onboarding-review.html");
+      // External validation stage – ZATCA and GOSI (AML & blacklist screening is done by LOS)
+      NAMA.process({
+        title: "Verifying Corporate Information",
+        text: "We are validating your corporate information with the relevant government and compliance services. Please wait until we complete the required validations.",
+        steps: ["VAT registration & tax number", "Employer registration & employee count"]
+      }).then(function (ok) { if (ok) NAMA.go("onboarding-review.html"); });
     }
   });
 })();
