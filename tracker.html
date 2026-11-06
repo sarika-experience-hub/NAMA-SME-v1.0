@@ -89,11 +89,15 @@
       <div class="status-preview" role="group" aria-label="Prototype: preview application status">
         <span class="sp-lbl"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-sparkle"/></svg> Prototype · preview status</span>
         <div class="segmented segmented-sm">
-          <input type="radio" name="appStatus" id="st_pending" value="pending" checked><label for="st_pending">Pending approval</label>
-          <input type="radio" name="appStatus" id="st_approved" value="approved"><label for="st_approved">Approved</label>
-          <input type="radio" name="appStatus" id="st_signed" value="signed"><label for="st_signed">Contract Signed</label>
-          <input type="radio" name="appStatus" id="st_declined" value="declined"><label for="st_declined">Declined</label>
           <input type="radio" name="appStatus" id="st_draft" value="draft"><label for="st_draft">Draft</label>
+          <input type="radio" name="appStatus" id="st_review" value="review" checked><label for="st_review">In Review</label>
+          <input type="radio" name="appStatus" id="st_offer" value="offer"><label for="st_offer">Pending Offer</label>
+          <input type="radio" name="appStatus" id="st_declined" value="declined"><label for="st_declined">Application Declined</label>
+          <input type="radio" name="appStatus" id="st_appeal" value="appeal"><label for="st_appeal">Appeal in Review</label>
+          <input type="radio" name="appStatus" id="st_accepted" value="accepted"><label for="st_accepted">Offer Accepted</label>
+          <input type="radio" name="appStatus" id="st_granted" value="granted"><label for="st_granted">Facility Granted</label>
+          <input type="radio" name="appStatus" id="st_rejected" value="rejected"><label for="st_rejected">Offer Rejected</label>
+          <input type="radio" name="appStatus" id="st_expired" value="expired"><label for="st_expired">Offer Expired</label>
         </div>
       </div>
 
@@ -118,6 +122,27 @@
         </div>
       </article>
 
+<!-- Offer pop-up (SME-APP-02 6.2 / 7.3): approved limit per card product, group limit, Accept / Reject / Appeal -->
+<div class="modal fade" id="offerModal" tabindex="-1" aria-labelledby="offerTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-form">
+    <div class="modal-content">
+      <div class="m-head ruled">
+        <h2 class="m-title" id="offerTitle">Your offer</h2>
+        <button type="button" class="m-close" data-bs-dismiss="modal" aria-label="Close"><svg class="ic ic-lg" aria-hidden="true"><use href="#i-circle-x"/></svg></button>
+      </div>
+      <div class="m-body">
+        <p class="mb-3" id="offerIntro"></p>
+        <table class="offer-table">
+          <thead><tr><th scope="col">Card product</th><th scope="col" class="num-col">Requested</th><th scope="col" class="num-col">Approved limit</th></tr></thead>
+          <tbody id="offerRows"></tbody>
+          <tfoot><tr><th scope="row" colspan="2">SME group limit <span class="t-caption fw-normal">· sum of the product limits</span></th><td class="num-col" id="offerTotal"></td></tr></tfoot>
+        </table>
+        <div id="offerNote"></div>
+      </div>
+      <div class="m-foot" id="offerFoot"></div>
+    </div>
+  </div>
+</div>
     </main>
     <footer class="app-footer"><span>© <span data-year>2026</span> NAMA United Financing Company. All rights reserved.</span><span>Secured session · Powered by Azentio</span></footer>
   </div>
