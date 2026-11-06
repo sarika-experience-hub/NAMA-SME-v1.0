@@ -76,3 +76,28 @@
 .sim-link { display: inline-flex; align-items: center; text-align: start; gap: .3rem; margin-top: .5rem; padding: .125rem .5rem; border: 1px dashed #F59E0B; border-radius: 999px; background: #FFFBEB; color: #92400E; font-size: .6875rem; font-weight: 600; line-height: 1.5; }
 .sim-link:hover { background: #FEF3C7; }
 .sim-link:focus-visible { outline: 2px solid var(--nama-primary); outline-offset: 2px; }
+
+/* Tracker – offer pop-up (approved limit per card product + group limit) */
+.offer-table { width: 100%; border-collapse: collapse; font-size: .875rem; }
+.offer-table th, .offer-table td { padding: .625rem 0; border-bottom: 1px solid var(--nama-border); text-align: left; vertical-align: middle; }
+.offer-table thead th { padding-top: 0; font-size: .6875rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--nama-text-3); }
+.offer-table tbody td { color: var(--nama-text-2); }
+.offer-table tbody td:first-child { color: var(--nama-text); font-weight: 600; }
+.offer-table .num-col { text-align: right; padding-left: 1rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.offer-table tbody .num-col:last-child { color: var(--nama-text); font-weight: 600; }
+.offer-table tfoot th, .offer-table tfoot td { border-bottom: 0; padding-top: .875rem; color: var(--nama-text); font-weight: 700; }
+.offer-table tfoot td { font-size: 1rem; color: var(--nama-primary); }
+.offer-status { display: flex; align-items: center; gap: .5rem; margin-top: 1rem; font-size: .8125rem; color: var(--nama-text-2); }
+/* Numbered steps inside an alert (external contract / Promissory Note signing) */
+.alert-steps { margin: .375rem 0 0; padding-left: 1.125rem; }
+.alert-steps li + li { margin-top: .25rem; }
+/* 9 lifecycle statuses in the preview switch wrap onto more rows */
+.status-preview .segmented-sm { flex-wrap: wrap; }
+/* Tracker card actions: up to three buttons wrap on narrow screens (long Facility Granted labels) */
+.app-card .ac-actions { flex-wrap: wrap; }
+@media (max-width: 575.98px) {
+  .app-card .ac-actions .btn { flex: 1 1 100%; white-space: normal; }
+}
+/* Home lifecycle: a closed step (declined, rejected, expired) */
+.timeline li.failed .dot { background: var(--nama-error); border-color: var(--nama-error); color: #fff; box-shadow: none; }
+.timeline li.failed .t-title { color: var(--nama-error); }

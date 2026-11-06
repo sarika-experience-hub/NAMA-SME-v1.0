@@ -57,8 +57,8 @@
   function lockForm(app) {
     document.getElementById("appNotice").innerHTML =
       '<div class="alert-nama alert-info-nama no-close mb-4" role="status">' + NAMA.icon("hourglass") +
-      '<div><span class="alert-title">Application pending approval</span>Application <b class="text-body">' + app.ref +
-      "</b> is under credit assessment. You can't submit another application until a decision is made. <a href=\"tracker.html\">Track status</a></div></div>";
+      '<div><span class="alert-title">Application already submitted</span>Application <b class="text-body">' + NAMA.esc(app.ref) +
+      "</b> is " + NAMA.esc(NAMA.APP_STATUS[NAMA.appStatus()]) + ". You can't submit another application while it's open. <a href=\"tracker.html\">Track status</a></div></div>";
     app.products.forEach(function (p) {
       var t = form.querySelector('[data-product="' + p.key + '"]');
       if (!t) return;
@@ -74,7 +74,8 @@
   }
 
   var existing = NAMA.store.get("application");
-  if (existing) { lockForm(existing); return; }
+  // One application at a time: closed (rejected / expired) or draft applications don't lock this step
+  if (existing && ["draft", "rejected", "expired"].indexOf(NAMA.appStatus()) < 0) { lockForm(existing); return; }
 
   // Returning to this step: restore the draft selection
   var draft = NAMA.store.get("appDraft", null);

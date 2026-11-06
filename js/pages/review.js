@@ -120,13 +120,13 @@
     document.querySelectorAll(".rv-edit, #cancelBtn").forEach(function (el) { el.classList.add("d-none"); });
     $("rvSubmit").classList.add("d-none");
     $("rvNotice").innerHTML = '<div class="alert-nama alert-info-nama no-close mb-4" role="status">' + icon("hourglass") +
-      '<div><span class="alert-title">Application pending approval</span>Application <b class="text-body">' + esc(rec.ref) +
+      '<div><span class="alert-title">Application submitted</span>Application <b class="text-body">' + esc(rec.ref) +
       '</b> was submitted on ' + new Date(rec.date).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" }) +
-      ' and is under credit assessment. <a href="tracker.html">Track status</a></div></div>';
+      '. Status: <b class="text-body">' + esc(NAMA.APP_STATUS[NAMA.appStatus()]) + '</b>. <a href="tracker.html">Track status</a></div></div>';
     document.querySelectorAll("[data-app-chip]").forEach(function (el) { el.textContent = rec.ref; });
     document.querySelectorAll(".stepper li").forEach(function (li) { li.classList.add("done"); li.classList.remove("active"); li.removeAttribute("aria-current"); });
   }
-  if (app && submitted) lock(submitted);
+  if (app && submitted && NAMA.appStatus() !== "draft") lock(submitted);
 
   $("rvSubmit").addEventListener("click", function () {
     if (!app) {
@@ -156,7 +156,7 @@
       steps: ["Card products & requested limits", "Business details, key people & addresses", "Documents", "Submitting for credit assessment"]
     }).then(function () {
       NAMA.store.set("application", rec);
-      NAMA.store.set("appStatus", "pending");
+      NAMA.store.set("appStatus", "review");
       NAMA.store.remove("appDraft");
       lock(rec);
       NAMA.modal({

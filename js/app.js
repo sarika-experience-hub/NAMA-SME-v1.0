@@ -30,8 +30,23 @@
     }
   };
 
+  /* Application lifecycle (SME-APP-02 section 6.2): status key → status shown on the Tracker.
+   * Values saved by earlier prototype versions are mapped to the new statuses. */
+  var APP_STATUS = { draft: "Draft", review: "In Review", offer: "Pending Offer", declined: "Application Declined", appeal: "Appeal in Review",
+    accepted: "Offer Accepted", granted: "Facility Granted", rejected: "Offer Rejected", expired: "Offer Expired" };
+  var APP_BADGE = { draft: "status-draft", review: "status-pending", offer: "status-approved", declined: "status-rejected", appeal: "status-pending",
+    accepted: "status-progress", granted: "status-approved", rejected: "status-draft", expired: "status-draft" };
+  var OLD_STATUS = { pending: "review", approved: "offer", signed: "accepted" };
+  function appStatus() {
+    var s = store.get("appStatus", "review");
+    s = OLD_STATUS[s] || s;
+    return APP_STATUS[s] ? s : "review";
+  }
+
   /* Demo defaults so every screen renders meaningfully on its own */
   var DEFAULTS = {
+    application: { ref: "SME-2026-0417", total: 750000, date: new Date().toISOString(),
+      products: [{ name: "Business Card", limit: 400000 }, { name: "Procurement Card", limit: 250000 }, { name: "Travel Card", limit: 100000 }] },
     admin: { name: "Faisal Al-Qahtani", username: "faisal.qahtani", mobile: "501234567", email: "faisal@alnoortrading.sa" },
     corp: { idType: "Unified National Number", idNo: "7009139175", name: "Al Noor Trading Company", nameAr: "شركة النور التجارية" },
     // Captured on Business Details (non-registry fields) — used by Review and the application journey
@@ -266,15 +281,20 @@
 
   /* ---------- In-portal notifications (header bell) ----------
    * Built from the prototype state: onboarding completion, application submitted and the
-   * credit decision (approved / declined → in-portal notification, SME-APP-BR-12) and the
-   * signed contract. */
+   * application lifecycle (section 6.2): offer ready, declined, appeal, offer accepted,
+   * facility granted, offer expired (SME-APP-BR-12). */
   function notifications() {
     var list = [], onboarded = store.get("onboarded", false) || document.body.hasAttribute("data-demo-onboarded");
     var app = store.get("application", null) || (document.body.hasAttribute("data-demo-onboarded") ? { ref: "SME-2026-0417", date: new Date(Date.now() - 2 * 864e5).toISOString() } : null);
-    var status = store.get("appStatus", "pending");
-    if (app && status === "signed") list.push({ id: "signed-" + app.ref, icon: "circle-check", tone: "ok", title: "Contract signed", text: "The contract for your Cards application " + app.ref + " has been signed. Your cards are being set up.", href: "tracker.html", when: "Just now" });
-    if (app && (status === "approved" || status === "signed")) list.push({ id: "approved-" + app.ref, icon: "circle-check", tone: "ok", title: "Application approved", text: "Your Cards application " + app.ref + " has been approved. Review your offer to continue.", href: "tracker.html", when: "Just now" });
-    if (app && status === "declined") list.push({ id: "declined-" + app.ref, icon: "circle-alert", tone: "bad", title: "Application declined", text: "Your Cards application " + app.ref + " was not approved. See the Tracker for details.", href: "tracker.html", when: "Just now" });
+    var status = appStatus(), ref = app ? app.ref : "";
+    var after = ["offer", "accepted", "granted", "rejected", "expired"].indexOf(status) >= 0; // offer was made
+    var N = function (id, icon, tone, title, text) { list.push({ id: id + "-" + ref, icon: icon, tone: tone, title: title, text: text, href: "tracker.html", when: "Just now" }); };
+    if (app && status === "granted") N("granted", "circle-check", "ok", "Facility granted", "Your facility for application " + ref + " is active. You can now onboard employees and manage cards.");
+    if (app && (status === "accepted" || status === "granted")) N("accepted", "file-text", "info", "Offer accepted", "The contract and the Promissory Note are sent to the authorized signatory by SMS for signing.");
+    if (app && status === "expired") N("expired", "clock", "bad", "Offer expired", "The offer for application " + ref + " is no longer valid.");
+    if (app && status === "appeal") N("appeal", "hourglass", "info", "Appeal submitted", "We're reviewing your appeal for application " + ref + ".");
+    if (app && after) N("approved", "circle-check", "ok", "Application approved", "Your Cards application " + ref + " has been approved. Your offer is ready.");
+    if (app && (status === "declined" || status === "appeal")) N("declined", "circle-alert", "bad", "Application declined", "Your Cards application " + ref + " was not approved. You can appeal the decision.");
     if (app && status !== "draft") list.push({ id: "submitted-" + app.ref, icon: "hourglass", tone: "info", title: "Application submitted", text: "Application " + app.ref + " is under credit assessment.", href: "tracker.html", when: new Date(app.date).toLocaleDateString("en-GB", { day: "2-digit", month: "short" }) });
     if (onboarded) list.push({ id: "onboarded", icon: "building", tone: "ok", title: "SME onboarding complete", text: "Your SME profile is ready. You can apply for financing.", href: "application-new.html", when: "Earlier" });
     return list;
@@ -681,5 +701,5 @@
     if (el.tagName === "SELECT" && el.classList.contains("is-invalid") && el.value) { el.classList.remove("is-invalid"); el.removeAttribute("aria-invalid"); }
   });
 
-  window.NAMA = { store: store, fmt: fmt, esc: esc, icon: icon, initials: initials, modal: modal, process: process, toast: toast, admin: admin, corp: corp, mark: mark, validateRequired: validateRequired, idField: idField, ID_SPECS: ID_SPECS, go: go, leave: leave, markDirty: markDirty, markClean: markClean, confirmLeave: confirmLeave, autoId: autoId, datePair: datePair, hijri: hijri, validationOn: validationOn, DEFAULTS: DEFAULTS };
+  window.NAMA = { store: store, fmt: fmt, esc: esc, icon: icon, initials: initials, modal: modal, process: process, toast: toast, admin: admin, corp: corp, mark: mark, validateRequired: validateRequired, idField: idField, ID_SPECS: ID_SPECS, go: go, leave: leave, markDirty: markDirty, markClean: markClean, confirmLeave: confirmLeave, autoId: autoId, datePair: datePair, hijri: hijri, validationOn: validationOn, DEFAULTS: DEFAULTS, appStatus: appStatus, APP_STATUS: APP_STATUS, APP_BADGE: APP_BADGE };
 })();
